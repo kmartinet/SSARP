@@ -1,0 +1,7 @@
+Package: SSARP
+Type: Package
+Title: SSARP (Species-/Speciation-Area Relationship Projector)
+Version: 0.0.1
+Imports: rgbif
+Encoding: UTF-8
+RoxygenNote: 7.1.2
