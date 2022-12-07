@@ -1,7 +1,10 @@
 Package: SSARP
 Type: Package
 Title: SSARP (Species-/Speciation-Area Relationship Projector)
+Description: Create Species- and Speciation-Area Relationships for any taxa
+Author: Kristen Martinet
 Version: 0.0.1
-Imports: rgbif
+Imports: rgbif, mapdata, tidyverse, httr, Dict
+LazyData: true
 Encoding: UTF-8
 RoxygenNote: 7.1.2
