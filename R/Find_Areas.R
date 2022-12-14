@@ -129,7 +129,7 @@ findAreas <- function(occs){
       
       if(area_compare == uniq_compare) {
         #testing[islands[i]] <- areas[i]
-        testing[as.character(uniq_islands[i])] <- area_file[j,3]
+        IslandDict[as.character(uniq_islands[i])] <- area_file[j,3]
         print("Found the island name for: ")
         print(i)
         break # Break the inner loop when you find the island name
@@ -155,12 +155,12 @@ findAreas <- function(occs){
       
       if(!is.na(occs[i,4])) {
         print(i)
-        areas[i]<-testing$get(occs[i,4])
+        areas[i]<-IslandDict$get(occs[i,4])
       }
     }
     
     if(!is.na(occs[i,5])) {
-      areas[i] <- testing$get(occs[i,5])
+      areas[i] <- IslandDict$get(occs[i,5])
     }
   }
   
