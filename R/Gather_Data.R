@@ -5,10 +5,13 @@
 #' @param rank The taxonimic rank associated with the search parameter
 #' @return The taxon key that GBIF needs to search its database for occurrence records
 #' @examples 
+#' \dontrun{
 #' key <- get_key("Phelsuma", "genus")
 #' key <- get_key("Tamias ruficaudus ruficaudus", "subspecies")
 #' key <- get_key("Naesiotus akamatus", "species")
 #' key <- get_key("Araneae", "order")
+#' }
+#' @import rgbif
 #' @export
 
 getKey <- function(query, rank) {
@@ -26,7 +29,9 @@ getKey <- function(query, rank) {
 #' @param limit The maximum number of occurrence records to return. Default: 100. NOTE: there is a hard maximum of 100,000 (see more information about the limit in rgbif::occ_search)
 #' @return A dataframe of occurrence records for the taxon of interest
 #' @examples 
+#' \dontrun{
 #' dat <- get_data(key = 2447418, limit = 1000)
+#' }
 #' @export
 
 getData <- function(key, limit = 100) {

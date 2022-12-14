@@ -18,5 +18,5 @@ A dataframe of the species name, longitude, latitude, country, and island of occ
 Use various mapping tools to attempt to find the names of land masses where the occurrence points were found.
 }
 \examples{
-occs <- findLand(occurrences, fillgaps = FALSE)
+\dontrun{occs <- findLand(occurrences, fillgaps = FALSE)}
 }

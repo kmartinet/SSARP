@@ -5,18 +5,23 @@
 #' @param fillgaps (logical) Attempt to use Photon API to fill in gaps left by mapdata::map.where (TRUE) or only mapdata::map.where results (FALSE, default). While it is powerful, the Photon API does not have a standard location for island names in its returned information, so using it will likely require the returned dataframe to be cleaned by the user.
 #' @return A dataframe of the species name, longitude, latitude, country, and island of occurrence
 #' @examples 
-#' occs <- findLand(occurrences, fillgaps = FALSE)
+#' \dontrun{occs <- findLand(occurrences, fillgaps = FALSE)}
+#' @import mapdata
+#' @import tidyverse
+#' @import httr
+#' @import Dict
+#' @import usethis
 #' @export
 
 findLand <- function(occurrences, fillgaps = FALSE) {
   lon<-as.numeric(occurrences$decimalLongitude)
   lat<-as.numeric(occurrences$decimalLatitude)
   # Use map.where to figure out what land mass the 
-  where<-map.where(database="world2Hires", x=lon, y=lat)
+  where<-maps::map.where(database="world2Hires", x=lon, y=lat)
   
   occs <- as.data.frame(cbind(occurrences$acceptedScientificName, lon, lat, where))
   # Separate the where column into two separate columns - Country and Island
-  occs <- occs %>% separate(where, c("Country", "Island"), sep = ":")
+  occs <- occs %>% tidyr::separate(where, c("Country", "Island"), sep = ":")
   colnames(occs) <- c("Species", "Longitude", "Latitude", "Country", "Island")
   
   if(fillgaps == TRUE) {
@@ -71,10 +76,10 @@ findLand <- function(occurrences, fillgaps = FALSE) {
 #' Find areas of land masses. CURRENTLY BROKEN?
 #' 
 #' Reference a dataset of island names and areas to find the areas of the land masses relevant to the taxon of interest.
-#' @param occ The dataframe that is returned by SSARP::findLand. If using a custom dataframe, ensure that it has an "Island" column and a "Country" column.
+#' @param occs The dataframe that is returned by SSARP::findLand. If using a custom dataframe, ensure that it has an "Island" column and a "Country" column.
 #' @return A dataframe of the species name, island name, and island area
 #' @examples 
-#' areas <- findAreas(occs)
+#' \dontrun{areas <- findAreas(occs)}
 #' @export
 
 findAreas <- function(occs){
@@ -106,7 +111,7 @@ findAreas <- function(occs){
   # Next, add the island names as keys and their corresponding areas as values
   # CAN'T GET DATA TO WORK??
   #area_file <- read.csv("data/EditedAllIslands.csv")
-  area_file <- data(island_areas)
+  area_file <- SSARP::island_areas # Should already be loaded with the package??
   
   # Look through the island area file and find the names in the uniq_islands list
   for (i in c(1:length(uniq_islands))) {

@@ -7,7 +7,7 @@
 findAreas(occs)
 }
 \arguments{
-\item{occ}{The dataframe that is returned by SSARP::findLand. If using a custom dataframe, ensure that it has an "Island" column and a "Country" column.}
+\item{occs}{The dataframe that is returned by SSARP::findLand. If using a custom dataframe, ensure that it has an "Island" column and a "Country" column.}
 }
 \value{
 A dataframe of the species name, island name, and island area
@@ -16,5 +16,5 @@ A dataframe of the species name, island name, and island area
 Reference a dataset of island names and areas to find the areas of the land masses relevant to the taxon of interest.
 }
 \examples{
-areas <- findAreas(occs)
+\dontrun{areas <- findAreas(occs)}
 }

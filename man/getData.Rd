@@ -18,5 +18,7 @@ A dataframe of occurrence records for the taxon of interest
 Use rgbif to retrieve occurrence data from GBIF's database for a given taxon. This function will only return occurrences that include GPS coordinates.
 }
 \examples{
+\dontrun{
 dat <- get_data(key = 2447418, limit = 1000)
+}
 }

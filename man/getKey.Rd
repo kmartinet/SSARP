@@ -18,8 +18,10 @@ The taxon key that GBIF needs to search its database for occurrence records
 Use rgbif to find the best match for the name given and return the taxon key
 }
 \examples{
+\dontrun{
 key <- get_key("Phelsuma", "genus")
 key <- get_key("Tamias ruficaudus ruficaudus", "subspecies")
 key <- get_key("Naesiotus akamatus", "species")
 key <- get_key("Araneae", "order")
+}
 }
