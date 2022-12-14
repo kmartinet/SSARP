@@ -19,6 +19,6 @@ Use rgbif to retrieve occurrence data from GBIF's database for a given taxon. Th
 }
 \examples{
 \dontrun{
-dat <- get_data(key = 2447418, limit = 1000)
+dat <- getData(key = 2447418, limit = 1000)
 }
 }

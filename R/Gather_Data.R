@@ -6,10 +6,10 @@
 #' @return The taxon key that GBIF needs to search its database for occurrence records
 #' @examples 
 #' \dontrun{
-#' key <- get_key("Phelsuma", "genus")
-#' key <- get_key("Tamias ruficaudus ruficaudus", "subspecies")
-#' key <- get_key("Naesiotus akamatus", "species")
-#' key <- get_key("Araneae", "order")
+#' key <- getKey("Phelsuma", "genus")
+#' key <- getKey("Tamias ruficaudus ruficaudus", "subspecies")
+#' key <- getKey("Naesiotus akamatus", "species")
+#' key <- getKey("Araneae", "order")
 #' }
 #' @import rgbif
 #' @export
@@ -30,7 +30,7 @@ getKey <- function(query, rank) {
 #' @return A dataframe of occurrence records for the taxon of interest
 #' @examples 
 #' \dontrun{
-#' dat <- get_data(key = 2447418, limit = 1000)
+#' dat <- getData(key = 2447418, limit = 1000)
 #' }
 #' @export
 
