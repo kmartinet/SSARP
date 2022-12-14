@@ -17,7 +17,8 @@ findLand <- function(occurrences, fillgaps = FALSE) {
   lon<-as.numeric(occurrences$decimalLongitude)
   lat<-as.numeric(occurrences$decimalLatitude)
   # Use map.where to figure out what land mass the 
-  where<-maps::map.where(database="world2Hires", x=lon, y=lat)
+  #where<-maps::map.where(database="world2Hires", x=lon, y=lat)
+  where<-maps::map.where(database="world", x=lon, y=lat)
   
   occs <- as.data.frame(cbind(occurrences$acceptedScientificName, lon, lat, where))
   # Separate the where column into two separate columns - Country and Island
