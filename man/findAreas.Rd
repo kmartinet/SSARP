@@ -2,12 +2,12 @@
 % Please edit documentation in R/Find_Areas.R
 \name{findAreas}
 \alias{findAreas}
-\title{Find areas of land masses. CURRENTLY BROKEN?}
+\title{Find areas of land masses.}
 \usage{
 findAreas(occs)
 }
 \arguments{
-\item{occs}{The dataframe that is returned by SSARP::findLand. If using a custom dataframe, ensure that it has an "Island" column and a "Country" column.}
+\item{occs}{The dataframe that is returned by SSARP::findLand. If using a custom dataframe, ensure that it has the following columns in order: "Species", "Longitude", "Latitude", "First", "Second", "Third"}
 }
 \value{
 A dataframe of the species name, island name, and island area
