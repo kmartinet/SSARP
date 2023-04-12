@@ -148,6 +148,7 @@ findAreas <- function(occs){
   # Next, add the island names as keys and their corresponding areas as values
   # Get island areas from built-in area file
   area_file <- SSARP::island_areas
+  #area_file <- read.csv("island_areas.csv")
   
   # Look through the island area file and find the names in the uniq_islands list
   for (i in c(1:length(uniq_islands))) {
@@ -156,19 +157,21 @@ findAreas <- function(occs){
     for(j in c(1:nrow(area_file))) {
       
       area_compare <- area_file[j,5]
+      area_compare2 <- paste0(area_file[j,5], " Island")
       uniq_compare <- as.character(uniq_islands[i])
+      uniq_compare2 <- paste0(as.character(uniq_islands[i]), " Island")
       
       if(is.na(uniq_compare)) {
         break
       }
       
-      if(area_compare == uniq_compare) {
+      if(area_compare == uniq_compare || area_compare2 == uniq_compare || area_compare == uniq_compare2 || area_compare2 == uniq_compare2) {
         #testing[islands[i]] <- areas[i]
-        print(as.character(uniq_islands[i]))
-        print(area_file[j,3])
+        #print(as.character(uniq_islands[i]))
+        #print(area_file[j,3])
         IslandDict[as.character(uniq_islands[i])] <- area_file[j,3]
-        print("Found the island name for: ")
-        print(i)
+        #print("Found the island name for: ")
+        #print(i)
         break # Break the inner loop when you find the island name
         
       }

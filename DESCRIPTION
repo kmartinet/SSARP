@@ -5,7 +5,7 @@ Description: Create Species- and Speciation-Area Relationships for any taxa.
 Author: Kristen Martinet
 Maintainer: Kristen Martinet <kmartinet@outlook.com>
 Version: 0.0.1
-Imports: rgbif, mapdata, tidyverse, httr, Dict, usethis
+Imports: rgbif, mapdata, tidyverse, httr, Dict, usethis, segmented
 LazyData: true
 Encoding: UTF-8
 License: GPL (>=2)

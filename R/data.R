@@ -1,6 +1,9 @@
-#' @title island_areas
-#' @description A dataframe of island names, their areas, and their elevations
-#' @format A data frame with 26220 rows and 5 variables:
+#' Island name data
+#' 
+#' A collection of island names, their areas, and their elevations found using ArcGIS
+#' 
+#' @format ## 'island_areas'
+#' A data frame with 26376 rows and 5 variables:
 #' \describe{
 #'   \item{\code{OBJECTID_1}}{integer Object ID from ArcGIS}
 #'   \item{\code{COUNT}}{integer Not sure what this is, from ArcGIS}
