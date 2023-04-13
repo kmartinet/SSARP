@@ -9,6 +9,6 @@
 #' @import tidyverse
 #' @import httr
 #' @import Dict
-#' @importFrom graphics points
+#' @importFrom graphics points abline
 #' @importFrom stats aggregate lm
 NULL
