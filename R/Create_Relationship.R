@@ -37,6 +37,8 @@ SARP <- function(occurrences, npsi = 1) {
     
     result <- list("summary" = summary_line, "linObj" = linear, "aggDF" = dat)
     
+    class(result) <- "SAR"
+    
     return(result)
   }
   else if(npsi == 1){
@@ -57,6 +59,8 @@ SARP <- function(occurrences, npsi = 1) {
     
     result <- list("summary" = summary_seg, "segObj" = seg, "aggDF" = dat)
     
+    class(result) <- "SAR"
+    
     return(result)
   }
   else{
@@ -71,6 +75,66 @@ SARP <- function(occurrences, npsi = 1) {
     
     result <- list("summary" = summary_seg, "segObj" = seg, "aggDF" = dat)
     
+    class(result) <- "SAR"
+    
     return(result)
   }
+}
+
+
+#' Plot a species-area relationship
+#' 
+#' Function for plotting species-area relationship objects from the SSARP::SARP() function
+#' @param x The SAR object that will be plotted
+#' @param ... Functions to pass to plot()
+#' @return A plot of your species-area relationship
+#' @examples 
+#' \dontrun{
+#' seg <- SARP(occurrences)
+#' plot(seg)
+#' }
+#' @import tidyverse
+#' @import segmented
+#' @export
+
+plot.SAR <- function(x, ...){
+  # Segmented plotting
+  if(!is.null(x[["segObj"]])){ 
+    plot(x[["segObj"]], rug = FALSE,
+         ylab = "Log Number of Species",
+         xlab = "Log Island Area (m^2)",
+         main = "Species-Area Relationship")
+    # Add the points
+    points(x[["aggDF"]]$x, x[["aggDF"]]$y, pch = 19)
+  } 
+  # Line plotting
+  else if(!is.null(x[["linObj"]])){
+    plot(x[["addDF"]],
+         ylab = "Log Number of Species",
+         xlab = "Log Island Area (m^2)",
+         main = "Species-Area Relationship",
+         pch = 16)
+    abline(x[["linObj"]])
+  }
+  
+}
+
+#' Print species-area relationship summary
+#' 
+#' Function for printing the summary of species-area relationship objects from the SSARP::SARP() function
+#' @param x The SAR object of interest
+#' @param ... Parameters to pass to print()
+#' @param printlen Should always be NULL
+#' @return The summary of your species-area relationship
+#' @examples 
+#' \dontrun{
+#' seg <- SARP(occurrences)
+#' print(seg)
+#' }
+#' @import tidyverse
+#' @import segmented
+#' @export
+
+print.SAR <- function(x, printlen = NULL, ...){
+  print(x$summary)
 }
