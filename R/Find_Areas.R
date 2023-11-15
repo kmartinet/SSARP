@@ -37,7 +37,7 @@ findLand <- function(occurrences, fillgaps = FALSE) {
   occs <- as.data.frame(cbind(occurrences$acceptedScientificName, lon, lat, where2))
   # Separate the where column into two separate columns - Country and Island
   # But sometimes there are three...
-  occs <- occs %>% tidyr::separate(where2, c("First", "Second", "Third"), sep = ":")
+  suppressWarnings(occs <- occs %>% tidyr::separate(where2, c("First", "Second", "Third"), sep = ":"))
   colnames(occs) <- c("Species", "Longitude", "Latitude", "First", "Second", "Third")
   
   if(fillgaps == TRUE) {
@@ -111,7 +111,11 @@ findAreas <- function(occs){
   # Remove NAs from row number vector
   minus <- minus[!is.na(minus)]
   
-  occs <- occs[-minus,]
+  # If all of minus is NA, that means that there are no rows to delete
+  # Only delete rows when minus is not 0
+  if(length(minus) != 0){
+    occs <- occs[-minus,]
+  }
   
   # Rename rows to make future loops make more sense
   #num_rows <- nrow(occs)
@@ -152,7 +156,6 @@ findAreas <- function(occs){
   
   # Look through the island area file and find the names in the uniq_islands list
   for (i in c(1:length(uniq_islands))) {
-    print(i)
     
     for(j in c(1:nrow(area_file))) {
       
@@ -230,7 +233,9 @@ removeContinents <- function(occs){
   continents <- c(5.50e13, 3.04e13, 1.78e13, 2.47e13)
   for(i in 1:length(continents)){
     exclude <- which(occs$areas == continents[i])
-    occs <- occs[-exclude,]
+    if(length(exclude) != 0){
+      occs <- occs[-exclude,]
+    }
   }
   
   return(occs)

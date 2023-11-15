@@ -9,6 +9,8 @@
 \arguments{
 \item{x}{The SAR object of interest}
 
+\item{printlen}{Should always be NULL}
+
 \item{...}{Parameters to pass to print()}
 }
 \value{

@@ -7,7 +7,7 @@
 getData(key, limit = 100)
 }
 \arguments{
-\item{key}{The taxon key for the taxon of interest (can be found using SSARP::get_key)}
+\item{key}{The taxon key for the taxon of interest (can be found using SSARP::getKey)}
 
 \item{limit}{The maximum number of occurrence records to return. Default: 100. NOTE: there is a hard maximum of 100,000 (see more information about the limit in rgbif::occ_search)}
 }
