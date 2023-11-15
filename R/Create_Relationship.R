@@ -24,9 +24,17 @@ SARP <- function(occurrences, npsi = 1) {
   # Run a linear model on the data to use in creating segmented/breakpoint regression
   linear <- lm(y ~ x, data = dat)
   
+  # Record x and y min/max for plot limits
+  x_max <- max(dat$x)
+  x_min <- min(dat$x)
+  y_max <- max(dat$y)
+  y_min <- min(dat$y)
+  
   # If the user does not want a breakpoint, they will input npsi = 0
   if(npsi == 0){
     plot(dat,
+         xlim = c(x_min, (x_max+0.5)),
+         ylim = c(y_min, (y_max+0.5)),
          ylab = "Log Number of Species",
          xlab = "Log Island Area (m^2)",
          main = "Species-Area Relationship",
@@ -48,6 +56,8 @@ SARP <- function(occurrences, npsi = 1) {
     
     # Plot the breakpoint regression line
     plot(seg, rug = FALSE,
+         xlim = c(x_min, (x_max+0.5)),
+         ylim = c(y_min, (y_max+0.5)),
          ylab = "Log Number of Species",
          xlab = "Log Island Area (m^2)",
          main = "Species-Area Relationship")
@@ -81,6 +91,54 @@ SARP <- function(occurrences, npsi = 1) {
   }
 }
 
+#' Quickly create a species-area relationship
+#' 
+#' Use the SSARP workflow for creating a species-area relationship for island species using occurrence data from GBIF without having to go through every individual step.
+#' @param taxon The name of the taxon of interest.
+#' @param rank The taxonomic rank associated with the taxon of interest.
+#' @param limit The number of GBIF occurrence records to obtain.
+#' @param continent (logical) If TRUE, continental areas are removed from the species-area relationship data. If FALSE, continental areas are not removed from the species-area relationship data. Default: TRUE
+#' @param npsi The number of breakpoints to estimate. Default: 1
+#' @return A list of 3 including: the summary output, the segmented regression object, and the aggregated dataframe used to create the plot.
+#' @examples 
+#' \dontrun{
+#' seg <- quickSARP("Phelsuma", "genus", 1000, 1)
+#' }
+#' @import tidyverse
+#' @import segmented
+#' @export
+
+quickSARP <- function(taxon, rank, limit, continent = TRUE, npsi = 1) {
+  # Get the taxon key from GBIF
+  print("Finding taxon key")
+  key <- getKey(taxon, rank)
+  
+  print("Gathering data")
+  # Use the key to get data
+  dat <- getData(key, limit = limit)
+  
+  print("Finding land")
+  # Find the name of the land on which the occurrence points were found
+  land <- findLand(dat)
+  
+  print("Gathering areas")
+  # Find the areas of the land
+  areas <- findAreas(land)
+
+  if(continent == TRUE) {
+  print("Removing continental areas")
+    # Remove continents from the dataframe
+    areas <- removeContinents(areas)
+  }
+  
+  # Create the species-area relationship plot
+  SAR_obj <- SARP(areas, npsi)
+  
+  return(SAR_obj)
+  
+}
+
+
 
 #' Plot a species-area relationship
 #' 
@@ -98,9 +156,20 @@ SARP <- function(occurrences, npsi = 1) {
 #' @export
 
 plot.SAR <- function(x, ...){
+  
+  # Record x and y min/max for plot limits
+  dat <- x[["aggDF"]]
+  
+  x_max <- max(dat$x)
+  x_min <- min(dat$x)
+  y_max <- max(dat$y)
+  y_min <- min(dat$y)
+  
   # Segmented plotting
   if(!is.null(x[["segObj"]])){ 
     plot(x[["segObj"]], rug = FALSE,
+         xlim = c(x_min, (x_max+0.5)),
+         ylim = c(y_min, (y_max+0.5)),
          ylab = "Log Number of Species",
          xlab = "Log Island Area (m^2)",
          main = "Species-Area Relationship")
@@ -109,7 +178,9 @@ plot.SAR <- function(x, ...){
   } 
   # Line plotting
   else if(!is.null(x[["linObj"]])){
-    plot(x[["addDF"]],
+    plot(x[["aggDF"]],
+         xlim = c(x_min, (x_max+0.5)),
+         ylim = c(y_min, (y_max+0.5)),
          ylab = "Log Number of Species",
          xlab = "Log Island Area (m^2)",
          main = "Species-Area Relationship",
@@ -138,3 +209,4 @@ plot.SAR <- function(x, ...){
 print.SAR <- function(x, printlen = NULL, ...){
   print(x$summary)
 }
+

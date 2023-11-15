@@ -9,6 +9,6 @@ Imports: rgbif, mapdata, tidyverse, httr, Dict, usethis, segmented
 LazyData: true
 Encoding: UTF-8
 License: GPL (>=2)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Depends: 
     R (>= 2.10)
