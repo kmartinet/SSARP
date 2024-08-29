@@ -108,7 +108,7 @@ SARP <- function(occurrences, npsi = 1) {
 #' @import segmented
 #' @export
 
-quickSARP <- function(taxon, rank, limit, continent = TRUE, npsi = 1) {
+quickSARP <- function(taxon, rank, limit = 100, continent = TRUE, npsi = 1) {
   # Get the taxon key from GBIF
   print("Finding taxon key")
   key <- getKey(taxon, rank)

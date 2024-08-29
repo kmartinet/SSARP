@@ -17,8 +17,8 @@ findLand <- function(occurrences, fillgaps = FALSE) {
   lon<-as.numeric(occurrences$decimalLongitude)
   lat<-as.numeric(occurrences$decimalLatitude)
   # Use map.where to find landmass names that correspond to GPS points
-  # First, use world2Hires
-  where <- maps::map.where(database="mapdata::world2Hires", x=lon, y=lat)
+  # First, use worldHires (world2Hires has a different coordinate system)
+  where <- maps::map.where(database="mapdata::worldHires", x=lon, y=lat)
   # Then, use world just in case it can fill gaps
   where2 <- maps::map.where(database="world", x=lon, y=lat)
   

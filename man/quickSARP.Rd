@@ -4,7 +4,7 @@
 \alias{quickSARP}
 \title{Quickly create a species-area relationship}
 \usage{
-quickSARP(taxon, rank, limit, continent = TRUE, npsi = 1)
+quickSARP(taxon, rank, limit = 100, continent = TRUE, npsi = 1)
 }
 \arguments{
 \item{taxon}{The name of the taxon of interest.}

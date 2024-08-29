@@ -5,10 +5,10 @@ Description: Create Species- and Speciation-Area Relationships for any taxa.
 Author: Kristen Martinet
 Maintainer: Kristen Martinet <kmartinet@outlook.com>
 Version: 0.0.1
-Imports: rgbif, mapdata, tidyverse, httr, Dict, usethis, segmented
+Imports: rgbif, mapdata, tidyverse, httr, Dict, usethis, segmented, ape, epm, dplyr
 LazyData: true
 Encoding: UTF-8
 License: GPL (>=2)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Depends: 
     R (>= 2.10)
