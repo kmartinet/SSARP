@@ -34,11 +34,11 @@ findLand <- function(occurrences, fillgaps = FALSE) {
     }
   }
   
-  occs <- as.data.frame(cbind(occurrences$acceptedScientificName, lon, lat, where2))
+  occs <- as.data.frame(cbind(occurrences$acceptedScientificName, occurrences$genericName, occurrences$specificEpithet, lon, lat, where2))
   # Separate the where column into two separate columns - Country and Island
   # But sometimes there are three...
   suppressWarnings(occs <- occs %>% tidyr::separate(where2, c("First", "Second", "Third"), sep = ":"))
-  colnames(occs) <- c("Species", "Longitude", "Latitude", "First", "Second", "Third")
+  colnames(occs) <- c("SpeciesName", "Genus", "Species", "Longitude", "Latitude", "First", "Second", "Third")
   
   if(fillgaps == TRUE) {
     # There might still be a lot of NA entries, so use Photon to try to fill in gaps
@@ -92,19 +92,20 @@ findLand <- function(occurrences, fillgaps = FALSE) {
 #' Find areas of land masses.
 #' 
 #' Reference a dataset of island names and areas to find the areas of the land masses relevant to the taxon of interest.
-#' @param occs The dataframe that is returned by SSARP::findLand. If using a custom dataframe, ensure that it has the following columns in order: "Species", "Longitude", "Latitude", "First", "Second", "Third"
+#' @param occs The dataframe that is returned by SSARP::findLand. If using a custom occurrence record dataframe, ensure that it has the following columns in order: "SpeciesName", "Genus", "Species", "Longitude", "Latitude", "First", "Second", "Third"
+#' @param area_custom (Optional) A dataframe including names of land masses and their associated areas. This dataframe should be provided when the user would like to bypass using the built-in database of island names and areas. Please ensure that the custom dataframe includes the land mass's area in column 3 and the name in column 5.
 #' @return A dataframe of the species name, island name, and island area
 #' @examples 
 #' \dontrun{areas <- findAreas(occs)}
 #' @export
 
-findAreas <- function(occs){
+findAreas <- function(occs, area_custom = NULL){
   # Remove rows where First, Second, and Third are all NA
   # Create vector to hold row numbers
   minus <- rep(NA, nrow(occs))
   # Loop through dataframe
   for(i in c(1:nrow(occs))){
-    if(is.na(occs[i,6]) && is.na(occs[i,5]) && is.na(occs[i,4])) {
+    if(is.na(occs[i,8]) && is.na(occs[i,7]) && is.na(occs[i,6])) {
       minus[i] <- i
     }
   }
@@ -116,10 +117,6 @@ findAreas <- function(occs){
   if(length(minus) != 0){
     occs <- occs[-minus,]
   }
-  
-  # Rename rows to make future loops make more sense
-  #num_rows <- nrow(occs)
-  #rownames(occs) <- c(1:num_rows)
   
   # Add a temporary key-value pair to initialize
   IslandDict <- Dict$new(
@@ -135,14 +132,14 @@ findAreas <- function(occs){
   # If yes, add to the island list. If NA, go to the Second column. If NA, go to the First column
   
   for(i in c(1:nrow(occs))) {
-    if(!is.na(occs[i,6])) {
+    if(!is.na(occs[i,8])) {
+      islands[i] <- occs[i,8]
+    }
+    else if (!is.na(occs[i,7])){
+      islands[i] <- occs[i,7]
+    }
+    else if (!is.na(occs[i,6])){
       islands[i] <- occs[i,6]
-    }
-    else if (!is.na(occs[i,5])){
-      islands[i] <- occs[i,5]
-    }
-    else if (!is.na(occs[i,4])){
-      islands[i] <- occs[i,4]
     }
   }
   
@@ -150,9 +147,14 @@ findAreas <- function(occs){
   uniq_islands <- unique(islands)
   
   # Next, add the island names as keys and their corresponding areas as values
-  # Get island areas from built-in area file
-  area_file <- SSARP::island_areas
-  #area_file <- read.csv("island_areas.csv")
+  # If the user did not supply a custom dataframe, get island areas from built-in area file
+  if(is.null(area_custom)){
+    area_file <- SSARP::island_areas
+    #area_file <- read.csv("island_areas.csv")
+  } else {
+    area_file <- area_custom
+  }
+  
   
   # Look through the island area file and find the names in the uniq_islands list
   for (i in c(1:length(uniq_islands))) {
@@ -190,21 +192,22 @@ findAreas <- function(occs){
   }
   
   # Use the dictionary to add the areas to the final dataframe
+  print("Adding areas to final dataframe...")
   areas <- rep(0, times = nrow(occs))
   
   for(i in c(1:nrow(occs))) {
     
-    if(!is.na(occs[i,6]) && IslandDict$has(occs[i,6])){
-      print(i)
+    if(!is.na(occs[i,8]) && IslandDict$has(occs[i,8])){
+      #print(i)
+      areas[i]<-IslandDict$get(occs[i,8])
+    }
+    else if(!is.na(occs[i,7]) && IslandDict$has(occs[i,7])){
+      #print(i)
+      areas[i]<-IslandDict$get(occs[i,7])
+    }
+    else if(!is.na(occs[i,6]) && IslandDict$has(occs[i,6])){
+      #print(i)
       areas[i]<-IslandDict$get(occs[i,6])
-    }
-    else if(!is.na(occs[i,5]) && IslandDict$has(occs[i,5])){
-      print(i)
-      areas[i]<-IslandDict$get(occs[i,5])
-    }
-    else if(!is.na(occs[i,4]) && IslandDict$has(occs[i,4])){
-      print(i)
-      areas[i]<-IslandDict$get(occs[i,4])
     }
     else {
       areas[i]<-NA
