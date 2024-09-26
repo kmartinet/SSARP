@@ -3,6 +3,7 @@
 S3method(plot,SAR)
 S3method(print,SAR)
 export(SARP)
+export(SpeARP)
 export(findAreas)
 export(findLand)
 export(getData)
