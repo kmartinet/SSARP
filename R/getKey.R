@@ -17,7 +17,7 @@
 getKey <- function(query, rank) {
   suggestions <- name_suggest(q = query, rank = rank)
   # name_suggest orders by relevance, so pick the first
-  if(length(suggestions$data)!= 0){
+  if(length(suggestions$data) != 0){
     key <- as.numeric(suggestions$data[1,1])
   } else {
     key <- NA

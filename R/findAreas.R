@@ -8,12 +8,16 @@
 #' \dontrun{areas <- findAreas(occs)}
 #' @export
 
-findAreas <- function(occs, area_custom = NULL){
+findAreas <- function(occs, area_custom = NULL) {
   # Remove rows where First, Second, and Third are all NA
   # Create vector to hold row numbers
   minus <- rep(NA, nrow(occs))
   # Loop through dataframe
   for(i in c(1:nrow(occs))){
+    if(nrow(occs)==0){
+      print("No data in occurrence record dataframe")
+      break
+    }
     if(is.na(occs[i,8]) && is.na(occs[i,7]) && is.na(occs[i,6])) {
       minus[i] <- i
     }
@@ -28,7 +32,7 @@ findAreas <- function(occs, area_custom = NULL){
   }
   
   # Add a temporary key-value pair to initialize
-  IslandDict <- Dict$new(
+  island_dict <- Dict$new(
     bloop = 108
   )
   
@@ -41,13 +45,15 @@ findAreas <- function(occs, area_custom = NULL){
   # If yes, add to the island list. If NA, go to the Second column. If NA, go to the First column
   
   for(i in c(1:nrow(occs))) {
+    if(nrow(occs)==0){
+      print("No data in occurrence record dataframe")
+      break
+    }
     if(!is.na(occs[i,8])) {
       islands[i] <- occs[i,8]
-    }
-    else if (!is.na(occs[i,7])){
+    } else if (!is.na(occs[i,7])){
       islands[i] <- occs[i,7]
-    }
-    else if (!is.na(occs[i,6])){
+    } else if (!is.na(occs[i,6])){
       islands[i] <- occs[i,6]
     }
   }
@@ -59,7 +65,6 @@ findAreas <- function(occs, area_custom = NULL){
   # If the user did not supply a custom dataframe, get island areas from built-in area file
   if(is.null(area_custom)){
     area_file <- SSARP::island_areas
-    #area_file <- read.csv("island_areas.csv")
   } else {
     area_file <- area_custom
   }
@@ -80,23 +85,10 @@ findAreas <- function(occs, area_custom = NULL){
       }
       
       if(area_compare == uniq_compare || area_compare2 == uniq_compare || area_compare == uniq_compare2 || area_compare2 == uniq_compare2) {
-        #testing[islands[i]] <- areas[i]
-        #print(as.character(uniq_islands[i]))
-        #print(area_file[j,3])
-        IslandDict[as.character(uniq_islands[i])] <- area_file[j,3]
-        #print("Found the island name for: ")
-        #print(i)
+        island_dict[as.character(uniq_islands[i])] <- area_file[j,3]
         break # Break the inner loop when you find the island name
         
       }
-      
-      #else if(agrep(area_compare, uniq_compare, max.distance=7) == 1) {
-      #  testing[as.character(uniq_islands[i])] <- area_file[j,4]
-      #  print("agrep found the island name for: ")
-      #  print(i)
-      #  break
-      #}
-      
     }
   }
   
@@ -106,22 +98,15 @@ findAreas <- function(occs, area_custom = NULL){
   
   for(i in c(1:nrow(occs))) {
     
-    if(!is.na(occs[i,8]) && IslandDict$has(occs[i,8])){
-      #print(i)
-      areas[i]<-IslandDict$get(occs[i,8])
+    if(!is.na(occs[i,8]) && island_dict$has(occs[i,8])){
+      areas[i] <- island_dict$get(occs[i,8])
+    } else if(!is.na(occs[i,7]) && island_dict$has(occs[i,7])){
+      areas[i] <- island_dict$get(occs[i,7])
+    } else if(!is.na(occs[i,6]) && island_dict$has(occs[i,6])){
+      areas[i] <- island_dict$get(occs[i,6])
+    } else {
+      areas[i] <- NA
     }
-    else if(!is.na(occs[i,7]) && IslandDict$has(occs[i,7])){
-      #print(i)
-      areas[i]<-IslandDict$get(occs[i,7])
-    }
-    else if(!is.na(occs[i,6]) && IslandDict$has(occs[i,6])){
-      #print(i)
-      areas[i]<-IslandDict$get(occs[i,6])
-    }
-    else {
-      areas[i]<-NA
-    }
-    
   }
   
   # Create final dataframe

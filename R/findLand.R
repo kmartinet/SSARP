@@ -14,13 +14,13 @@
 #' @export
 
 findLand <- function(occurrences, fillgaps = FALSE) {
-  lon<-as.numeric(occurrences$decimalLongitude)
-  lat<-as.numeric(occurrences$decimalLatitude)
+  lon <- as.numeric(occurrences$decimalLongitude)
+  lat <- as.numeric(occurrences$decimalLatitude)
   # Use map.where to find landmass names that correspond to GPS points
   # First, use worldHires (world2Hires has a different coordinate system)
-  where <- maps::map.where(database="mapdata::worldHires", x=lon, y=lat)
+  where <- maps::map.where(database = "mapdata::worldHires", x = lon, y = lat)
   # Then, use world just in case it can fill gaps
-  where2 <- maps::map.where(database="world", x=lon, y=lat)
+  where2 <- maps::map.where(database = "world", x = lon, y = lat)
   
   # Next, combine the two where options (prioritize where2)
   for(i in c(1:length(where2))) {
@@ -40,49 +40,47 @@ findLand <- function(occurrences, fillgaps = FALSE) {
   suppressWarnings(occs <- occs %>% tidyr::separate(where2, c("First", "Second", "Third"), sep = ":"))
   colnames(occs) <- c("SpeciesName", "Genus", "Species", "Longitude", "Latitude", "First", "Second", "Third")
   
-  if(fillgaps == TRUE) {
+  if(fillgaps == TRUE){
     # There might still be a lot of NA entries, so use Photon to try to fill in gaps
     
-    for(i in c(1:nrow(occs))) {
+    for(i in c(1:nrow(occs))){
+      if(nrow(occs) == 0){
+        print("Occurrence record dataframe has no entries")
+        break
+      }
       if(is.na(occs[i,4])){
         # Get lon and lat
-        longitude = occs[i,4]
-        latitude = occs[i,3]
+        longitude <- occs[i,4]
+        latitude <- occs[i,3]
         
         # Create Photon URL
         url <- paste0("http://photon.komoot.io/reverse?lon=", 
                       longitude, "&lat=", latitude)
         
         # GET content from the Photon API
-        data <- content(GET(url), encoding="UTF-8")
+        data <- content(GET(url), encoding = "UTF-8")
         
         # Sometimes data$features has nothing in it, so first check if it has something
-        if(length(data$features) != 0) {
+        if(length(data$features) != 0){
           PhotonInfo <- data$features[[1]]$properties
           
           # Different information is passed back sometimes, so try to find the best options
           # First, check if a country is listed and put it in the appropriate column
-          if(length(PhotonInfo$country) != 0) {
+          if(length(PhotonInfo$country) != 0){
             occs[i,4] <- as.character(PhotonInfo$country)
           }
           
           # Next, try to fill in the island column
           # The "locality" part of the Photon data often has the island name
           # If that part is empty, get the "county" part instead - COUNTY COULD BE A PROBLEM
-          if(length(PhotonInfo$locality) != 0) {
+          if(length(PhotonInfo$locality) != 0){
             occs[i,5] <- as.character(PhotonInfo$locality)
           } else if(length(PhotonInfo$county) != 0) {
             occs[i,5] <- as.character(PhotonInfo$county)
           }
-          
-          
         }
-        
-        
       }
-      
     }
-    
   } # End fillgaps
   
   return(occs)

@@ -33,8 +33,8 @@ SARP <- function(occurrences, npsi = 1) {
   # If the user does not want a breakpoint, they will input npsi = 0
   if(npsi == 0){
     plot(dat,
-         xlim = c(x_min, (x_max+0.5)),
-         ylim = c(y_min, (y_max+0.5)),
+         xlim = c(x_min, (x_max + 0.5)),
+         ylim = c(y_min, (y_max + 0.5)),
          ylab = "Log Number of Species",
          xlab = "Log Island Area (m^2)",
          main = "Species-Area Relationship",
@@ -48,16 +48,15 @@ SARP <- function(occurrences, npsi = 1) {
     class(result) <- "SAR"
     
     return(result)
-  }
-  else if(npsi == 1){
+  } else if(npsi == 1){
     # Linear is the object we're segmenting, seg.Z is the continuous variable, npsi is the number of breakpoints to estimate, 
     # control is the bootstrap parameters (display = FALSE stops it from printing each iteration)
     seg <- segmented(linear, seg.Z = ~x, npsi = npsi, control = seg.control(display = FALSE))
     
     # Plot the breakpoint regression line
     plot(seg, rug = FALSE,
-         xlim = c(x_min, (x_max+0.5)),
-         ylim = c(y_min, (y_max+0.5)),
+         xlim = c(x_min, (x_max + 0.5)),
+         ylim = c(y_min, (y_max + 0.5)),
          ylab = "Log Number of Species",
          xlab = "Log Island Area (m^2)",
          main = "Species-Area Relationship")
@@ -72,8 +71,7 @@ SARP <- function(occurrences, npsi = 1) {
     class(result) <- "SAR"
     
     return(result)
-  }
-  else{
+  } else{
     # If npsi is > 1, the seg object plots differently...
     seg <- segmented(linear, seg.Z = ~x, npsi = npsi, control = seg.control(display = FALSE))
     

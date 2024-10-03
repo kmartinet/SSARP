@@ -26,8 +26,8 @@ plot.SAR <- function(x, ...){
   # Segmented plotting
   if(!is.null(x[["segObj"]])){ 
     plot(x[["segObj"]], rug = FALSE,
-         xlim = c(x_min, (x_max+0.5)),
-         ylim = c(y_min, (y_max+0.5)),
+         xlim = c(x_min, (x_max + 0.5)),
+         ylim = c(y_min, (y_max + 0.5)),
          ylab = "Log Number of Species",
          xlab = "Log Island Area (m^2)",
          main = "Species-Area Relationship")
@@ -37,13 +37,12 @@ plot.SAR <- function(x, ...){
   # Line plotting
   else if(!is.null(x[["linObj"]])){
     plot(x[["aggDF"]],
-         xlim = c(x_min, (x_max+0.5)),
-         ylim = c(y_min, (y_max+0.5)),
+         xlim = c(x_min, (x_max + 0.5)),
+         ylim = c(y_min, (y_max + 0.5)),
          ylab = "Log Number of Species",
          xlab = "Log Island Area (m^2)",
          main = "Species-Area Relationship",
          pch = 16)
     abline(x[["linObj"]])
   }
-  
 }
