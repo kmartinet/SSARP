@@ -14,7 +14,7 @@ findAreas <- function(occs, area_custom = NULL) {
   minus <- rep(NA, nrow(occs))
   # Loop through dataframe
   for(i in c(1:nrow(occs))){
-    if(nrow(occs)==0){
+    if(nrow(occs) == 0){
       print("No data in occurrence record dataframe")
       break
     }
@@ -22,7 +22,7 @@ findAreas <- function(occs, area_custom = NULL) {
       minus[i] <- i
     }
   }
-  # Remove NAs from row number vector
+  # Remove NAs (from initialization) from row number vector
   minus <- minus[!is.na(minus)]
   
   # If all of minus is NA, that means that there are no rows to delete
@@ -43,7 +43,7 @@ findAreas <- function(occs, area_custom = NULL) {
   
   # Next, go through the occs dataframe and see if the Third column has a name in it
   # If yes, add to the island list. If NA, go to the Second column. If NA, go to the First column
-  
+  print("Recording island names...")
   for(i in c(1:nrow(occs))) {
     if(nrow(occs)==0){
       print("No data in occurrence record dataframe")
@@ -71,6 +71,7 @@ findAreas <- function(occs, area_custom = NULL) {
   
   
   # Look through the island area file and find the names in the uniq_islands list
+  print("Assembling island dictionary...")
   for (i in c(1:length(uniq_islands))) {
     
     for(j in c(1:nrow(area_file))) {

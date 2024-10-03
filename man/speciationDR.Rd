@@ -4,12 +4,14 @@
 \alias{speciationDR}
 \title{Get speciation rates using the DR statistic (Jetz et al. 2012)}
 \usage{
-speciationDR(tree, occurrences)
+speciationDR(tree, label_type = "binomial", occurrences)
 }
 \arguments{
 \item{tree}{The dated phylogenetic tree that corresponds with the taxa to be included in a speciation-area relationship}
 
-\item{occurrences}{The occurrence record dataframe output from the SSARP pipeline. If you would like to use a custom dataframe, please make sure that there is a column titled "Species"}
+\item{label_type}{Either "epithet" or "binomial" (default): describes the type of tip label in the provided tree. If "epithet," only the species epithet will be used to match speciation rates to tips in the returned occurrence dataframe. If "binomial," the full species name (including genus) will be used to match speciation rates to tips in the returned occurrence dataframe.}
+
+\item{occurrences}{The occurrence record dataframe output from the SSARP pipeline. If you would like to use a custom dataframe, please make sure that there are columns titled "Genus" and "Species"}
 }
 \value{
 A dataframe that includes speciation rates for each species in the occurrence record dataframe
