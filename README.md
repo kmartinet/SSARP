@@ -25,7 +25,7 @@ install_github("kmartinet/SSARP")
 3. Use **findLand(occ)** with the dataframe obtained in Step 2 to figure out the names of landmasses using the occurrence record GPS points and the [*maps* R package](https://cran.r-project.org/web/packages/maps/index.html).
 4. Use **findAreas(occ)** with the dataframe obtained in Step 3 to match the landmass names to a dataset that includes names of most islands on the planet and their areas.
 5. Use **speciationDR(tree, occ)** with your own phylogenetic tree that corresponds with the taxa signified in previous steps, along with the dataframe obtained in Step 4 to add tip speciation rates using the DR statistic (Jetz et al. 2012) to the occurrence dataframe.
-6. Use **SpeARP(occ, npsi)** with the dataframe obtained in Step 5 to create a speciation-area relationship plot that reports information important to the associated regression. The *npsi* parameter indicates how many breakpoints the user would like the segmented regression to include.
+6. Use **SpeARP(occ, npsi)** with the dataframe obtained in Step 5 to create a speciation-area relationship plot that reports information important to the associated regression. The *npsi* parameter indicates the maximum number of breakpoints the user would like to compare for model selection. The returned model and plot correspond with the best-fit model.
 
 #### Literature Cited
 Jetz, W., Thomas, G.H, Joy, J.B., Harmann, K., & Mooers, A.O. 2012. The global diversity of birds in space and time. *Nature* 491: 444-448.
