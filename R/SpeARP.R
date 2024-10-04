@@ -52,7 +52,7 @@ SpeARP <- function(occurrences, npsi = 2) {
     plot(dat,
          xlim = c(x_min, (x_max + 0.5)),
          ylim = c(y_min, (y_max + 0.5)),
-         ylab = "Log Number of Species",
+         ylab = "Log Speciation Rate",
          xlab = "Log Island Area (m^2)",
          main = "Species-Area Relationship",
          pch = 16)
@@ -75,7 +75,7 @@ SpeARP <- function(occurrences, npsi = 2) {
     plot(seg, rug = FALSE,
          xlim = c(x_min, (x_max + 0.5)),
          ylim = c(y_min, (y_max + 0.5)),
-         ylab = "Log Number of Species",
+         ylab = "Log Speciation Rate",
          xlab = "Log Island Area (m^2)",
          main = "Species-Area Relationship")
     # Add the points
