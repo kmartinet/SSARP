@@ -2,7 +2,7 @@
 #' 
 #' Use segmented regression to create a species-area relationship plot (SARP). The X axis represents log(island area) and the Y axis represents log(number of species)
 #' @param occurrences The dataframe output by findAreas (or if using a custom dataframe, ensure that it has the following columns: Species, areas)
-#' @param npsi The number of breakpoints to estimate. Default: 1
+#' @param npsi The maximum number of breakpoints to estimate for model selection.  Default: 2
 #' @return A list of 3 including: the summary output, the segmented regression object, and the aggregated dataframe used to create the plot
 #' @examples 
 #' \dontrun{
@@ -11,9 +11,10 @@
 #' }
 #' @import tidyverse
 #' @import segmented
+#' @importFrom stats AIC
 #' @export
 
-SARP <- function(occurrences, npsi = 1) {
+SARP <- function(occurrences, npsi = 2) {
   #   formula Species ~ Area means to group scientific names by area
   #   function(x) length(unique(x)) tells it to give me the number of unique species for each unique island area
   agg <- aggregate(data = occurrences, Species ~ areas, function(x) length(unique(x)))
@@ -30,8 +31,23 @@ SARP <- function(occurrences, npsi = 1) {
   y_max <- max(dat$y)
   y_min <- min(dat$y)
   
-  # If the user does not want a breakpoint, they will input npsi = 0
-  if(npsi == 0){
+  # First, create all requested models and compare their AIC scores to determine the best-fit
+  # Empty list to populate with AIC scores
+  aic_scores <- list()
+  # Linear model is already created above
+  aic_scores[1] <- AIC(linear)
+  
+  # Create a segmented model for each level of npsi specified by the user
+  for(i in c(1:npsi)){
+    seg <- segmented(linear, seg.Z = ~x, npsi = i, control = seg.control(display = FALSE))
+    aic_scores[i+1] <- AIC(seg)
+  }
+  
+  # Find the smallest AIC score (the best-fit model)
+  min_score <- which.min(aic_scores)
+  
+  # If the min_score is index 1, then the best-fit model is linear
+  if(min_score == 1){
     plot(dat,
          xlim = c(x_min, (x_max + 0.5)),
          ylim = c(y_min, (y_max + 0.5)),
@@ -48,10 +64,11 @@ SARP <- function(occurrences, npsi = 1) {
     class(result) <- "SAR"
     
     return(result)
-  } else if(npsi == 1){
+  } else if(min_score == 2){
     # Linear is the object we're segmenting, seg.Z is the continuous variable, npsi is the number of breakpoints to estimate, 
     # control is the bootstrap parameters (display = FALSE stops it from printing each iteration)
-    seg <- segmented(linear, seg.Z = ~x, npsi = npsi, control = seg.control(display = FALSE))
+    # If min_score is 2, the best-fit model has one breakpoint
+    seg <- segmented(linear, seg.Z = ~x, npsi = 1, control = seg.control(display = FALSE))
     
     # Plot the breakpoint regression line
     plot(seg, rug = FALSE,
@@ -72,8 +89,11 @@ SARP <- function(occurrences, npsi = 1) {
     
     return(result)
   } else{
-    # If npsi is > 1, the seg object plots differently...
-    seg <- segmented(linear, seg.Z = ~x, npsi = npsi, control = seg.control(display = FALSE))
+    # If min_score > 2, then the best-fit model has multiple breakpoints
+    # If npsi is > 1, the seg object plots differently, so it needs a separate else statement
+    # The actual number of segments is the index of the minimum AIC minus 1 (because the first index is always linear)
+    n_psi <- min_score - 1
+    seg <- segmented(linear, seg.Z = ~x, npsi = n_psi, control = seg.control(display = FALSE))
     
     # Plot defaults to multiple outputs when npsi > 1, so my npsi = 1 plot doesn't apply
     plot(seg)
