@@ -36,11 +36,19 @@ SARP <- function(occurrences, npsi = 2) {
   aic_scores <- list()
   # Linear model is already created above
   aic_scores[1] <- AIC(linear)
+  # Name the list element in case the user wants to examine the AIC scores
+  names(aic_scores)[1] <- "Linear"
   
   # Create a segmented model for each level of npsi specified by the user
-  for(i in c(1:npsi)){
-    seg <- segmented(linear, seg.Z = ~x, npsi = i, control = seg.control(display = FALSE))
-    aic_scores[i+1] <- AIC(seg)
+  # This only makes sense if the user does not specify that they want zero breakpoints
+  if(npsi != 0){
+    for(i in c(1:npsi)){
+      seg <- segmented(linear, seg.Z = ~x, npsi = i, control = seg.control(display = FALSE, quant = TRUE))
+      # Since the first index is always linear, use i+1
+      aic_scores[i+1] <- AIC(seg)
+      # Name the list element
+      names(aic_scores)[i+1] <- paste0("BP", i)
+    }
   }
   
   # Find the smallest AIC score (the best-fit model)
@@ -59,7 +67,7 @@ SARP <- function(occurrences, npsi = 2) {
     
     summary_line <- summary(linear)
     
-    result <- list("summary" = summary_line, "linObj" = linear, "aggDF" = dat)
+    result <- list("summary" = summary_line, "linObj" = linear, "aggDF" = dat, "AICscores" = aic_scores)
     
     class(result) <- "SAR"
     
@@ -83,7 +91,7 @@ SARP <- function(occurrences, npsi = 2) {
     # Save the summary as an object to add to the result list
     summary_seg <- summary(seg)
     
-    result <- list("summary" = summary_seg, "segObj" = seg, "aggDF" = dat)
+    result <- list("summary" = summary_seg, "segObj" = seg, "aggDF" = dat, "AICscores" = aic_scores)
     
     class(result) <- "SAR"
     
@@ -101,7 +109,7 @@ SARP <- function(occurrences, npsi = 2) {
     # Save the summary as an object to add to the result list
     summary_seg <- summary(seg)
     
-    result <- list("summary" = summary_seg, "segObj" = seg, "aggDF" = dat)
+    result <- list("summary" = summary_seg, "segObj" = seg, "aggDF" = dat, "AICscores" = aic_scores)
     
     class(result) <- "SAR"
     
