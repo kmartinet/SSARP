@@ -1,8 +1,9 @@
 #' Create a speciation-area relationship plot
 #' 
 #' Use segmented regression to create a speciation-area relationship plot. The X axis represents log(island area) and the Y axis represents log(speciation rate)
-#' @param occurrences The dataframe output by one of SSARP's speciation methods (speciationDR), or if using a custom dataframe, ensure that it has the following columns: Genus, Species, areas, rate
+#' @param occurrences The dataframe output by one of SSARP's speciation methods (speciationDR), or if using a custom dataframe, ensure that it has the following columns: areas, rate
 #' @param npsi The maximum number of breakpoints to estimate for model selection.  Default: 2
+#' @param MS (Logical) Whether you used the speciationMS function to calculate speciation rates (TRUE) or not (FALSE - default). The speciationMS function already calculates a log-transformed speciation rate, so this prevents the rate from being log-transformed twice.
 #' @return A list of 3 including: the summary output, the segmented regression object, and the aggregated dataframe used to create the plot
 #' @examples 
 #' \dontrun{
@@ -14,14 +15,19 @@
 #' @importFrom stats AIC
 #' @export
 
-SpeARP <- function(occurrences, npsi = 2) {
+SpeARP <- function(occurrences, npsi = 2, MS = FALSE) {
   # The purpose of this function is to create either a linear or segmented regression to visualize the relationship between speciation rate and island area
-  #   formula rate ~ areas means to group scientific names by area
-  #   function(x) length(unique(x)) tells it to give me the number of unique species for each unique island area
-  agg <- aggregate(data = occurrences, rate ~ areas, function(x) mean(x))
+  #   formula rate ~ areas means to group speciation rates by area
+  #   function(x) mean(x, na.rm = TRUE) gives the mean of the rate for each area, while also removing any NA values
+  agg <- aggregate(data = occurrences, rate ~ areas, function(x) mean(x, na.rm = TRUE))
   
   # Segmented package prefers tidy dataframes, so make one for it
-  dat <- data.frame(x = log(agg$areas), y = log(agg$rate))
+  # If speciationMS was used to calculate speciation rates, make sure to not log-transform the rate column
+  if(MS == FALSE){
+    dat <- data.frame(x = log(agg$areas), y = log(agg$rate))
+  } else{
+    dat <- data.frame(x = log(agg$areas), y = agg$rate)
+  }
   
   # Run a linear model on the data to use in creating segmented/breakpoint regression
   linear <- lm(y ~ x, data = dat)
@@ -31,6 +37,15 @@ SpeARP <- function(occurrences, npsi = 2) {
   x_min <- min(dat$x)
   y_max <- max(dat$y)
   y_min <- min(dat$y)
+  
+  # Create a buffer around y to slightly expand plot to ensure all points can be seen
+  # Address buffer differently depending on the sign of y_max
+  if(y_max < 0){
+    # If y_max is negative, subtract
+    y_buff <- y_max - (y_max*0.2)
+  } else {
+    y_buff <- y_max + (y_max*0.2)
+  }
   
   # First, create all requested models and compare their AIC scores to determine the best-fit
   # Empty list to populate with AIC scores
@@ -51,10 +66,10 @@ SpeARP <- function(occurrences, npsi = 2) {
   if(min_score == 1){
     plot(dat,
          xlim = c(x_min, (x_max + 0.5)),
-         ylim = c(y_min, (y_max + 0.5)),
+         ylim = c(y_min, y_buff),
          ylab = "Log Speciation Rate",
          xlab = "Log Island Area (m^2)",
-         main = "Species-Area Relationship",
+         main = "Speciation-Area Relationship",
          pch = 16)
     abline(linear)
     
@@ -74,10 +89,10 @@ SpeARP <- function(occurrences, npsi = 2) {
     # Plot the breakpoint regression line
     plot(seg, rug = FALSE,
          xlim = c(x_min, (x_max + 0.5)),
-         ylim = c(y_min, (y_max + 0.5)),
+         ylim = c(y_min, y_buff),
          ylab = "Log Speciation Rate",
          xlab = "Log Island Area (m^2)",
-         main = "Species-Area Relationship")
+         main = "Speciation-Area Relationship")
     # Add the points
     points(dat$x, dat$y, pch = 19)
     
