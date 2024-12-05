@@ -2,9 +2,9 @@
 #' 
 #' Use methodology from Magallon and Sanderson (2001) to estimate speciation rates using a user-provided phylogeny and output a dataframe for use in SSARP's speciation-area relationship pipeline. This method also removes any species rows without rates (this is most likely to occur when the tree does not have all of the species included in the occurrence record dataframe)
 #' @param tree The dated phylogenetic tree that corresponds with the taxa to be included in a speciation-area relationship
-#' @param label_type Either "epithet" or "binomial" (default): describes the type of tip label in the provided tree. If "epithet," only the species epithet will be used to match speciation rates to tips in the returned occurrence dataframe. If "binomial," the full species name (including genus) will be used to match speciation rates to tips in the returned occurrence dataframe. 
+#' @param label_type Either "epithet" or "binomial" (default): describes the type of tip label in the provided tree. If "epithet," only the species epithet will be used when interacting with the tree. If "binomial," the full species name (including genus) will be used when interacting with the tree.
 #' @param occurrences The occurrence record dataframe output from the SSARP pipeline. If you would like to use a custom dataframe, please make sure that there are columns titled "Genus", "Species", and "areas"
-#' @return A dataframe that includes speciation rates for each species in the occurrence record dataframe
+#' @return A dataframe that includes speciation rates for each island in the user-provided occurrence record dataframe
 #' @examples 
 #' \dontrun{
 #' occ_speciation <- speciationMS(tree, occs)
@@ -19,8 +19,19 @@ speciationMS <- function(tree, label_type = "binomial", occurrences){
   # Get all subtrees from given phylogenetic tree
   sub_trees <- subtrees(tree)
   
-  # Organize species into island groups
-  island_groups <- tapply(occurrences$Species, occurrences$areas, unique)
+  # If the user specified label_type = "epithet"
+  if(label_type == "epithet"){
+    # Organize species into island groups
+    island_groups <- tapply(occurrences$Species, occurrences$areas, unique)
+  } else if(label_type == "binomial"){
+    # The occurrence record dataframe has separate "genus" and "species" columns, so they should be combined for this label type
+    # First, double-check that the "Species" column doesn't have any NAs
+    occurrences <- occurrences[!is.na(occurrences$Species),]
+    # Then create a new column with the full name
+    occurrences$Binomial <- paste(occurrences$Genus, occurrences$Species, sep = " ")
+    # Organize species into island groups
+    island_groups <- tapply(occurrences$Binomial, occurrences$areas, unique)
+  }
   
   # Create a df to store: each monophyletic group, the number of species in each, and the node age
   mono_df <- data.frame()
@@ -44,6 +55,7 @@ speciationMS <- function(tree, label_type = "binomial", occurrences){
       }
     }
   }
+  
   colnames(mono_df) <- c("comp_group", "area", "ntips", "root_age")
   
   # They've all turned into characters, so let's change that
