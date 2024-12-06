@@ -7,7 +7,7 @@
 #' @return A dataframe that includes speciation rates for each island in the user-provided occurrence record dataframe
 #' @examples 
 #' \dontrun{
-#' occ_speciation <- speciationMS(tree, occs)
+#' occ_speciation <- speciationMS(tree, "epithet", occs)
 #' }
 #' @import tidyverse
 #' @importFrom dplyr mutate

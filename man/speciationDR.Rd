@@ -21,6 +21,6 @@ Use the DRstat method from the epm package (Title et al. 2022) and output a data
 }
 \examples{
 \dontrun{
-occ_speciation <- speciationDR(tree, occs)
+occ_speciation <- speciationDR(tree, "epithet", occs)
 }
 }

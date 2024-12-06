@@ -21,6 +21,6 @@ Use methodology from Magallon and Sanderson (2001) to estimate speciation rates 
 }
 \examples{
 \dontrun{
-occ_speciation <- speciationMS(tree, occs)
+occ_speciation <- speciationMS(tree, "epithet", occs)
 }
 }

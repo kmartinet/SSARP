@@ -7,7 +7,7 @@
 #' @return A dataframe that includes speciation rates for each species in the occurrence record dataframe
 #' @examples 
 #' \dontrun{
-#' occ_speciation <- speciationDR(tree, occs)
+#' occ_speciation <- speciationDR(tree, "epithet", occs)
 #' }
 #' @import tidyverse
 #' @importFrom dplyr mutate

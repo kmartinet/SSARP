@@ -15,7 +15,8 @@ Imports:
   rgbif (>= 3.8.0),
   segmented (>= 2.1.1),
   tidyverse (>= 2.0.0),
-  usethis (>= 2.2.3)   
+  usethis (>= 2.2.3),
+  BAMMtools (>= 2.1.12)
 LazyData: true
 Encoding: UTF-8
 License: GPL (>=2)
