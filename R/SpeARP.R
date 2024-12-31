@@ -68,7 +68,7 @@ SpeARP <- function(occurrences, npsi = 2, MS = FALSE) {
          xlim = c(x_min, (x_max + 0.5)),
          ylim = c(y_min, y_buff),
          ylab = "Log Speciation Rate",
-         xlab = "Log Island Area (m^2)",
+         xlab = expression(paste("Log Island Area (", "m"^"2", ")")),
          main = "Speciation-Area Relationship",
          pch = 16)
     abline(linear)
@@ -91,7 +91,7 @@ SpeARP <- function(occurrences, npsi = 2, MS = FALSE) {
          xlim = c(x_min, (x_max + 0.5)),
          ylim = c(y_min, y_buff),
          ylab = "Log Speciation Rate",
-         xlab = "Log Island Area (m^2)",
+         xlab = expression(paste("Log Island Area (", "m"^"2", ")")),
          main = "Speciation-Area Relationship")
     # Add the points
     points(dat$x, dat$y, pch = 19)

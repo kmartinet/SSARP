@@ -29,7 +29,7 @@ plot.SAR <- function(x, ...){
          xlim = c(x_min, (x_max + 0.5)),
          ylim = c(y_min, (y_max + 0.5)),
          ylab = "Log Number of Species",
-         xlab = "Log Island Area (m^2)",
+         xlab = expression(paste("Log Island Area (", "m"^"2", ")")),
          main = "Species-Area Relationship")
     # Add the points
     points(x[["aggDF"]]$x, x[["aggDF"]]$y, pch = 19)
@@ -40,7 +40,7 @@ plot.SAR <- function(x, ...){
          xlim = c(x_min, (x_max + 0.5)),
          ylim = c(y_min, (y_max + 0.5)),
          ylab = "Log Number of Species",
-         xlab = "Log Island Area (m^2)",
+         xlab = expression(paste("Log Island Area (", "m"^"2", ")")),
          main = "Species-Area Relationship",
          pch = 16)
     abline(x[["linObj"]])
