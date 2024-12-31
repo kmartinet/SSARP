@@ -2,13 +2,24 @@ Package: SSARP
 Type: Package
 Title: SSARP (Species-/Speciation-Area Relationship Projector)
 Description: Create Species- and Speciation-Area Relationships for any taxa.
-Author: Kristen Martinet
+Authors@R: person("Kristen", "Martinet", email = "kmartinet@outlook.com", role = c("aut", "cre"))
 Maintainer: Kristen Martinet <kmartinet@outlook.com>
-Version: 0.0.1
-Imports: rgbif, mapdata, tidyverse, httr, Dict, usethis, segmented
+Version: 0.2.0
+Imports: 
+  ape (>= 5.8),
+  Dict (>= 0.1.0),
+  dplyr (>= 1.1.4),
+  epm (>= 1.1.2),
+  httr (>= 1.4.7),
+  mapdata (>= 2.3.1),
+  rgbif (>= 3.8.0),
+  segmented (>= 2.1.1),
+  tidyverse (>= 2.0.0),
+  usethis (>= 2.2.3),
+  BAMMtools (>= 2.1.12)
 LazyData: true
 Encoding: UTF-8
 License: GPL (>=2)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 Depends: 
     R (>= 2.10)

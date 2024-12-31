@@ -1,0 +1,88 @@
+
+
+#SMALL ISLANDS
+import arcpy
+from arcpy.sa import *
+
+# Set environment
+arcpy.env.workspace = " D:/gis_project_work/global_islands/arcgis_pro/global_islands/Default.gdb"
+
+# Set Mask environment
+arcpy.env.mask = "Small_Islands_02km"
+
+# Use 95 percent of the cores on the machine
+arcpy.env.parallelProcessingFactor = "95%"
+
+# Set local variables
+InZones = " Small_Islands_02km"
+InZoneField = "OBJECTID”
+InValueRaster = "World Elevation GMTED"
+outTable = "zonalstattblout_small_islands_02km"
+
+# Check out a Spatial Analyst license
+arcpy.CheckOutExtension("Spatial")
+
+# Execute ZonalStatisticsAsTable
+outZSaT = ZonalStatisticsAsTable(InZones, InZoneField, InValueRaster, outTable, "DATA", "MAXIMUM")
+
+
+
+
+
+#BIG ISLANDS
+import arcpy
+from arcpy.sa import *
+
+# Set environment
+arcpy.env.workspace = " D:/gis_project_work/global_islands/arcgis_pro/global_islands/Default.gdb"
+
+# Set Mask environment
+arcpy.env.mask = "Big_Islands"
+
+# Use 95 percent of the cores on the machine
+arcpy.env.parallelProcessingFactor = "95%"
+
+# Set local variables
+InZones = "Big_Islands"
+InZoneField = "OBJECTID”
+InValueRaster = "World Elevation GMTED"
+outTable = "zonalstattblout_big_islands"
+
+# Check out a Spatial Analyst license
+arcpy.CheckOutExtension("Spatial")
+
+# Execute ZonalStatisticsAsTable
+outZSaT = ZonalStatisticsAsTable(InZones, InZoneField, InValueRaster, outTable, "DATA", "MAXIMUM")
+
+
+
+
+
+#MAINLANDS
+import arcpy
+from arcpy.sa import *
+
+# Set environment
+arcpy.env.workspace = " D:/gis_project_work/global_islands/arcgis_pro/global_islands/Default.gdb"
+
+# Set Mask environment
+arcpy.env.mask = "Mainlands"
+
+# Use 95 percent of the cores on the machine
+arcpy.env.parallelProcessingFactor = "95%"
+
+# Set local variables
+InZones = "Mainlands"
+InZoneField = "OBJECTID”
+InValueRaster = "SRTM_GMTED_20_gcs "
+outTable = "zonalstattblout_mainlands"
+
+# Check out a Spatial Analyst license
+arcpy.CheckOutExtension("Spatial")
+
+# Execute ZonalStatisticsAsTable
+outZSaT = ZonalStatisticsAsTable(InZones, InZoneField, InValueRaster, outTable, "DATA", "MAXIMUM")
+
+
+
+

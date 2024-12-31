@@ -9,6 +9,10 @@
 #' @import tidyverse
 #' @import httr
 #' @import Dict
+#' @import usethis
+#' @import segmented
+#' @import ape
+#' @import epm
 #' @importFrom graphics points abline
 #' @importFrom stats aggregate lm
 NULL
