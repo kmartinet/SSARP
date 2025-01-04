@@ -2,6 +2,8 @@
 
 SSARP (Species-/Speciation-Area Relationship Projector) is an R package that provides a suite of functions to help users **create speciation- and species-area relationships for island-dwelling taxa** using occurrence data from GBIF (Global Biodiversity Information Facility) accessed via GBIF's API or the user's own occurrence data.
 
+Please find the [bioRxiv preprint of the manuscript associated with *SSARP* here!](https://www.biorxiv.org/content/10.1101/2024.12.31.630948v1)
+
 ### Installation
 
 To install *SSARP*, use the "install_github" function from the *devtools* package:
