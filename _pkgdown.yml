@@ -2,3 +2,15 @@ url: https://kmartinet.github.io/SSARP/
 template:
   bootstrap: 5
 
+navbar:
+  structure:
+    left:  [reference, articles]
+    right: [search, github]
+  components:
+    articles:
+      text: Articles
+      menu:
+      - text: Create Species-Area Relationship
+        href: articles/Create_SAR.html
+      - text: Create Speciation-Area Relationship
+        href: articles/Create_SpAR.html
