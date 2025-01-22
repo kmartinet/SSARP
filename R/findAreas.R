@@ -6,6 +6,7 @@
 #' @return A dataframe of the species name, island name, and island area
 #' @examples 
 #' \dontrun{areas <- findAreas(occs)}
+#' @importFrom cli cli_alert_info cli_alert_warning cli_progress_bar cli_progress_update
 #' @export
 
 findAreas <- function(occs, area_custom = NULL) {
@@ -15,7 +16,7 @@ findAreas <- function(occs, area_custom = NULL) {
   # Loop through dataframe
   for(i in c(1:nrow(occs))){
     if(nrow(occs) == 0){
-      print("No data in occurrence record dataframe")
+      cli_alert_warning("No data in occurrence record dataframe")
       break
     }
     if(is.na(occs[i,8]) && is.na(occs[i,7]) && is.na(occs[i,6])) {
@@ -43,10 +44,10 @@ findAreas <- function(occs, area_custom = NULL) {
   
   # Next, go through the occs dataframe and see if the Third column has a name in it
   # If yes, add to the island list. If NA, go to the Second column. If NA, go to the First column
-  print("Recording island names...")
+  cli_alert_info("Recording island names...")
   for(i in c(1:nrow(occs))) {
     if(nrow(occs)==0){
-      print("No data in occurrence record dataframe")
+      cli_alert_warning("No data in occurrence record dataframe")
       break
     }
     if(!is.na(occs[i,8])) {
@@ -71,7 +72,8 @@ findAreas <- function(occs, area_custom = NULL) {
   
   
   # Look through the island area file and find the names in the uniq_islands list
-  print("Assembling island dictionary...")
+  cli_alert_info("Assembling island dictionary...")
+  cli_progress_bar("Dictionary progress", total = length(uniq_islands))
   for (i in c(1:length(uniq_islands))) {
     
     for(j in c(1:nrow(area_file))) {
@@ -91,10 +93,11 @@ findAreas <- function(occs, area_custom = NULL) {
         
       }
     }
+    cli_progress_update()
   }
   
   # Use the dictionary to add the areas to the final dataframe
-  print("Adding areas to final dataframe...")
+  cli_alert_info("Adding areas to final dataframe...")
   areas <- rep(0, times = nrow(occs))
   
   for(i in c(1:nrow(occs))) {

@@ -2,12 +2,7 @@
 % Please edit documentation in R/SSARP.R
 \name{SSARP}
 \alias{SSARP}
-\title{SSARP}
+\title{SSARP: Species-/Speciation-Area Relationship Projector}
 \description{
-Easily create species-area relationships
-}
-\details{
-Easily create species-area relationships
-
-Testing testing 1 2 3
+SSARP (Species-/Speciation-Area Relationship Projector) is an R package that provides a suite of functions to help users create species-area relationships for island-dwelling taxa using occurrence data from GBIF (Global Biodiversity Information Facility) accessed via GBIF's API or the user's own occurrence data. If the user supplies a phylogenetic tree for the taxa of interest, SSARP can also create speciation-area relationships.
 }

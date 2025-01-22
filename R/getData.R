@@ -15,6 +15,7 @@
 #'               limit = 1000, 
 #'               geometry = 'POLYGON((-87.4 24.3, -79.2 24.3, -79.2 31.1, -87.4 31.1, -87.4 24.3))')
 #' }
+#' @import rgbif
 #' @export
 
 getData <- function(key, limit = 100, geometry = NULL) {
