@@ -14,27 +14,28 @@
 #' }
 #' @import tidyverse
 #' @import segmented
+#' @importFrom cli cli_alert_info
 #' @export
 
 quickSARP <- function(taxon, rank, limit = 100, geometry = NULL, continent = TRUE, npsi = 1) {
   # Get the taxon key from GBIF
-  print("Finding taxon key")
+  cli_alert_info("Finding taxon key")
   key <- getKey(taxon, rank)
   
-  print("Gathering data")
+  cli_alert_info("Gathering data")
   # Use the key to get data
   dat <- getData(key, limit = limit, geometry = geometry)
   
-  print("Finding land")
+  cli_alert_info("Finding land")
   # Find the name of the land on which the occurrence points were found
   land <- findLand(dat)
   
-  print("Gathering areas")
+  cli_alert_info("Gathering areas")
   # Find the areas of the land
   areas <- findAreas(land)
   
   if(continent == TRUE) {
-    print("Removing continental areas")
+    cli_alert_info("Removing continental areas")
     # Remove continents from the dataframe
     areas <- removeContinents(areas)
   }

@@ -12,7 +12,6 @@
 #' @import tidyverse
 #' @importFrom dplyr mutate
 #' @importFrom dplyr case_when
-#' @import BAMMtools
 #' @export
 
 speciationBAMM <- function(label_type = "binomial", occurrences, edata) {

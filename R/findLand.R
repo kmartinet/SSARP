@@ -11,6 +11,7 @@
 #' @import httr
 #' @import Dict
 #' @import usethis
+#' @importFrom cli cli_alert_warning
 #' @export
 
 findLand <- function(occurrences, fillgaps = FALSE) {
@@ -45,7 +46,7 @@ findLand <- function(occurrences, fillgaps = FALSE) {
     
     for(i in c(1:nrow(occs))){
       if(nrow(occs) == 0){
-        print("Occurrence record dataframe has no entries")
+        cli_alert_warning("Occurrence record dataframe has no entries")
         break
       }
       if(is.na(occs[i,4])){
