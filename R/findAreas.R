@@ -7,9 +7,13 @@
 #' @examples 
 #' \dontrun{areas <- findAreas(occs)}
 #' @importFrom cli cli_alert_info cli_alert_warning cli_progress_bar cli_progress_update
+#' @importFrom checkmate assertDataFrame
 #' @export
 
 findAreas <- function(occs, area_custom = NULL) {
+  # checkmate input verification
+  assertDataFrame(occs)
+  
   # Remove rows where First, Second, and Third are all NA
   # Create vector to hold row numbers
   minus <- rep(NA, nrow(occs))

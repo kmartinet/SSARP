@@ -13,9 +13,14 @@
 #' @importFrom dplyr mutate
 #' @importFrom dplyr case_when
 #' @import ape
+#' @importFrom checkmate assertString assertDataFrame
 #' @export
 
 speciationMS <- function(tree, label_type = "binomial", occurrences){
+  # Checkmate input validation
+  assertString(label_type)
+  assertDataFrame(occurrences)
+  
   # Get all subtrees from given phylogenetic tree
   sub_trees <- subtrees(tree)
   

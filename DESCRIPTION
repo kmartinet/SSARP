@@ -18,7 +18,8 @@ Imports:
   segmented (>= 2.1.1),
   tidyverse (>= 2.0.0),
   usethis (>= 2.2.3),
-  cli (>= 3.6.2)
+  cli (>= 3.6.2),
+  checkmate (>= 2.3.2)
 LazyData: true
 Encoding: UTF-8
 License: GPL (>=2)

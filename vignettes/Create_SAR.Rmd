@@ -94,5 +94,4 @@ SARP(occurrences = nocont_dat, npsi = 1)
 ## Boot restarting based on 8 samples. Last fit:
 ## Convergence attained in 2 iterations (rel. change 3.648e-10)
 ```
-
-This is the SAR for *Anolis* including island-based occurrences within a polygon around Caribbean islands from the first 10000 records for the genus in GBIF! The best-fit model was a segmented regression with one breakpoint.
+![Figure 2. This is the species-area relationship (SAR) for *Anolis* including island-based occurrences within a polygon around Caribbean islands from the first 10000 records for the genus in GBIF! The best-fit model was a segmented regression with one breakpoint.](anolis_SAR-1.png)

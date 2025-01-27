@@ -13,9 +13,15 @@
 #' @import tidyverse
 #' @import segmented
 #' @importFrom stats AIC
+#' @importFrom checkmate assertDataFrame assertNumeric assertLogical
 #' @export
 
 SpeARP <- function(occurrences, npsi = 2, MS = FALSE) {
+  # Checkmate input validation
+  assertDataFrame(occurrences)
+  assertNumeric(npsi)
+  assertLogical(MS)
+  
   # The purpose of this function is to create either a linear or segmented regression to visualize the relationship between speciation rate and island area
   #   formula rate ~ areas means to group speciation rates by area
   #   function(x) mean(x, na.rm = TRUE) gives the mean of the rate for each area, while also removing any NA values

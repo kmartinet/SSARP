@@ -12,9 +12,14 @@
 #' @import tidyverse
 #' @importFrom dplyr mutate
 #' @importFrom dplyr case_when
+#' @importFrom checkmate assertString assertDataFrame
 #' @export
 
 speciationBAMM <- function(label_type = "binomial", occurrences, edata) {
+  # Checkmate input validation
+  assertString(label_type)
+  assertDataFrame(occurrences)
+  
   # Create a named number vector of speciation rates
   speciation_rates <- edata$meanTipLambda
   names(speciation_rates) <- edata$tip.label

@@ -14,9 +14,14 @@
 #' @importFrom dplyr case_when
 #' @import epm
 #' @import ape
+#' @importFrom checkmate assertString assertDataFrame
 #' @export
 
 speciationDR <- function(tree, label_type = "binomial", occurrences) {
+  # Checkmate input validation
+  assertString(label_type)
+  assertDataFrame(occurrences)
+  
   # Use DRstat from the epm package to find speciation rates for each tip
   speciation_rates <- epm::DRstat(tree)
   

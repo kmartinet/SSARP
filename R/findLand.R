@@ -12,9 +12,14 @@
 #' @import Dict
 #' @import usethis
 #' @importFrom cli cli_alert_warning
+#' @importFrom checkmate assertDataFrame assertLogical
 #' @export
 
 findLand <- function(occurrences, fillgaps = FALSE) {
+  # checkmate input validation
+  assertDataFrame(occurrences)
+  assertLogical(fillgaps)
+  
   lon <- as.numeric(occurrences$decimalLongitude)
   lat <- as.numeric(occurrences$decimalLatitude)
   # Use map.where to find landmass names that correspond to GPS points

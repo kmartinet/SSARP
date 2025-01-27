@@ -12,9 +12,14 @@
 #' key <- getKey("Araneae", "order")
 #' }
 #' @import rgbif
+#' @importFrom checkmate assertString
 #' @export
 
 getKey <- function(query, rank) {
+  # Checkmate input validation
+  assertString(query)
+  assertString(rank)
+  
   suggestions <- name_suggest(q = query, rank = rank)
   # name_suggest orders by relevance, so pick the first
   if(length(suggestions$data) != 0){

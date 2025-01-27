@@ -12,9 +12,14 @@
 #' @import tidyverse
 #' @import segmented
 #' @importFrom stats AIC
+#' @importFrom checkmate assertDataFrame assertNumeric
 #' @export
 
 SARP <- function(occurrences, npsi = 2) {
+  # Checkmate input validation
+  assertDataFrame(occurrences)
+  assertNumeric(npsi)
+  
   #   formula Species ~ Area means to group scientific names by area
   #   function(x) length(unique(x)) tells it to give me the number of unique species for each unique island area
   agg <- aggregate(data = occurrences, Species ~ areas, function(x) length(unique(x)))
