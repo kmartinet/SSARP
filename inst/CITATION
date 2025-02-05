@@ -1,0 +1,11 @@
+citHeader("To cite SSARP in publications use:")
+
+bibentry(
+  bibtype  = "Article",
+  title    = "SSARP: An R Package for Easily Creating Species- and Speciation- Area Relationships Using Web Databases",
+  author   = as.person("Kristen M. Martinet [aut], Cristian Román-Palacios [aut], Luke J. Harmon [aut]"),
+  journal  = "bioRxiv",
+  year     = "2025",
+  doi      = "https://doi.org/10.1101/2024.12.31.630948",
+  url      = "https://www.biorxiv.org/content/10.1101/2024.12.31.630948v1"
+)

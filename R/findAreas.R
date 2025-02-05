@@ -120,6 +120,12 @@ findAreas <- function(occs, area_custom = NULL) {
   # Create final dataframe
   occs_final <- cbind(occs, areas)
   
+  # Remove rows with NA in area column
+  occs_final <- occs_final[!is.na(occs_final$areas),]
+  
+  # Ensure areas are numeric
+  occs_final$areas <- as.numeric(occs_final$areas)
+  
   return(occs_final)
   
 }

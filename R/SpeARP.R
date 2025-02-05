@@ -60,9 +60,12 @@ SpeARP <- function(occurrences, npsi = 2, MS = FALSE) {
   aic_scores[1] <- AIC(linear)
   
   # Create a segmented model for each level of npsi specified by the user
-  for(i in c(1:npsi)){
-    seg <- segmented(linear, seg.Z = ~x, npsi = i, control = seg.control(display = FALSE))
-    aic_scores[i+1] <- AIC(seg)
+  # This only makes sense if the user does not specify that they want zero breakpoints
+  if(npsi != 0){
+    for(i in c(1:npsi)){
+      seg <- segmented(linear, seg.Z = ~x, npsi = i, control = seg.control(display = FALSE))
+      aic_scores[i+1] <- AIC(seg)
+    }
   }
   
   # Find the smallest AIC score (the best-fit model)

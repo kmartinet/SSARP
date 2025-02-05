@@ -68,7 +68,7 @@ The final parameter is the “MS” parameter, which tells *SSARP* whether the u
 SpeARP(occurrences = speciation_occurrences, npsi = 1, MS = TRUE)
 ```
 
-![plot of chunk anolis_SpAR](figure/anolis_SpAR-1.png)
+![This is the SpAR for *Anolis* including island-based occurrences within a polygon around Caribbean islands from the first 10000 records for the genus in GBIF! The best-fit model was a segmented regression with one breakpoint.](../vignettes/anolis_SpAR-1.png)
 
 ```
 ## 
@@ -93,7 +93,6 @@ SpeARP(occurrences = speciation_occurrences, npsi = 1, MS = TRUE)
 ## Boot restarting based on 6 samples. Last fit:
 ## Convergence attained in 3 iterations (rel. change 2.3011e-16)
 ```
-![This is the SpAR for *Anolis* including island-based occurrences within a polygon around Caribbean islands from the first 10000 records for the genus in GBIF! The best-fit model was a segmented regression with one breakpoint.](anolis_SpAR-1.png)
 
 
 You will notice that two of the largest islands have a speciation rate of zero in this example. This very likely occurred because the calculation for speciation rate in Magallόn and Sanderson (2001) that “speciationMS” uses is based on monophyly, which can be disrupted on islands with non-native species occurrence records. When using the "speciationMS" function to estimate speciation rates for a SpAR, it is incredibly important to manually filter the returned occurrence records to remove non-native species.
