@@ -18,10 +18,17 @@ Imports:
   segmented (>= 2.1.1),
   tidyverse (>= 2.0.0),
   usethis (>= 2.2.3),
-  cli (>= 3.6.2)
+  cli (>= 3.6.2),
+  checkmate (>= 2.3.2)
 LazyData: true
 Encoding: UTF-8
 License: GPL (>=2)
 RoxygenNote: 7.3.2
+Roxygen: list(markdown = TRUE)
+VignetteBuilder: knitr
 Depends: 
     R (>= 2.10)
+Suggests: 
+    testthat (>= 3.0.0),
+    knitr (>= 1.46)
+Config/testthat/edition: 3

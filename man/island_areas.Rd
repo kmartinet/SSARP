@@ -5,14 +5,16 @@
 \alias{island_areas}
 \title{Island name data}
 \format{
-## 'island_areas'
+\subsection{'island_areas'}{
+
 A data frame with 26376 rows and 5 variables:
 \describe{
-  \item{\code{OBJECTID_1}}{integer Object ID from ArcGIS}
-  \item{\code{COUNT}}{integer Number of cells within island, from ArcGIS}
-  \item{\code{AREA}}{double Area of the island}
-  \item{\code{MAX}}{integer Maximum elevation of the island}
-  \item{\code{Name}}{character Name of the island} 
+\item{\code{OBJECTID_1}}{integer Object ID from ArcGIS}
+\item{\code{COUNT}}{integer Number of cells within island, from ArcGIS}
+\item{\code{AREA}}{double Area of the island}
+\item{\code{MAX}}{integer Maximum elevation of the island}
+\item{\code{Name}}{character Name of the island}
+}
 }
 }
 \usage{

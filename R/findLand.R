@@ -11,10 +11,22 @@
 #' @import httr
 #' @import Dict
 #' @import usethis
-#' @importFrom cli cli_alert_warning
+#' @importFrom cli cli_alert_warning cli_alert_info
+#' @importFrom checkmate assertDataFrame assertLogical
 #' @export
 
 findLand <- function(occurrences, fillgaps = FALSE) {
+  # checkmate input validation
+  assertDataFrame(occurrences)
+  assertLogical(fillgaps)
+  
+  # Check if there is anything in the given occurrences
+  # If not, return NULL to stop the function call
+  if(nrow(occurrences) == 0){
+    cli_alert_warning("Occurrence record dataframe has no entries")
+    return(NULL)
+  }
+  
   lon <- as.numeric(occurrences$decimalLongitude)
   lat <- as.numeric(occurrences$decimalLatitude)
   # Use map.where to find landmass names that correspond to GPS points
@@ -43,23 +55,27 @@ findLand <- function(occurrences, fillgaps = FALSE) {
   
   if(fillgaps == TRUE){
     # There might still be a lot of NA entries, so use Photon to try to fill in gaps
-    
+    cli_alert_info("Filling gaps using Photon...")
     for(i in c(1:nrow(occs))){
+      
       if(nrow(occs) == 0){
         cli_alert_warning("Occurrence record dataframe has no entries")
         break
       }
-      if(is.na(occs[i,4])){
+      if(is.na(occs[i,6])){
         # Get lon and lat
         longitude <- occs[i,4]
-        latitude <- occs[i,3]
+        latitude <- occs[i,5]
         
         # Create Photon URL
         url <- paste0("http://photon.komoot.io/reverse?lon=", 
                       longitude, "&lat=", latitude)
         
-        # GET content from the Photon API
-        data <- content(GET(url), encoding = "UTF-8")
+        # Create a user agent to tell Photon that SSARP is making the request
+        user <- user_agent("SSARP R Package (https://github.com/kmartinet/SSARP)")
+        
+        # GET content from the Photon API, including the user agent in the call
+        data <- content(GET(url = url, config = user), encoding = "UTF-8")
         
         # Sometimes data$features has nothing in it, so first check if it has something
         if(length(data$features) != 0){
@@ -68,16 +84,16 @@ findLand <- function(occurrences, fillgaps = FALSE) {
           # Different information is passed back sometimes, so try to find the best options
           # First, check if a country is listed and put it in the appropriate column
           if(length(PhotonInfo$country) != 0){
-            occs[i,4] <- as.character(PhotonInfo$country)
+            occs[i,6] <- as.character(PhotonInfo$country)
           }
           
-          # Next, try to fill in the island column
-          # The "locality" part of the Photon data often has the island name
-          # If that part is empty, get the "county" part instead - COUNTY COULD BE A PROBLEM
-          if(length(PhotonInfo$locality) != 0){
-            occs[i,5] <- as.character(PhotonInfo$locality)
-          } else if(length(PhotonInfo$county) != 0) {
-            occs[i,5] <- as.character(PhotonInfo$county)
+          # Next, try to find the island name
+          # Sometimes, it is in the "name" part of the Photon data
+          # If not, the "locality" part of the Photon data often has the island name
+          if(length(PhotonInfo$name) != 0){
+            occs[i,7] <- as.character(PhotonInfo$name)
+          } else if(length(PhotonInfo$locality) != 0){
+            occs[i,7] <- as.character(PhotonInfo$locality)
           }
         }
       }

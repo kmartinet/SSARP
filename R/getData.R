@@ -16,9 +16,14 @@
 #'               geometry = 'POLYGON((-87.4 24.3, -79.2 24.3, -79.2 31.1, -87.4 31.1, -87.4 24.3))')
 #' }
 #' @import rgbif
+#' @importFrom checkmate assertNumeric
 #' @export
 
 getData <- function(key, limit = 100, geometry = NULL) {
+  # Checkmate input validation
+  assertNumeric(key)
+  assertNumeric(limit)
+  
   # If the user did not supply geometry, run occ_search without geometry
   if(is.null(geometry)){
     occurrences <- occ_search(taxonKey = key, hasCoordinate = TRUE, limit = limit)
