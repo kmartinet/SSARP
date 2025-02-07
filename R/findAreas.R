@@ -6,8 +6,9 @@
 #' @return A dataframe of the species name, island name, and island area
 #' @examples 
 #' \dontrun{areas <- findAreas(occs)}
-#' @importFrom cli cli_alert_info cli_alert_warning cli_progress_bar cli_progress_update
+#' @importFrom cli cli_alert_info cli_alert_warning
 #' @importFrom checkmate assertDataFrame
+#' @import Dict
 #' @export
 
 findAreas <- function(occs, area_custom = NULL) {
@@ -41,13 +42,15 @@ findAreas <- function(occs, area_custom = NULL) {
     bloop = 108
   )
   
-  # For each island name in the current dataframe, find the area and add the pair to the dictionary
+  # For each island name in the current dataframe, 
+  # find the area and add the pair to the dictionary
   
   # First, create an empty list of island names
   islands <- list()
   
-  # Next, go through the occs dataframe and see if the Third column has a name in it
-  # If yes, add to the island list. If NA, go to the Second column. If NA, go to the First column
+  # Next, go through the occs dataframe and see if the Third column has a name.
+  # If yes, add to the island list. If NA, go to the Second column. 
+  # If Second column is NA, go to the First column.
   cli_alert_info("Recording island names...")
   for(i in c(1:nrow(occs))) {
     if(nrow(occs)==0){
@@ -67,7 +70,8 @@ findAreas <- function(occs, area_custom = NULL) {
   uniq_islands <- unique(islands)
   
   # Next, add the island names as keys and their corresponding areas as values
-  # If the user did not supply a custom dataframe, get island areas from built-in area file
+  # If the user did not supply a custom dataframe, get island areas from 
+  # built-in island area dataset
   if(is.null(area_custom)){
     area_file <- SSARP::island_areas
   } else {
@@ -75,29 +79,41 @@ findAreas <- function(occs, area_custom = NULL) {
   }
   
   
-  # Look through the island area file and find the names in the uniq_islands list
+  # Look through the island area file and find the names in uniq_islands list
   cli_alert_info("Assembling island dictionary...")
-  cli_progress_bar("Dictionary progress", total = length(uniq_islands))
+  # Initialize vector of island names from island area dataset with "Island" appended
+  area_file_append <- paste0(area_file$Name, " Island")
+  # Initialize grep statements as NA
+  grep_res <- grep_res2 <- grep_res3 <- NA
+
   for (i in c(1:length(uniq_islands))) {
+    # Use grep for exact match in the area database
+    # [1] picks the first match if the query gets multiple matches
+    query <- paste0("^", as.character(uniq_islands[i]), "$")
+    grep_res <- grep(query, area_file$Name)[1]
     
-    for(j in c(1:nrow(area_file))) {
-      
-      area_compare <- area_file[j,5]
-      area_compare2 <- paste0(area_file[j,5], " Island")
-      uniq_compare <- as.character(uniq_islands[i])
-      uniq_compare2 <- paste0(as.character(uniq_islands[i]), " Island")
-      
-      if(is.na(uniq_compare)) {
-        break
+    if(!is.na(grep_res)){
+      # If grep found a match, add it to island dictionary
+      island_dict[as.character(uniq_islands[i])] <- area_file[grep_res,3]
+    } else {
+      # If it doesn't find the name directly from uniq_islands, try adding "island" at the end
+      query <- paste0("^", as.character(uniq_islands[i]), " Island$")
+      grep_res2 <- grep(query, area_file$Name)[1]
+      if(!is.na(grep_res2)){
+        # If grep found a match, add it to island dictionary 
+        island_dict[as.character(uniq_islands[i])] <- area_file[grep_res2,3]
       }
-      
-      if(area_compare == uniq_compare || area_compare2 == uniq_compare || area_compare == uniq_compare2 || area_compare2 == uniq_compare2) {
-        island_dict[as.character(uniq_islands[i])] <- area_file[j,3]
-        break # Break the inner loop when you find the island name
-        
+    } 
+    
+    # If it doesn't find the name from uniq_islands, look in area_file_append
+    if(is.na(grep_res2)){
+      query <- paste0("^", as.character(uniq_islands[i]), "$")
+      grep_res3 <- grep(query, area_file_append)[1]
+      if(!is.na(grep_res3)){
+        # If grep found a match, add it to island dictionary 
+        island_dict[as.character(uniq_islands[i])] <- area_file[grep_res3,3]
       }
     }
-    cli_progress_update()
   }
   
   # Use the dictionary to add the areas to the final dataframe

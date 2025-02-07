@@ -9,7 +9,6 @@
 #' seg <- SARP(occurrences)
 #' plot(seg)
 #' }
-#' @import tidyverse
 #' @import segmented
 #' @export
 

@@ -22,6 +22,9 @@ occ_mat[2,] <- c("Anolis second", "Anolis", "second", -81.949353, 28.028047, "US
 # Smaller dataframe for findAreas occs input
 occs_small <- occs_vals[,1:5]
 
+# Uniq_islands to test full findAreas grep party
+uniq_islands <- c("Aappalaartoq", "Abbotts Harbour", "A Chau Island")
+
 ########
 
 test_that("Input occurrence record dataframe has 8 columns", {
@@ -36,8 +39,9 @@ test_that("Inputting an empty occurrence record dataframe will cause an error", 
   expect_error(findAreas(occs))
 })
 
-test_that("Inputting an empty custom area dataframe will cause an error", {
-  expect_error(findAreas(occs_vals, custom_area))
+test_that("Inputting an empty custom area dataframe will result in an empty dataframe", {
+ test_areas <- findAreas(occs_vals, custom_area)
+ expect_equal(length(test_areas[,1]), 0)
 })
 
 test_that("Inputting a matrix instead of a dataframe for occurrence records will cause an error", {

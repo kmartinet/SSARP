@@ -11,7 +11,7 @@
 #' key <- getKey("Naesiotus akamatus", "species")
 #' key <- getKey("Araneae", "order")
 #' }
-#' @import rgbif
+#' @importFrom rgbif name_suggest
 #' @importFrom checkmate assertString
 #' @export
 

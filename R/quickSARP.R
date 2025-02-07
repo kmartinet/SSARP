@@ -12,8 +12,6 @@
 #' \dontrun{
 #' seg <- quickSARP("Phelsuma", "genus", 1000, 1)
 #' }
-#' @import tidyverse
-#' @import segmented
 #' @importFrom cli cli_alert_info
 #' @export
 

@@ -7,10 +7,9 @@
 #' @examples 
 #' \dontrun{occs <- findLand(occurrences, fillgaps = FALSE)}
 #' @import mapdata
-#' @import tidyverse
-#' @import httr
-#' @import Dict
-#' @import usethis
+#' @import maps
+#' @importFrom tidyr separate
+#' @importFrom httr user_agent content GET
 #' @importFrom cli cli_alert_warning cli_alert_info
 #' @importFrom checkmate assertDataFrame assertLogical
 #' @export
@@ -47,7 +46,10 @@ findLand <- function(occurrences, fillgaps = FALSE) {
     }
   }
   
-  occs <- as.data.frame(cbind(occurrences$acceptedScientificName, occurrences$genericName, occurrences$specificEpithet, lon, lat, where2))
+  occs <- as.data.frame(cbind(occurrences$acceptedScientificName, 
+                              occurrences$genericName, 
+                              occurrences$specificEpithet, 
+                              lon, lat, where2))
   # Separate the where column into two separate columns - Country and Island
   # But sometimes there are three...
   suppressWarnings(occs <- occs %>% tidyr::separate(where2, c("First", "Second", "Third"), sep = ":"))

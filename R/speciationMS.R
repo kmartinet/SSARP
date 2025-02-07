@@ -9,10 +9,8 @@
 #' \dontrun{
 #' occ_speciation <- speciationMS(tree, "epithet", occs)
 #' }
-#' @import tidyverse
-#' @importFrom dplyr mutate
-#' @importFrom dplyr case_when
-#' @import ape
+#' @importFrom dplyr mutate case_when
+#' @importFrom ape subtrees node.depth.edgelength
 #' @importFrom checkmate assertString assertDataFrame
 #' @export
 

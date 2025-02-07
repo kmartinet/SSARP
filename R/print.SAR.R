@@ -10,8 +10,6 @@
 #' seg <- SARP(occurrences)
 #' print(seg)
 #' }
-#' @import tidyverse
-#' @import segmented
 #' @export
 
 print.SAR <- function(x, printlen = NULL, ...){

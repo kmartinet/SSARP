@@ -9,11 +9,8 @@
 #' \dontrun{
 #' occ_speciation <- speciationDR(tree, "epithet", occs)
 #' }
-#' @import tidyverse
-#' @importFrom dplyr mutate
-#' @importFrom dplyr case_when
-#' @import epm
-#' @import ape
+#' @importFrom dplyr mutate case_when
+#' @importFrom epm DRstat
 #' @importFrom checkmate assertString assertDataFrame
 #' @export
 
@@ -23,7 +20,7 @@ speciationDR <- function(tree, label_type = "binomial", occurrences) {
   assertDataFrame(occurrences)
   
   # Use DRstat from the epm package to find speciation rates for each tip
-  speciation_rates <- epm::DRstat(tree)
+  speciation_rates <- DRstat(tree)
   
   # Initialize a rate column with NAs
   sp_occ <- occurrences %>%

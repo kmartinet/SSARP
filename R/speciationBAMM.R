@@ -9,9 +9,7 @@
 #' \dontrun{
 #' occ_speciation <- speciationBAMM("epithet", occs, edata)
 #' }
-#' @import tidyverse
-#' @importFrom dplyr mutate
-#' @importFrom dplyr case_when
+#' @importFrom dplyr mutate case_when
 #' @importFrom checkmate assertString assertDataFrame
 #' @export
 

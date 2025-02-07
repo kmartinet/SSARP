@@ -9,8 +9,7 @@
 #' seg <- SARP(occurrences)
 #' summary <- seg[1]
 #' }
-#' @import tidyverse
-#' @import segmented
+#' @importFrom segmented segmented
 #' @importFrom stats AIC
 #' @importFrom checkmate assertDataFrame assertNumeric
 #' @export
