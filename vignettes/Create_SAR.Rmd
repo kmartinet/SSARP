@@ -1,6 +1,10 @@
 ---
 title: "Construct a Species-Area Relationship with SSARP"
-output: html_document
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Construct a Species-Area Relationship with SSARP}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 

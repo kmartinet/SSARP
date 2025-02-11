@@ -19,6 +19,7 @@ Imports:
   maps,
   rgbif,
   segmented,
+  stringi,
   tidyr,
   tidyverse,
   usethis

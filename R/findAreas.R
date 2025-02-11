@@ -73,7 +73,7 @@ findAreas <- function(occs, area_custom = NULL) {
   # If the user did not supply a custom dataframe, get island areas from 
   # built-in island area dataset
   if(is.null(area_custom)){
-    area_file <- SSARP::island_areas
+    area_file <- get_island_areas()
   } else {
     area_file <- area_custom
   }
