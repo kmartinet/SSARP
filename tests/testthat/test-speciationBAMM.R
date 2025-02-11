@@ -1,5 +1,5 @@
 # Read tree via raw file on SSARP's GitHub repo
-tree <- read.tree("https://raw.githubusercontent.com/kmartinet/SSARP/refs/heads/main/vignettes/Patton_Anolis_Trimmed.tree")
+tree <- ape::read.tree("https://raw.githubusercontent.com/kmartinet/SSARP/refs/heads/main/vignettes/Patton_Anolis_Trimmed.tree")
 
 # Create an incomplete bammdata object for testing purposes
 edata_test <- list()

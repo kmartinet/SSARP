@@ -1,5 +1,5 @@
 # Read tree via raw file on SSARP's GitHub repo
-tree <- read.tree("https://raw.githubusercontent.com/kmartinet/SSARP/refs/heads/main/vignettes/Patton_Anolis_Trimmed.tree")
+tree <- ape::read.tree("https://raw.githubusercontent.com/kmartinet/SSARP/refs/heads/main/vignettes/Patton_Anolis_Trimmed.tree")
 
 # The speciationDR function only really needs "Genus" and "Species" columns to work, so a simple dataframe can be created for testing (without real occurrence data)
 Species <- tree$tip.label

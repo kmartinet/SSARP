@@ -11,6 +11,7 @@
 #' }
 #' @importFrom dplyr mutate case_when
 #' @importFrom checkmate assertString assertDataFrame
+#' @importFrom ape read.tree
 #' @export
 
 speciationBAMM <- function(label_type = "binomial", occurrences, edata) {

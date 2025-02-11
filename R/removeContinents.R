@@ -14,7 +14,7 @@ removeContinents <- function(occs){
   
   # List of continental areas that could be added through the use of findAreas()
   continents <- c(5.50e13, 3.04e13, 1.78e13, 2.47e13)
-  for(i in 1:length(continents)){
+  for(i in seq(continents)){
     exclude <- which(occs[,9] == continents[i])
     if(length(exclude) != 0){
       occs <- occs[-exclude,]

@@ -9,9 +9,10 @@
 #' seg <- SARP(occurrences)
 #' summary <- seg[1]
 #' }
-#' @importFrom segmented segmented
-#' @importFrom stats AIC
+#' @importFrom segmented segmented seg.control
+#' @importFrom stats AIC aggregate lm
 #' @importFrom checkmate assertDataFrame assertNumeric
+#' @importFrom graphics abline points
 #' @export
 
 SARP <- function(occurrences, npsi = 2) {
@@ -46,7 +47,7 @@ SARP <- function(occurrences, npsi = 2) {
   # Create a segmented model for each level of npsi specified by the user
   # This only makes sense if the user does not specify that they want zero breakpoints
   if(npsi != 0){
-    for(i in c(1:npsi)){
+    for(i in seq(npsi)){
       seg <- segmented(linear, seg.Z = ~x, npsi = i, control = seg.control(display = FALSE, quant = TRUE))
       # Since the first index is always linear, use i+1
       aic_scores[i+1] <- AIC(seg)

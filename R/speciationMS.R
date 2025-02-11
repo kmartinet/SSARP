@@ -38,10 +38,10 @@ speciationMS <- function(tree, label_type = "binomial", occurrences){
   
   # Create a df to store: each monophyletic group, the number of species in each, and the node age
   mono_df <- data.frame()
-  for(g in c(1:length(island_groups))){
+  for(g in seq(island_groups)){
     comp_group <- island_groups[[g]]
     # See how many subtrees are in this list of species
-    for(i in c(1:length(sub_trees))){
+    for(i in seq(sub_trees)){
       # If all taxa in the current subtree is in the comparison group, add its info to the df
       if(all(sub_trees[[i]]$tip.label %in% comp_group)){
         comp_group <- g
@@ -69,7 +69,7 @@ speciationMS <- function(tree, label_type = "binomial", occurrences){
   # Following Magallon and Sanderson (2001) Equation 4
   # lambda = [log(n) - log2]/t
   sp_rates <- rep(0, length(mono_df$comp_group))
-  for(i in c(1:length(mono_df$comp_group))){
+  for(i in seq(mono_df$comp_group)){
     sp_rates[i] <- (log(mono_df[i,3])-log(2))/mono_df[i,4]
   }
   
@@ -84,7 +84,7 @@ speciationMS <- function(tree, label_type = "binomial", occurrences){
   final_df <- as.data.frame(cbind(uniq_islands, sp_rates))
   
   # Add speciation rates for specific islands from mono_df
-  for(i in c(1:length(mono_df$area))){
+  for(i in seq(mono_df$area)){
     # Figure out which row has the current area
     ind <- which(final_df$uniq_islands == mono_df[i,2])
     # Add corresponding speciation rate to final_df

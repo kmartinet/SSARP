@@ -9,7 +9,8 @@
 #' seg <- SARP(occurrences)
 #' plot(seg)
 #' }
-#' @import segmented
+#' @importFrom segmented segmented
+#' @importFrom graphics abline points
 #' @export
 
 plot.SAR <- function(x, ...){

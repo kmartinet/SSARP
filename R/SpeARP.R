@@ -10,9 +10,10 @@
 #' seg <- SpeARP(occurrences)
 #' summary <- seg[1]
 #' }
-#' @importFrom segmented segmented
-#' @importFrom stats AIC
+#' @importFrom segmented segmented seg.control
+#' @importFrom stats AIC aggregate lm
 #' @importFrom checkmate assertDataFrame assertNumeric assertLogical
+#' @importFrom graphics abline points
 #' @export
 
 SpeARP <- function(occurrences, npsi = 2, MS = FALSE) {
@@ -61,7 +62,7 @@ SpeARP <- function(occurrences, npsi = 2, MS = FALSE) {
   # Create a segmented model for each level of npsi specified by the user
   # This only makes sense if the user does not specify that they want zero breakpoints
   if(npsi != 0){
-    for(i in c(1:npsi)){
+    for(i in seq(npsi)){
       seg <- segmented(linear, seg.Z = ~x, npsi = i, control = seg.control(display = FALSE))
       aic_scores[i+1] <- AIC(seg)
     }

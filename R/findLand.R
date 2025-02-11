@@ -35,7 +35,7 @@ findLand <- function(occurrences, fillgaps = FALSE) {
   where2 <- maps::map.where(database = "world", x = lon, y = lat)
   
   # Next, combine the two where options (prioritize where2)
-  for(i in c(1:length(where2))) {
+  for(i in seq(where2)) {
     # Check if this row is NA
     if(is.na(where2[i])){
       # If it is NA, check if where is not NA
@@ -58,7 +58,7 @@ findLand <- function(occurrences, fillgaps = FALSE) {
   if(fillgaps == TRUE){
     # There might still be a lot of NA entries, so use Photon to try to fill in gaps
     cli_alert_info("Filling gaps using Photon...")
-    for(i in c(1:nrow(occs))){
+    for(i in seq_len(nrow(occs))){
       
       if(nrow(occs) == 0){
         cli_alert_warning("Occurrence record dataframe has no entries")

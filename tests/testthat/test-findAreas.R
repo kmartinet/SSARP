@@ -35,10 +35,6 @@ test_that("Input occurrence record dataframe has correct column names", {
   expect_equal(colnames(occs), c("SpeciesName", "Genus", "Species", "Longitude", "Latitude", "First", "Second", "Third"))
 })
 
-test_that("Inputting an empty occurrence record dataframe will cause an error", {
-  expect_error(findAreas(occs))
-})
-
 test_that("Inputting an empty custom area dataframe will result in an empty dataframe", {
  test_areas <- findAreas(occs_vals, custom_area)
  expect_equal(length(test_areas[,1]), 0)

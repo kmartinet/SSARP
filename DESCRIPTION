@@ -20,9 +20,7 @@ Imports:
   rgbif,
   segmented,
   stringi,
-  tidyr,
-  tidyverse,
-  usethis
+  tidyr
 LazyData: true
 Encoding: UTF-8
 License: GPL (>=2)
@@ -33,5 +31,6 @@ Depends:
     R (>= 4.3.0)
 Suggests: 
     testthat (>= 3.0.0),
+    rmarkdown,
     knitr (>= 1.46)
 Config/testthat/edition: 3

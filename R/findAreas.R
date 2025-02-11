@@ -19,7 +19,7 @@ findAreas <- function(occs, area_custom = NULL) {
   # Create vector to hold row numbers
   minus <- rep(NA, nrow(occs))
   # Loop through dataframe
-  for(i in c(1:nrow(occs))){
+  for(i in seq_len(nrow(occs))){
     if(nrow(occs) == 0){
       cli_alert_warning("No data in occurrence record dataframe")
       break
@@ -52,7 +52,7 @@ findAreas <- function(occs, area_custom = NULL) {
   # If yes, add to the island list. If NA, go to the Second column. 
   # If Second column is NA, go to the First column.
   cli_alert_info("Recording island names...")
-  for(i in c(1:nrow(occs))) {
+  for(i in seq_len(nrow(occs))) {
     if(nrow(occs)==0){
       cli_alert_warning("No data in occurrence record dataframe")
       break
@@ -86,7 +86,7 @@ findAreas <- function(occs, area_custom = NULL) {
   # Initialize grep statements as NA
   grep_res <- grep_res2 <- grep_res3 <- NA
 
-  for (i in c(1:length(uniq_islands))) {
+  for(i in seq(uniq_islands)) {
     # Use grep for exact match in the area database
     # [1] picks the first match if the query gets multiple matches
     query <- paste0("^", as.character(uniq_islands[i]), "$")
@@ -120,7 +120,7 @@ findAreas <- function(occs, area_custom = NULL) {
   cli_alert_info("Adding areas to final dataframe...")
   areas <- rep(0, times = nrow(occs))
   
-  for(i in c(1:nrow(occs))) {
+  for(i in seq_len(nrow(occs))) {
     
     if(!is.na(occs[i,8]) && island_dict$has(occs[i,8])){
       areas[i] <- island_dict$get(occs[i,8])
