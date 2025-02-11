@@ -2,6 +2,7 @@
   <!-- badges: start -->
   [![Codecov test coverage](https://codecov.io/gh/kmartinet/SSARP/branch/main/graph/badge.svg)](https://codecov.io/gh/kmartinet/SSARP?branch=main)
   [![R-CMD-check](https://github.com/kmartinet/SSARP/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/kmartinet/SSARP/actions/workflows/R-CMD-check.yaml)
+  [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
   <!-- badges: end -->
 
 SSARP (Species-/Speciation-Area Relationship Projector) is an R package that provides a suite of functions to help users **create speciation- and species-area relationships for island-dwelling taxa** using occurrence data from GBIF (Global Biodiversity Information Facility) accessed via GBIF's API or the user's own occurrence data.
