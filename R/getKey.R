@@ -13,6 +13,7 @@
 #' }
 #' @importFrom rgbif name_suggest
 #' @importFrom checkmate assertString
+#' @importFrom cli cli_alert_info
 #' @export
 
 getKey <- function(query, rank) {
@@ -22,10 +23,19 @@ getKey <- function(query, rank) {
   
   suggestions <- name_suggest(q = query, rank = rank)
   # name_suggest orders by relevance, so pick the first
-  if(length(suggestions$data) != 0){
+  if(length(suggestions$data) > 0){
     key <- as.numeric(suggestions$data[1,1])
   } else {
     key <- NA
   }
+  
+  # If the name is not an exact match, tell the user
+  # Make sure suggestions is not empty before attempting
+  if(length(suggestions$data) > 0 && query != suggestions$data[1,2]){
+    suggested_name <- suggestions$data[1,2]
+    suggested_rank <- suggestions$data[1,3]
+    cli_alert_info("No exact match found for query. The closest match was {suggested_name}, which has the following rank: {suggested_rank}.")
+  }
+  
   return(key)
 }

@@ -25,14 +25,13 @@ speciationBAMM <- function(label_type = "binomial", occurrences, edata) {
   # For each Species name in speciation_rates, look for that name in the Species column of the occurrence record dataframe and add the appropriate rate
   
   # Initialize a rate column with NAs
-  occurrences <- occurrences %>%
-    mutate(rate = NA)
+  occurrences <- occurrences |> mutate(rate = NA)
   
   # If the user specified label_type = "epithet"
   if(label_type == "epithet"){
     # For each name in speciation_rates, look for that name in the Species column of the occurrence record dataframe and add the appropriate rate
     for(i in names(speciation_rates)){
-      occurrences <- occurrences %>%
+      occurrences <- occurrences |>
         mutate(rate = case_when(
           grepl(i, Species) ~ speciation_rates[[i]],
           TRUE ~ rate # Keeps values for non-matching rows
@@ -43,7 +42,7 @@ speciationBAMM <- function(label_type = "binomial", occurrences, edata) {
     occurrences$Binomial <- paste(occurrences$Genus, occurrences$Species, sep = " ")
     # Now, for each name in speciation_rates, look for that name in the Binomial column of the occurrence record dataframe and add the appropriate rate
     for(i in names(speciation_rates)){
-      occurrences <- occurrences %>%
+      occurrences <- occurrences |>
         mutate(rate = case_when(
           grepl(i, Binomial) ~ speciation_rates[[i]],
           TRUE ~ rate # Keeps values for non-matching rows

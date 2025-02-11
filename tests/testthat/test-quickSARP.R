@@ -11,33 +11,6 @@ rank_bad <- 1
 key_bad <- "testing"
 limit_bad <- "one hundred"
 
-# Test dataframe for findLand occs input without values
-occs <- as.data.frame(matrix(ncol = 5, nrow = 2))
-colnames(occs) <- c("decimalLongitude", "decimalLatitude", "acceptedScientificName", "genericName", "specificEpithet")
-
-# Test dataframe for findLand occs input with values
-occs_vals <- occs
-occs_vals[1,] <- c(-81.948509, 28.028463, "Anolis first", "Anolis", "first")
-occs_vals[2,] <- c(-81.949353, 28.028047, "Anolis second", "Anolis", "second")
-
-# Test matrix for findLand occs input
-occ_mat <- matrix(ncol = 5, nrow = 2)
-colnames(occ_mat) <- c("decimalLongitude", "decimalLatitude", "acceptedScientificName", "genericName", "specificEpithet")
-occ_mat[1,] <- c(-81.948509, 28.028463, "Anolis first", "Anolis", "first")
-occ_mat[2,] <- c(-81.949353, 28.028047, "Anolis second", "Anolis", "second")
-
-# Smaller dataframe for findLand occs input
-occs_small <- occs_vals[,1:3]
-
-# Dataframe with no rows for findLand occs input
-occs <- as.data.frame(matrix(ncol = 5, nrow = 0))
-colnames(occs) <- c("decimalLongitude", "decimalLatitude", "acceptedScientificName", "genericName", "specificEpithet")
-
-# Dataframe with an occurrence record point that map.where() doesn't have info for
-# Test dataframe for findLand occs input with values
-occs_mystery <- occs_vals
-occs_mystery[1,] <- c(-90.66546, -0.611595, "Anolis first", "Anolis", "first")
-
 ########
 # Note: quickSARP is a simple function that runs all of the other functions pertinent to making a species-area relationship. To this end, the test cases are borrowed from the test files for the other functions.
 

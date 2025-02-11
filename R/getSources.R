@@ -27,7 +27,7 @@ getSources <- function(occs){
     key_col <- as.data.frame(occs$datasetKey)
     
     # Filter 
-    count_df <- key_col %>% count(occs$datasetKey)
+    count_df <- key_col |> count(occs$datasetKey)
     # Name columns
     colnames(count_df) <- c("datasetKey", "n")
     

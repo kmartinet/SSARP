@@ -52,7 +52,7 @@ findLand <- function(occurrences, fillgaps = FALSE) {
                               lon, lat, where2))
   # Separate the where column into two separate columns - Country and Island
   # But sometimes there are three...
-  suppressWarnings(occs <- occs %>% tidyr::separate(where2, c("First", "Second", "Third"), sep = ":"))
+  suppressWarnings(occs <- occs |> tidyr::separate(where2, c("First", "Second", "Third"), sep = ":"))
   colnames(occs) <- c("SpeciesName", "Genus", "Species", "Longitude", "Latitude", "First", "Second", "Third")
   
   if(fillgaps == TRUE){

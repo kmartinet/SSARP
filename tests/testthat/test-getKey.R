@@ -23,3 +23,7 @@ test_that("The getKey function returns a numeric with a valid query and rank", {
 test_that("The getKey function returns NA with a query and rank with no matches", {
   expect_equal(getKey(query = "Pikachu", rank = "family"), NA)
 })
+
+test_that("A message will be displayed when the name associated with the returned key does not match the provided query.", {
+ expect_message(getKey("Anol", "genus"))
+})
