@@ -73,7 +73,7 @@ Next, we will generate the SAR using the “SARP” function. The “SARP” fun
 SARP(occurrences = nocont_dat, npsi = 1)
 ```
 
-![Figure 2. This is the species-area relationship (SAR) for *Anolis* including island-based occurrences within a polygon around Caribbean islands from the first 10000 records for the genus in GBIF! The best-fit model was a segmented regression with one breakpoint.](../vignettes/anolis_SAR-1.png)
+![Figure 2. This is the species-area relationship (SAR) for *Anolis* including island-based occurrences within a polygon around Caribbean islands from the first 10000 records for the genus in GBIF! The best-fit model was a segmented regression with one breakpoint.](anolis_SAR-1.png)
 
 ```
 ## 

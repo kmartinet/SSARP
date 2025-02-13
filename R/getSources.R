@@ -1,11 +1,11 @@
 #' Gather sources from GBIF data for citation
 #' 
-#' When using data obtained via SSARP::getData for a publication, you must keep a record of the datasets used in your analysis. This function assists in creating the dataframe necessary to follow GBIF's citation guidelines (see References).
-#' @param occs The occurrence record dataframe returned by SSARP::getData.
-#' @return A dataframe of dataset keys and the number of occurrence records associated with each key that were gathered with SSARP::getData.
+#' When using data obtained via SSARP::getData and filtered with SSARP::findAreas for a publication, you must keep a record of the datasets used in your analysis. This function assists in creating the dataframe necessary to follow GBIF's citation guidelines (see References).
+#' @param occs The occurrence record dataframe returned by SSARP::getData or SSARP::findAreas.
+#' @return A dataframe of dataset keys and the number of occurrence records associated with each key that were gathered with SSARP::getData and/or filtered with SSARP::findAreas.
 #' @references 
 #' - [GBIF citation guidelines](https://www.gbif.org/citation-guidelines)
-#' - Data obtained via SSARP::getData falls under [the derived datasets distinction](https://www.gbif.org/derived-dataset/about)
+#' - Data obtained via SSARP::getData and filtered with SSARP::findAreas falls under [the derived datasets distinction](https://www.gbif.org/derived-dataset/about)
 #' - [More information about creating derived datasets](https://data-blog.gbif.org/post/derived-datasets/)
 #' @examples 
 #' \dontrun{

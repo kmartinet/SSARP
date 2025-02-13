@@ -1,9 +1,9 @@
 # Test dataframe
-occs <- as.data.frame(matrix(nrow = 4, ncol = 9))
+occs <- as.data.frame(matrix(nrow = 4, ncol = 10))
 names <- c("one", "two", "three", "four")
 areas <- c(5.50e13, 3.04e13, 10, 15)
 occs[,8] <- names
-occs[,9] <- areas
+occs[,10] <- areas
 
 # Test matrix
 occs_mat <- matrix(nrow = 1, ncol = 1)

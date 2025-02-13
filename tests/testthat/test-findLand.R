@@ -1,29 +1,29 @@
 # Test dataframe for findLand occs input without values
-occs <- as.data.frame(matrix(ncol = 5, nrow = 2))
-colnames(occs) <- c("decimalLongitude", "decimalLatitude", "acceptedScientificName", "genericName", "specificEpithet")
+occs <- as.data.frame(matrix(ncol = 6, nrow = 2))
+colnames(occs) <- c("decimalLongitude", "decimalLatitude", "acceptedScientificName", "genericName", "specificEpithet", "datasetKey")
 
 # Test dataframe for findLand occs input with values
 occs_vals <- occs
-occs_vals[1,] <- c(-81.948509, 28.028463, "Anolis first", "Anolis", "first")
-occs_vals[2,] <- c(-81.949353, 28.028047, "Anolis second", "Anolis", "second")
+occs_vals[1,] <- c(-81.948509, 28.028463, "Anolis first", "Anolis", "first", 1)
+occs_vals[2,] <- c(-81.949353, 28.028047, "Anolis second", "Anolis", "second", 1)
 
 # Test matrix for findLand occs input
-occ_mat <- matrix(ncol = 5, nrow = 2)
-colnames(occ_mat) <- c("decimalLongitude", "decimalLatitude", "acceptedScientificName", "genericName", "specificEpithet")
-occ_mat[1,] <- c(-81.948509, 28.028463, "Anolis first", "Anolis", "first")
-occ_mat[2,] <- c(-81.949353, 28.028047, "Anolis second", "Anolis", "second")
+occ_mat <- matrix(ncol = 6, nrow = 2)
+colnames(occ_mat) <- c("decimalLongitude", "decimalLatitude", "acceptedScientificName", "genericName", "specificEpithet", "datasetKey")
+occ_mat[1,] <- c(-81.948509, 28.028463, "Anolis first", "Anolis", "first", 1)
+occ_mat[2,] <- c(-81.949353, 28.028047, "Anolis second", "Anolis", "second", 1)
 
 # Smaller dataframe for findLand occs input
 occs_small <- occs_vals[,1:3]
 
 # Dataframe with no rows for findLand occs input
-occs <- as.data.frame(matrix(ncol = 5, nrow = 0))
-colnames(occs) <- c("decimalLongitude", "decimalLatitude", "acceptedScientificName", "genericName", "specificEpithet")
+occs <- as.data.frame(matrix(ncol = 6, nrow = 0))
+colnames(occs) <- c("decimalLongitude", "decimalLatitude", "acceptedScientificName", "genericName", "specificEpithet", "datasetKey")
 
 # Dataframe with an occurrence record point that map.where() doesn't have info for
 # Test dataframe for findLand occs input with values
 occs_mystery <- occs_vals
-occs_mystery[1,] <- c(-90.66546, -0.611595, "Anolis first", "Anolis", "first")
+occs_mystery[1,] <- c(-90.66546, -0.611595, "Anolis first", "Anolis", "first", 1)
 
 ########
 

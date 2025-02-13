@@ -72,7 +72,7 @@ The final parameter is the “MS” parameter, which tells *SSARP* whether the u
 SpeARP(occurrences = speciation_occurrences, npsi = 1, MS = TRUE)
 ```
 
-![This is the SpAR for *Anolis* including island-based occurrences within a polygon around Caribbean islands from the first 10000 records for the genus in GBIF! The best-fit model was a segmented regression with one breakpoint.](../vignettes/anolis_SpAR-1.png)
+![This is the SpAR for *Anolis* including island-based occurrences within a polygon around Caribbean islands from the first 10000 records for the genus in GBIF! The best-fit model was a segmented regression with one breakpoint.](anolis_SpAR-1.png)
 
 ```
 ## 
