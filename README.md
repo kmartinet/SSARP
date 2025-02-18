@@ -20,6 +20,8 @@ library(devtools)
 install_github("kmartinet/SSARP")
 ```
 
+Important note: *SSARP* depends on the [*epm*](https://cran.r-project.org/web/packages/epm/index.html) package, which itself depends on the [*terra*](https://cran.r-project.org/web/packages/terra/index.html) and [*sf*](https://cran.r-project.org/web/packages/sf/index.html) packages. These two packages can be difficult to install, so it is a good idea to install them individually before installing *SSARP* if they are not already installed.
+
 ### Example: Creating a Species-Area Relationship
 A species-area relationship (SAR) visualizes the relationship between species richness (the number of species) and the area of the land mass on which the species live. This brief example covers the *SSARP* workflow for creating a SAR, and more detailed explanations of the code and methods can be found [in the Articles on the SSARP pkgdown website](https://kmartinet.github.io/SSARP/index.html).
 
