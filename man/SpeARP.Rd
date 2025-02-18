@@ -21,7 +21,12 @@ Use segmented regression to create a speciation-area relationship plot. The X ax
 }
 \examples{
 \dontrun{
-seg <- SpeARP(occurrences)
+key <- getKey(query = "Anolis", rank = "genus")
+dat <- getData(key = key, limit = 100)
+land <- findLand(occurrences = dat)
+areas <- findAreas(occs = land)
+occ_speciation <- speciationBAMM(label_type = "epithet", occurrences = areas, edata = edata)
+seg <- SpeARP(occurrences = occ_speciation, npsi = 1, MS = FALSE)
 summary <- seg[1]
 }
 }

@@ -19,7 +19,12 @@ Use segmented regression to create a species-area relationship plot (SARP). The 
 }
 \examples{
 \dontrun{
-seg <- SARP(occurrences)
+key <- getKey(query = "Anolis", rank = "genus")
+dat <- getData(key = key, limit = 100)
+land <- findLand(occurrences = dat)
+areas <- findAreas(occs = land)
+
+seg <- SARP(areas)
 summary <- seg[1]
 }
 }

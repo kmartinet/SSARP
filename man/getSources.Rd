@@ -17,6 +17,7 @@ When using data obtained via SSARP::getData and filtered with SSARP::findAreas f
 }
 \examples{
 \dontrun{
+key <- getKey(query = "Anolis", rank = "genus")
 occs <- getData(key = key, limit = 10000)
 source_df <- getSources(occs = occs)
 }

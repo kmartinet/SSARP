@@ -5,7 +5,11 @@
 #' @param area_custom A dataframe including names of land masses and their associated areas. This dataframe should be provided when the user would like to bypass using the built-in database of island names and areas. Please ensure that the custom dataframe includes the land mass's area in column 3 and the name in column 5. (Optional)
 #' @return A dataframe of the species name, island name, and island area
 #' @examples 
-#' \dontrun{areas <- findAreas(occs)}
+#' \dontrun{
+#' key <- getKey(query = "Anolis", rank = "genus")
+#' dat <- getData(key = key, limit = 100)
+#' occs <- findLand(occurrences = dat)
+#' areas <- findAreas(occs = occs)}
 #' @importFrom cli cli_alert_info cli_alert_warning
 #' @importFrom checkmate assertDataFrame
 #' @import Dict

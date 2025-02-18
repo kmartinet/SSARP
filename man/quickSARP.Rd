@@ -34,6 +34,6 @@ Use the SSARP workflow for creating a species-area relationship for island speci
 }
 \examples{
 \dontrun{
-seg <- quickSARP("Phelsuma", "genus", 1000, 1)
+seg <- quickSARP(taxon = "Phelsuma", rank = "genus", limit = 1000, npsi = 1)
 }
 }

@@ -6,7 +6,12 @@
 #' @return A list of 3 including: the summary output, the segmented regression object, and the aggregated dataframe used to create the plot
 #' @examples 
 #' \dontrun{
-#' seg <- SARP(occurrences)
+#' key <- getKey(query = "Anolis", rank = "genus")
+#' dat <- getData(key = key, limit = 100)
+#' land <- findLand(occurrences = dat)
+#' areas <- findAreas(occs = land)
+#' 
+#' seg <- SARP(areas)
 #' summary <- seg[1]
 #' }
 #' @importFrom segmented segmented seg.control

@@ -19,9 +19,9 @@ Use rgbif to find the best match for the name given and return the taxon key
 }
 \examples{
 \dontrun{
-key <- getKey("Phelsuma", "genus")
-key <- getKey("Tamias ruficaudus ruficaudus", "subspecies")
-key <- getKey("Naesiotus akamatus", "species")
-key <- getKey("Araneae", "order")
+key <- getKey(query = "Phelsuma", rank = "genus")
+key <- getKey(query = "Tamias ruficaudus ruficaudus", rank = "subspecies")
+key <- getKey(query = "Naesiotus akamatus", rank = "species")
+key <- getKey(query = "Araneae", rank = "order")
 }
 }

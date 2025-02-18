@@ -18,5 +18,8 @@ A dataframe of the species name, longitude, latitude, and three parts of occurre
 Use various mapping tools to attempt to find the names of land masses where the occurrence points were found.
 }
 \examples{
-\dontrun{occs <- findLand(occurrences, fillgaps = FALSE)}
+\dontrun{
+key <- getKey(query = "Anolis", rank = "genus")
+dat <- getData(key = key, limit = 100)
+occs <- findLand(occurrences = dat, fillgaps = FALSE)}
 }

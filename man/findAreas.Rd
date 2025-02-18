@@ -18,5 +18,9 @@ A dataframe of the species name, island name, and island area
 Reference a dataset of island names and areas to find the areas of the land masses relevant to the taxon of interest.
 }
 \examples{
-\dontrun{areas <- findAreas(occs)}
+\dontrun{
+key <- getKey(query = "Anolis", rank = "genus")
+dat <- getData(key = key, limit = 100)
+occs <- findLand(occurrences = dat)
+areas <- findAreas(occs = occs)}
 }

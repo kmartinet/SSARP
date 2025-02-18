@@ -5,7 +5,10 @@
 #' @param fillgaps (logical) Attempt to use Photon API to fill in gaps left by mapdata::map.where (TRUE) or only mapdata::map.where results (FALSE, default). While it is powerful, the Photon API does not have a standard location for island names in its returned information, so using it will likely require the returned dataframe to be cleaned by the user.
 #' @return A dataframe of the species name, longitude, latitude, and three parts of occurrence information. "First" is the name used to describe the largest possible area of land where the occurrence point is found. "Second" is the name used to describe the second-largest possible area of land that corresponds with the occurrence point. "Third" is the most specific area of land that corresponds with the occurrence point. Functions later in the SSARP pipeline default to checking whether "Third" has an entry, then look at "Second," and then "First."
 #' @examples 
-#' \dontrun{occs <- findLand(occurrences, fillgaps = FALSE)}
+#' \dontrun{
+#' key <- getKey(query = "Anolis", rank = "genus")
+#' dat <- getData(key = key, limit = 100)
+#' occs <- findLand(occurrences = dat, fillgaps = FALSE)}
 #' @import mapdata
 #' @import maps
 #' @importFrom tidyr separate

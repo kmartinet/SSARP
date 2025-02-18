@@ -16,5 +16,10 @@ A dataframe of the species name, island name, and island area (without continent
 Reference a list of continental areas to remove them from the dataframe output by SSARP::findAreas().
 }
 \examples{
-\dontrun{new_areas <- removeContinents(occs)}
+\dontrun{
+key <- getKey(query = "Anolis", rank = "genus")
+dat <- getData(key = key, limit = 100)
+land <- findLand(occurrences = dat)
+areas <- findAreas(occs = land)
+new_areas <- removeContinents(areas)}
 }

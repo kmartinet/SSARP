@@ -9,6 +9,7 @@
 #' - [More information about creating derived datasets](https://data-blog.gbif.org/post/derived-datasets/)
 #' @examples 
 #' \dontrun{
+#' key <- getKey(query = "Anolis", rank = "genus")
 #' occs <- getData(key = key, limit = 10000)
 #' source_df <- getSources(occs = occs)
 #' }

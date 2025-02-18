@@ -10,7 +10,7 @@
 #' @return A list of 3 including: the summary output, the segmented regression object, and the aggregated dataframe used to create the plot.
 #' @examples 
 #' \dontrun{
-#' seg <- quickSARP("Phelsuma", "genus", 1000, 1)
+#' seg <- quickSARP(taxon = "Phelsuma", rank = "genus", limit = 1000, npsi = 1)
 #' }
 #' @importFrom cli cli_alert_info
 #' @export

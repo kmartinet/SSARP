@@ -21,6 +21,14 @@ Use methodology from Magallon and Sanderson (2001) to estimate speciation rates 
 }
 \examples{
 \dontrun{
-occ_speciation <- speciationMS(tree, "epithet", occs)
+key <- getKey(query = "Anolis", rank = "genus")
+dat <- getData(key = key, limit = 100)
+land <- findLand(occurrences = dat)
+areas <- findAreas(occs = land)
+
+# Assuming that the user has a tree file called "anolis.tree"
+tree <- ape::read.tree("anolis.tree")
+
+occ_speciation <- speciationMS(tree = tree, label_type = "epithet", occurrences = areas)
 }
 }

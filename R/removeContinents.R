@@ -4,7 +4,12 @@
 #' @param occs The dataframe that is returned by SSARP::findAreas. I do not recommend using a custom dataframe for this function because it references areas given by the area database used in SSARP::findAreas(). If you must use a custom dataframe, please ensure  that the landmass areas are in the 9th column of the dataframe.
 #' @return A dataframe of the species name, island name, and island area (without continents)
 #' @examples 
-#' \dontrun{new_areas <- removeContinents(occs)}
+#' \dontrun{
+#' key <- getKey(query = "Anolis", rank = "genus")
+#' dat <- getData(key = key, limit = 100)
+#' land <- findLand(occurrences = dat)
+#' areas <- findAreas(occs = land)
+#' new_areas <- removeContinents(areas)}
 #' @importFrom checkmate assertDataFrame
 #' @export
 

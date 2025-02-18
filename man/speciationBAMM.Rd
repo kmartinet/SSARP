@@ -21,6 +21,17 @@ Use the BAMMtools package (Rabosky et al. 2014) to extract tip speciation rates 
 }
 \examples{
 \dontrun{
-occ_speciation <- speciationBAMM("epithet", occs, edata)
+key <- getKey(query = "Anolis", rank = "genus")
+dat <- getData(key = key, limit = 100)
+land <- findLand(occurrences = dat)
+areas <- findAreas(occs = land)
+
+# Assuming that the user has a tree file called "anolis.tree"
+tree <- ape::read.tree("anolis.tree")
+
+# Assuming that the user has an eventdata file from a BAMM run called "event_data.txt"
+edata <- BAMMtools::getEventData(phy = tree, eventdata = "event_data.txt")
+
+occ_speciation <- speciationBAMM(label_type = "epithet", occurrences = areas , edata = edata)
 }
 }
