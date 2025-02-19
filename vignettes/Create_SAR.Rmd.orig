@@ -1,6 +1,10 @@
 ---
 title: "Construct a Species-Area Relationship with SSARP"
-output: html_document
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Construct a Species-Area Relationship with SSARP}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
@@ -30,6 +34,9 @@ library(SSARP)
 # Get the GBIF key for the Anolis genus
 key <- getKey(query = "Anolis", rank = "genus")
 
+# Print key
+key
+
 ```
 
 Now that we have the key associated with *Anolis*, we will use this key with *SSARP*'s "getData" function to gather georeferenced occurrence records from GBIF. The “limit” parameter will be set to 10000 in this case for a quick illustration of *SSARP*’s functionality, but this parameter can be as large as 100,000 (the hard limit from *rgbif* for the number of records returned).
@@ -44,20 +51,37 @@ We are only interested in occurrence records for island-dwelling anole lizards l
 # Get data for Anolis from GBIF in the specified polygon
 dat <- SSARP::getData(key = key, limit = 10000, geometry = 'POLYGON((-84.8 23.9, -84.7 16.4, -65.2 13.9, -63.1 11.0, -56.9 15.5, -60.5 21.9, -79.3 27.8, -79.8 24.8, -84.8 23.9))')
 
+# Print first 5 lines of dat
+head(dat, n = 5)
 ```
 
 ## Finding Land Mass Names and Areas
 Once the occurrence data is returned, we will use each occurrence record’s GPS point to determine the land mass on which the species was found and find the area associated with that land mass using a database of island areas and names from *SSARP*.
 
-```{r, message = FALSE}
+```{r }
 
 # Find land mass names
 land_dat <- findLand(occurrences = dat)
 
+# Print first 5 lines of land_dat
+head(land_dat, n = 5)
+```
+
+The locality information is split across three columns: "First," "Second," and "Third." The mapping utilities that *SSARP* uses sometimes output different levels of specificity for locality information (up to three different levels), so these columns provide space for these different levels. The island name that we are interested in will be in the last filled-in column of the three. For example, if there are two columns of locality information for a given occurrence record, the island name will be in the second. If there is only one column of locality information, it will contain the island name (as with Puerto Rico and Antigua above). If all columns have `NA`, the occurrence record is invalid and will be filtered out in the next step.
+
+Now that we have determined the names of the land masses associated with each occurrence record, we will find the area associated with each land mass.
+
+```{r, message = FALSE}
+
 # Use the land mass names to get their areas
 area_dat <- findAreas(occs = land_dat)
 
+# Print first 5 lines of area_dat
+head(area_dat, n = 5)
+
 ```
+Now, our occurrence record dataframe includes records with GPS points that are associated with a land mass, along with the areas of those land masses (in m^2).
+
 The “removeContinents” function in *SSARP* removes any continental occurrence records, which is useful when the user is only interested in island-dwelling species (as we are in this example). While the data obtained by using the “getData” function was geographically restricted, potential user error in specifying the polygon in WKT format often leads to accidental continental records that will be removed by using this function.
 
 ```{r }
@@ -66,9 +90,14 @@ nocont_dat <- removeContinents(occs = area_dat)
 ```
 
 ## Create Species-Area Relationship
-Next, we will generate the SAR using the “SARP” function. The “SARP” function creates multiple regression objects with breakpoints up to the user-specified “npsi” parameter. For example, if “npsi” is two, “SARP” will generate regression objects with zero (linear regression), one, and two breakpoints. The function will then return the regression object with the lowest AIC score. The “npsi” parameter will be set to one in this example. Note that if linear regression (zero breakpoints) is better-supported than segmented regression with one breakpoint, the linear regression will be returned instead.
+Finally, we will generate the SAR using the “SARP” function. The “SARP” function creates multiple regression objects with breakpoints up to the user-specified “npsi” parameter. For example, if “npsi” is two, “SARP” will generate regression objects with zero (linear regression), one, and two breakpoints. The function will then return the regression object with the lowest AIC score. The “npsi” parameter will be set to one in this example. Note that if linear regression (zero breakpoints) is better-supported than segmented regression with one breakpoint, the linear regression will be returned instead.
 
-```{r anolis_SAR, results = 'hide'}
-relationship <- SARP(occurrences = nocont_dat, npsi = 1)
+
+``` r
+SARP(occurrences = nocont_dat, npsi = 1)
 ```
+
 ![Figure 2. This is the species-area relationship (SAR) for *Anolis* including island-based occurrences within a polygon around Caribbean islands from the first 10000 records for the genus in GBIF! The best-fit model was a segmented regression with one breakpoint.](anolis_SAR-1.png)
+
+
+*SSARP* will also output the summary for the best-fit model for the data (displayed above).

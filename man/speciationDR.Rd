@@ -17,7 +17,7 @@ speciationDR(tree, label_type = "binomial", occurrences)
 A dataframe that includes speciation rates for each species in the occurrence record dataframe
 }
 \description{
-Use the DRstat method from the epm package (Title et al. 2022) and output a dataframe for use in SSARP's speciation-area relationship pipeline. This method also removes any species rows without rates (this is most likely to occur when the tree does not have all of the species included in the occurrence record dataframe)
+Use methodology from Sun and Folk (2020) to calculate the DR statistic for each tip of a given tree and output a dataframe for use in SSARP's speciation-area relationship pipeline. This method also removes any species rows without rates (this is most likely to occur when the tree does not have all of the species included in the occurrence record dataframe)
 }
 \examples{
 \dontrun{
@@ -30,5 +30,11 @@ areas <- findAreas(occs = land)
 tree <- ape::read.tree("anolis.tree")
 
 occ_speciation <- speciationDR(tree = tree, label_type = "epithet", occurrences = areas)
+}
+}
+\references{
+\itemize{
+\item Jetz, W., Thomas, G.H, Joy, J.B., Harmann, K., & Mooers, A.O. (2012). The global diversity of birds in space and time. Nature, 491: 444-448.
+\item Sun, M. & Folk, R.A. (2020). Cactusolo/rosid_NCOMMS-19-37964-T: Code and data for rosid_NCOMMS-19-37964 (Version V.1.0). Zenodo. http://doi.org/10.5281/zenodo.3843441
 }
 }
