@@ -45,6 +45,7 @@ speciationDR <- function(tree, label_type = "binomial", occurrences) {
     }
     speciation_rates[i] <- 1/qx
   }
+  names(speciation_rates) <- tree$tip.label
   
   # Initialize a rate column with NAs
   sp_occ <- occurrences |> mutate(rate = NA)
