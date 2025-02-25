@@ -4,12 +4,12 @@
 \alias{SARP}
 \title{Create a species-area relationship plot (SARP)}
 \usage{
-SARP(occurrences, npsi = 2)
+SARP(occurrences, npsi = 1)
 }
 \arguments{
 \item{occurrences}{The dataframe output by findAreas (or if using a custom dataframe, ensure that it has the following columns: Species, areas)}
 
-\item{npsi}{The maximum number of breakpoints to estimate for model selection.  Default: 2}
+\item{npsi}{The maximum number of breakpoints to estimate for model selection.  Default: 1}
 }
 \value{
 A list of 3 including: the summary output, the segmented regression object, and the aggregated dataframe used to create the plot

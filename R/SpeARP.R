@@ -2,8 +2,7 @@
 #' 
 #' Use segmented regression to create a speciation-area relationship plot. The X axis represents log(island area) and the Y axis represents log(speciation rate)
 #' @param occurrences The dataframe output by one of SSARP's speciation methods (speciationDR), or if using a custom dataframe, ensure that it has the following columns: areas, rate
-#' @param npsi The maximum number of breakpoints to estimate for model selection.  Default: 2
-#' @param MS (Logical) Whether you used the speciationMS function to calculate speciation rates (TRUE) or not (FALSE - default). The speciationMS function already calculates a log-transformed speciation rate, so this prevents the rate from being log-transformed twice.
+#' @param npsi The maximum number of breakpoints to estimate for model selection.  Default: 1
 #' @return A list of 3 including: the summary output, the segmented regression object, and the aggregated dataframe used to create the plot
 #' @examples 
 #' \dontrun{
@@ -21,11 +20,10 @@
 #' @importFrom graphics abline points
 #' @export
 
-SpeARP <- function(occurrences, npsi = 2, MS = FALSE) {
+SpeARP <- function(occurrences, npsi = 1) {
   # Checkmate input validation
   assertDataFrame(occurrences)
   assertNumeric(npsi)
-  assertLogical(MS)
   
   # The purpose of this function is to create either a linear or segmented regression to visualize the relationship between speciation rate and island area
   #   formula rate ~ areas means to group speciation rates by area
@@ -34,11 +32,8 @@ SpeARP <- function(occurrences, npsi = 2, MS = FALSE) {
   
   # Segmented package prefers tidy dataframes, so make one for it
   # If speciationMS was used to calculate speciation rates, make sure to not log-transform the rate column
-  if(MS == FALSE){
-    dat <- data.frame(x = log(agg$areas), y = log(agg$rate))
-  } else{
-    dat <- data.frame(x = log(agg$areas), y = agg$rate)
-  }
+
+  dat <- data.frame(x = log(agg$areas), y = log(agg$rate))
   
   # Run a linear model on the data to use in creating segmented/breakpoint regression
   linear <- lm(y ~ x, data = dat)

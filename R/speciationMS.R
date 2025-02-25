@@ -4,7 +4,7 @@
 #' @param tree The dated phylogenetic tree that corresponds with the taxa to be included in a speciation-area relationship
 #' @param label_type Either "epithet" or "binomial" (default): describes the type of tip label in the provided tree. If "epithet," only the species epithet will be used when interacting with the tree. If "binomial," the full species name (including genus) will be used when interacting with the tree.
 #' @param occurrences The occurrence record dataframe output from the SSARP pipeline. If you would like to use a custom dataframe, please make sure that there are columns titled "Genus", "Species", and "areas"
-#' @return A dataframe that includes speciation rates for each island in the user-provided occurrence record dataframe
+#' @return A dataframe that includes speciation rates for each island in the user-provided occurrence record dataframe.
 #' @examples 
 #' \dontrun{
 #' key <- getKey(query = "Anolis", rank = "genus")
@@ -104,6 +104,17 @@ speciationMS <- function(tree, label_type = "binomial", occurrences){
   
   # Rename columns
   colnames(final_df) <- c("areas", "rate")
+  
+  # Ensure columns are numeric
+  final_df$areas <- as.numeric(final_df$areas)
+  final_df$rate <- as.numeric(final_df$rate)
+  
+  # The rates here are logged, which would make it incorrect to log them again
+  #   when the speciation-area relationship is plotted (as happens in SSARP::SpeARP).
+  # To this end, we will exponentiate the rate values here so when they are logged
+  #   in SSARP::SpeARP, the rates will be displayed appropriately.
+  final_df$rate <- exp(final_df$rate)
+  
   
   return(final_df)
 }
