@@ -14,7 +14,7 @@ speciationMS(tree, label_type = "binomial", occurrences)
 \item{occurrences}{The occurrence record dataframe output from the SSARP pipeline. If you would like to use a custom dataframe, please make sure that there are columns titled "Genus", "Species", and "areas"}
 }
 \value{
-A dataframe that includes speciation rates for each island in the user-provided occurrence record dataframe
+A dataframe that includes speciation rates for each island in the user-provided occurrence record dataframe.
 }
 \description{
 Use methodology from Magallon and Sanderson (2001) to estimate speciation rates using a user-provided phylogeny and output a dataframe for use in SSARP's speciation-area relationship pipeline. This method also removes any species rows without rates (this is most likely to occur when the tree does not have all of the species included in the occurrence record dataframe)

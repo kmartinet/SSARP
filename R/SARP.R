@@ -2,7 +2,7 @@
 #' 
 #' Use segmented regression to create a species-area relationship plot (SARP). The X axis represents log(island area) and the Y axis represents log(number of species)
 #' @param occurrences The dataframe output by findAreas (or if using a custom dataframe, ensure that it has the following columns: Species, areas)
-#' @param npsi The maximum number of breakpoints to estimate for model selection.  Default: 2
+#' @param npsi The maximum number of breakpoints to estimate for model selection.  Default: 1
 #' @return A list of 3 including: the summary output, the segmented regression object, and the aggregated dataframe used to create the plot
 #' @examples 
 #' \dontrun{
@@ -20,7 +20,7 @@
 #' @importFrom graphics abline points
 #' @export
 
-SARP <- function(occurrences, npsi = 2) {
+SARP <- function(occurrences, npsi = 1) {
   # Checkmate input validation
   assertDataFrame(occurrences)
   assertNumeric(npsi)
