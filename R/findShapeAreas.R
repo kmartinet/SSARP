@@ -11,7 +11,7 @@
 #' dat <- getData(key = key, limit = 100)
 #' 
 #' occs <- findShapeAreas(occs = dat, shapefile = shapefile, names = NULL)
-#' new_occs <- occs[1]}
+#' new_occs <- occs[[1]]}
 #' @importFrom cli cli_alert_info cli_alert_warning
 #' @importFrom checkmate assertDataFrame assertClass
 #' @importFrom terra vect subset extract
