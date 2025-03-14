@@ -25,5 +25,5 @@ key <- getKey(query = "Anolis", rank = "genus")
 dat <- getData(key = key, limit = 100)
 
 occs <- findShapeAreas(occs = dat, shapefile = shapefile, names = NULL)
-new_occs <- occs[1]}
+new_occs <- occs[[1]]}
 }
