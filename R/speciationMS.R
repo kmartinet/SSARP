@@ -92,7 +92,7 @@ speciationMS <- function(tree, label_type = "binomial", occurrences){
   final_df <- as.data.frame(cbind(uniq_islands, sp_rates))
   
   # Add speciation rates for specific islands from mono_df
-  for(i in seq(mono_df$area)){
+  for(i in 1:length(mono_df$area)){
     # Figure out which row has the current area
     ind <- which(final_df$uniq_islands == mono_df[i,2])
     # Add corresponding speciation rate to final_df
