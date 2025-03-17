@@ -16,6 +16,7 @@ Imports:
   httr,
   mapdata,
   maps,
+  reshape2,
   rgbif,
   segmented,
   sf,
