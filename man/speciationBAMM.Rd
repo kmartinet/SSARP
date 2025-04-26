@@ -7,17 +7,27 @@
 speciationBAMM(label_type = "binomial", occurrences, edata)
 }
 \arguments{
-\item{label_type}{Either "epithet" or "binomial" (default): describes the type of tip label in the tree used for the BAMM analysis. If "epithet," only the species epithet will be used to match speciation rates to tips in the returned occurrence dataframe. If "binomial," the full species name (including genus) will be used to match speciation rates to tips in the returned occurrence dataframe.}
+\item{label_type}{Either "epithet" or "binomial" (default): describes the
+type of tip label in the tree used for the BAMM analysis. If "epithet," only
+the species epithet will be used to match speciation rates to tips in the
+returned occurrence dataframe. If "binomial," the full species name
+(including genus) will be used to match speciation rates to tips in the
+returned occurrence dataframe.}
 
-\item{occurrences}{The occurrence record dataframe output from the SSARP pipeline. If you would like to use a custom dataframe, please make sure that there are columns titled "Genus" and "Species"}
+\item{occurrences}{The occurrence record dataframe output from the SSARP
+pipeline. If you would like to use a custom dataframe, please make sure that
+there are columns titled "Genus" and "Species"}
 
-\item{edata}{The eventdata object created by using the getEventData() function in BAMMtools}
+\item{edata}{The eventdata object created by using the getEventData()
+function in BAMMtools}
 }
 \value{
-A dataframe that includes speciation rates for each species in the occurrence record dataframe
+A dataframe that includes speciation rates for each species in the
+occurrence record dataframe
 }
 \description{
-Use the BAMMtools package (Rabosky et al. 2014) to extract tip speciation rates from user-supplied BAMM analysis objects.
+Use the BAMMtools package (Rabosky et al. 2014) to extract tip speciation
+rates from user-supplied BAMM analysis objects.
 }
 \examples{
 \dontrun{
@@ -29,9 +39,12 @@ areas <- findAreas(occs = land)
 # Assuming that the user has a tree file called "anolis.tree"
 tree <- ape::read.tree("anolis.tree")
 
-# Assuming that the user has an eventdata file from a BAMM run called "event_data.txt"
+# Assuming that the user has an eventdata file from a BAMM run 
+#  called "event_data.txt"
 edata <- BAMMtools::getEventData(phy = tree, eventdata = "event_data.txt")
 
-occ_speciation <- speciationBAMM(label_type = "epithet", occurrences = areas , edata = edata)
+occ_speciation <- speciationBAMM(label_type = "epithet", 
+                                 occurrences = areas , 
+                                 edata = edata)
 }
 }

@@ -15,7 +15,8 @@
 A plot of your species-area relationship
 }
 \description{
-Function for plotting species-area relationship objects from the SSARP::SARP() function
+Function for plotting species-area relationship objects from the
+SSARP::SARP() function
 }
 \examples{
 \dontrun{

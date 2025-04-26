@@ -1,8 +1,14 @@
 #' Remove continents from area dataframe.
 #' 
-#' Reference a list of continental areas to remove them from the dataframe output by SSARP::findAreas().
-#' @param occs The dataframe that is returned by SSARP::findAreas. I do not recommend using a custom dataframe for this function because it references areas given by the area database used in SSARP::findAreas(). If you must use a custom dataframe, please ensure  that the landmass areas are in the 9th column of the dataframe.
-#' @return A dataframe of the species name, island name, and island area (without continents)
+#' Reference a list of continental areas to remove them from the dataframe 
+#' output by SSARP::findAreas().
+#' @param occs The dataframe that is returned by SSARP::findAreas. I do not 
+#' recommend using a custom dataframe for this function because it references 
+#' areas given by the area database used in SSARP::findAreas(). If you must use 
+#' a custom dataframe, please ensure  that the landmass areas are in the 9th 
+#' column of the dataframe.
+#' @return A dataframe of the species name, island name, and island area 
+#' (without continents)
 #' @examples 
 #' \dontrun{
 #' key <- getKey(query = "Anolis", rank = "genus")

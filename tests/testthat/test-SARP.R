@@ -1,5 +1,7 @@
 # Test occurrence record dataframe
-Species <- c("Tropius", "Taillow", "Chikorita", "Girafarig", "Octillery", "Amaura", "Pangoro", "Fearow", "Pikachu", "Weepinbell", "Graveler", "Voltorb")
+Species <- c("Tropius", "Taillow", "Chikorita", "Girafarig", "Octillery", 
+             "Amaura", "Pangoro", "Fearow", "Pikachu", "Weepinbell", 
+             "Graveler", "Voltorb")
 areas <- c(650, 650, 800, 800, 800, 600, 600, 1000, 1000, 1000, 1000, 1000)
 occ <- as.data.frame(cbind(Species, areas))
 occ$areas <- as.numeric(occ$areas)

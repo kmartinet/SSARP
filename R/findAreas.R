@@ -1,8 +1,19 @@
 #' Find areas of land masses.
 #' 
-#' Reference a dataset of island names and areas to find the areas of the land masses relevant to the taxon of interest.
-#' @param occs The dataframe that is returned by SSARP::findLand. If using a custom occurrence record dataframe, ensure that it has the following columns in order: "SpeciesName", "Genus", "Species", "Longitude", "Latitude", "First", "Second", "Third", "datasetKey". The "datasetKey" column is important for GBIF records and identifies the dataset to which the occurrence record belongs. Custom dataframes without this style of data organization should fill the column with placeholder values.
-#' @param area_custom A dataframe including names of land masses and their associated areas. This dataframe should be provided when the user would like to bypass using the built-in database of island names and areas. Please ensure that the custom dataframe includes the land mass's area in column 3 and the name in column 5. (Optional)
+#' Reference a dataset of island names and areas to find the areas of the land 
+#' masses relevant to the taxon of interest.
+#' @param occs The dataframe that is returned by SSARP::findLand. If using a 
+#' custom occurrence record dataframe, ensure that it has the following columns 
+#' in order: "SpeciesName", "Genus", "Species", "Longitude", "Latitude", 
+#' "First", "Second", "Third", "datasetKey". The "datasetKey" column is 
+#' important for GBIF records and identifies the dataset to which the occurrence
+#' record belongs. Custom dataframes without this style of data organization 
+#' should fill the column with placeholder values.
+#' @param area_custom A dataframe including names of land masses and their 
+#' associated areas. This dataframe should be provided when the user would like 
+#' to bypass using the built-in database of island names and areas. Please 
+#' ensure that the custom dataframe includes the land mass's area in column 3 
+#' and the name in column 5. (Optional)
 #' @return A dataframe of the species name, island name, and island area
 #' @examples 
 #' \dontrun{
@@ -57,7 +68,7 @@ findAreas <- function(occs, area_custom = NULL) {
   # If Second column is NA, go to the First column.
   cli_alert_info("Recording island names...")
   for(i in seq_len(nrow(occs))) {
-    if(nrow(occs)==0){
+    if(nrow(occs) == 0){
       cli_alert_warning("No data in occurrence record dataframe")
       break
     }
@@ -85,7 +96,8 @@ findAreas <- function(occs, area_custom = NULL) {
   
   # Look through the island area file and find the names in uniq_islands list
   cli_alert_info("Assembling island dictionary...")
-  # Initialize vector of island names from island area dataset with "Island" appended
+  # Initialize vector of island names from island area dataset with 
+  #  "Island" appended
   area_file_append <- paste0(area_file$Name, " Island")
   # Initialize grep statements as NA
   grep_res <- grep_res2 <- grep_res3 <- NA
@@ -100,7 +112,8 @@ findAreas <- function(occs, area_custom = NULL) {
       # If grep found a match, add it to island dictionary
       island_dict[as.character(uniq_islands[i])] <- area_file[grep_res,3]
     } else {
-      # If it doesn't find the name directly from uniq_islands, try adding "island" at the end
+      # If it doesn't find the name directly from uniq_islands, try adding 
+      #  "island" at the end
       query <- paste0("^", as.character(uniq_islands[i]), " Island$")
       grep_res2 <- grep(query, area_file$Name)[1]
       if(!is.na(grep_res2)){

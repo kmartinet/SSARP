@@ -1,5 +1,7 @@
 # Dataframe for linear object plotting
-species_L <- c("Tropius", "Taillow", "Chikorita", "Girafarig", "Octillery", "Amaura", "Pangoro", "Fearow", "Pikachu", "Weepinbell", "Graveler", "Voltorb")
+species_L <- c("Tropius", "Taillow", "Chikorita", "Girafarig", "Octillery", 
+               "Amaura", "Pangoro", "Fearow", "Pikachu", "Weepinbell", 
+               "Graveler", "Voltorb")
 areas_L <- c(650, 650, 800, 800, 800, 600, 600, 1000, 1000, 1000, 1000, 1000)
 occ_L <- as.data.frame(cbind(species_L, areas_L))
 occ_L$areas_L <- as.numeric(occ_L$areas_L)

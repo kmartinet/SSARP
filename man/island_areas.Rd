@@ -21,6 +21,7 @@ A data frame with 26376 rows and 5 variables:
 island_areas
 }
 \description{
-A collection of island names, their areas, and their elevations found using ArcGIS
+A collection of island names, their areas, and their elevations found using
+ArcGIS
 }
 \keyword{datasets}

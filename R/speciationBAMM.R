@@ -1,10 +1,20 @@
 #' Get tip speciation rates from BAMM (Rabosky 2014) analysis
 #' 
-#' Use the BAMMtools package (Rabosky et al. 2014) to extract tip speciation rates from user-supplied BAMM analysis objects.
-#' @param label_type Either "epithet" or "binomial" (default): describes the type of tip label in the tree used for the BAMM analysis. If "epithet," only the species epithet will be used to match speciation rates to tips in the returned occurrence dataframe. If "binomial," the full species name (including genus) will be used to match speciation rates to tips in the returned occurrence dataframe.
-#' @param occurrences The occurrence record dataframe output from the SSARP pipeline. If you would like to use a custom dataframe, please make sure that there are columns titled "Genus" and "Species"
-#' @param edata The eventdata object created by using the getEventData() function in BAMMtools
-#' @return A dataframe that includes speciation rates for each species in the occurrence record dataframe
+#' Use the BAMMtools package (Rabosky et al. 2014) to extract tip speciation 
+#' rates from user-supplied BAMM analysis objects.
+#' @param label_type Either "epithet" or "binomial" (default): describes the 
+#' type of tip label in the tree used for the BAMM analysis. If "epithet," only 
+#' the species epithet will be used to match speciation rates to tips in the 
+#' returned occurrence dataframe. If "binomial," the full species name 
+#' (including genus) will be used to match speciation rates to tips in the 
+#' returned occurrence dataframe.
+#' @param occurrences The occurrence record dataframe output from the SSARP 
+#' pipeline. If you would like to use a custom dataframe, please make sure that 
+#' there are columns titled "Genus" and "Species"
+#' @param edata The eventdata object created by using the getEventData() 
+#' function in BAMMtools
+#' @return A dataframe that includes speciation rates for each species in the 
+#' occurrence record dataframe
 #' @examples 
 #' \dontrun{
 #' key <- getKey(query = "Anolis", rank = "genus")
@@ -15,10 +25,13 @@
 #' # Assuming that the user has a tree file called "anolis.tree"
 #' tree <- ape::read.tree("anolis.tree")
 #' 
-#' # Assuming that the user has an eventdata file from a BAMM run called "event_data.txt"
+#' # Assuming that the user has an eventdata file from a BAMM run 
+#' #  called "event_data.txt"
 #' edata <- BAMMtools::getEventData(phy = tree, eventdata = "event_data.txt")
 #' 
-#' occ_speciation <- speciationBAMM(label_type = "epithet", occurrences = areas , edata = edata)
+#' occ_speciation <- speciationBAMM(label_type = "epithet", 
+#'                                  occurrences = areas , 
+#'                                  edata = edata)
 #' }
 #' @importFrom dplyr mutate case_when
 #' @importFrom checkmate assertString assertDataFrame
@@ -34,14 +47,17 @@ speciationBAMM <- function(label_type = "binomial", occurrences, edata) {
   speciation_rates <- edata$meanTipLambda
   names(speciation_rates) <- edata$tip.label
   
-  # For each Species name in speciation_rates, look for that name in the Species column of the occurrence record dataframe and add the appropriate rate
+  # For each Species name in speciation_rates, look for that name in the 
+  #  Species column of the occurrence record dataframe and add the 
+  #  appropriate rate
   
   # Initialize a rate column with NAs
   occurrences <- occurrences |> mutate(rate = NA)
   
   # If the user specified label_type = "epithet"
   if(label_type == "epithet"){
-    # For each name in speciation_rates, look for that name in the Species column of the occurrence record dataframe and add the appropriate rate
+    # For each name in speciation_rates, look for that name in the Species 
+    #  column of the occurrence record dataframe and add the appropriate rate
     for(i in names(speciation_rates)){
       occurrences <- occurrences |>
         mutate(rate = case_when(
@@ -50,9 +66,12 @@ speciationBAMM <- function(label_type = "binomial", occurrences, edata) {
         ))
     }
   } else if(label_type == "binomial"){
-    # The occurrence record dataframe has separate "Genus" and "Species" columns, so they should be combined for this label type
-    occurrences$Binomial <- paste(occurrences$Genus, occurrences$Species, sep = " ")
-    # Now, for each name in speciation_rates, look for that name in the Binomial column of the occurrence record dataframe and add the appropriate rate
+    # The occurrence record dataframe has separate "Genus" and "Species" 
+    #  columns, so they should be combined for this label type
+    occurrences$Binomial <- paste(occurrences$Genus, occurrences$Species, 
+                                  sep = " ")
+    # Now, for each name in speciation_rates, look for that name in the Binomial
+    #  column of the occurrence record dataframe and add the appropriate rate
     for(i in names(speciation_rates)){
       occurrences <- occurrences |>
         mutate(rate = case_when(

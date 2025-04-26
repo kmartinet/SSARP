@@ -20,17 +20,24 @@ quickSARP(
 
 \item{limit}{The number of GBIF occurrence records to obtain.}
 
-\item{geometry}{(character) A polygon written in Well Known Text (WKT) format to pass to the SSARP::getData function. If no polygon is given, records from across the globe will be returned.}
+\item{geometry}{(character) A polygon written in Well Known Text (WKT)
+format to pass to the SSARP::getData function. If no polygon is given,
+records from across the globe will be returned.}
 
-\item{continent}{(logical) If TRUE, continental areas are removed from the species-area relationship data. If FALSE, continental areas are not removed from the species-area relationship data. Default: TRUE}
+\item{continent}{(logical) If TRUE, continental areas are removed from the
+species-area relationship data. If FALSE, continental areas are not removed
+from the species-area relationship data. Default: TRUE}
 
 \item{npsi}{The number of breakpoints to estimate. Default: 1}
 }
 \value{
-A list of 3 including: the summary output, the segmented regression object, and the aggregated dataframe used to create the plot.
+A list of 3 including: the summary output, the segmented regression
+object, and the aggregated dataframe used to create the plot.
 }
 \description{
-Use the SSARP workflow for creating a species-area relationship for island species using occurrence data from GBIF without having to go through every individual step.
+Use the SSARP workflow for creating a species-area relationship for island
+species using occurrence data from GBIF without having to go through every
+individual step.
 }
 \examples{
 \dontrun{

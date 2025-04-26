@@ -7,15 +7,20 @@
 SARP(occurrences, npsi = 1)
 }
 \arguments{
-\item{occurrences}{The dataframe output by findAreas (or if using a custom dataframe, ensure that it has the following columns: Species, areas)}
+\item{occurrences}{The dataframe output by findAreas (or if using a custom
+dataframe, ensure that it has the following columns: Species, areas)}
 
-\item{npsi}{The maximum number of breakpoints to estimate for model selection.  Default: 1}
+\item{npsi}{The maximum number of breakpoints to estimate for model
+selection.  Default: 1}
 }
 \value{
-A list of 3 including: the summary output, the segmented regression object, and the aggregated dataframe used to create the plot
+A list of 3 including: the summary output, the segmented regression
+object, and the aggregated dataframe used to create the plot
 }
 \description{
-Use segmented regression to create a species-area relationship plot (SARP). The X axis represents log(island area) and the Y axis represents log(number of species)
+Use segmented regression to create a species-area relationship plot (SARP).
+The X axis represents log(island area) and the Y axis represents log(number
+of species)
 }
 \examples{
 \dontrun{

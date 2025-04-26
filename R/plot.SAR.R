@@ -1,6 +1,7 @@
 #' Plot a species-area relationship
 #' 
-#' Function for plotting species-area relationship objects from the SSARP::SARP() function
+#' Function for plotting species-area relationship objects from the 
+#' SSARP::SARP() function
 #' @param x The SAR object that will be plotted
 #' @param ... Functions to pass to plot()
 #' @return A plot of your species-area relationship

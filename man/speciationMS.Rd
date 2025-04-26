@@ -7,17 +7,28 @@
 speciationMS(tree, label_type = "binomial", occurrences)
 }
 \arguments{
-\item{tree}{The dated phylogenetic tree that corresponds with the taxa to be included in a speciation-area relationship}
+\item{tree}{The dated phylogenetic tree that corresponds with the taxa to be
+included in a speciation-area relationship}
 
-\item{label_type}{Either "epithet" or "binomial" (default): describes the type of tip label in the provided tree. If "epithet," only the species epithet will be used when interacting with the tree. If "binomial," the full species name (including genus) will be used when interacting with the tree.}
+\item{label_type}{Either "epithet" or "binomial" (default): describes the
+type of tip label in the provided tree. If "epithet," only the species
+epithet will be used when interacting with the tree. If "binomial," the full
+species name (including genus) will be used when interacting with the tree.}
 
-\item{occurrences}{The occurrence record dataframe output from the SSARP pipeline. If you would like to use a custom dataframe, please make sure that there are columns titled "Genus", "Species", and "areas"}
+\item{occurrences}{The occurrence record dataframe output from the SSARP
+pipeline. If you would like to use a custom dataframe, please make sure that
+there are columns titled "Genus", "Species", and "areas"}
 }
 \value{
-A dataframe that includes speciation rates for each island in the user-provided occurrence record dataframe.
+A dataframe that includes speciation rates for each island in the
+user-provided occurrence record dataframe.
 }
 \description{
-Use methodology from Magallon and Sanderson (2001) to estimate speciation rates using a user-provided phylogeny and output a dataframe for use in SSARP's speciation-area relationship pipeline. This method also removes any species rows without rates (this is most likely to occur when the tree does not have all of the species included in the occurrence record dataframe)
+Use methodology from Magallon and Sanderson (2001) to estimate speciation
+rates using a user-provided phylogeny and output a dataframe for use in
+SSARP's speciation-area relationship pipeline. This method also removes any
+species rows without rates (this is most likely to occur when the tree does
+not have all of the species included in the occurrence record dataframe)
 }
 \examples{
 \dontrun{
@@ -29,6 +40,8 @@ areas <- findAreas(occs = land)
 # Assuming that the user has a tree file called "anolis.tree"
 tree <- ape::read.tree("anolis.tree")
 
-occ_speciation <- speciationMS(tree = tree, label_type = "epithet", occurrences = areas)
+occ_speciation <- speciationMS(tree = tree, 
+                              label_type = "epithet", 
+                              occurrences = areas)
 }
 }

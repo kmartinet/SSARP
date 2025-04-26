@@ -1,6 +1,7 @@
 #' Print species-area relationship summary
 #' 
-#' Function for printing the summary of species-area relationship objects from the SSARP::SARP() function
+#' Function for printing the summary of species-area relationship objects from 
+#' the SSARP::SARP() function
 #' @param x The SAR object of interest
 #' @param ... Parameters to pass to print()
 #' @param printlen Should always be NULL

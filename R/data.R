@@ -1,6 +1,7 @@
 #' Island name data
 #' 
-#' A collection of island names, their areas, and their elevations found using ArcGIS
+#' A collection of island names, their areas, and their elevations found using 
+#' ArcGIS
 #' 
 #' @format ## 'island_areas'
 #' A data frame with 26376 rows and 5 variables:

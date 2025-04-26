@@ -23,8 +23,10 @@ occ_mat <- as.matrix(occs)
 
 ########
 
-test_that("Inputting a matrix instead of a dataframe for occurrence records will cause an error", {
-  expect_error(speciationMS(tree = tree, label_type = "epithet", occurrences = occ_mat))
+test_that("Inputting a matrix instead of a dataframe for occurrence records 
+          will cause an error", {
+  expect_error(speciationMS(tree = tree, label_type = "epithet", 
+                            occurrences = occ_mat))
 })
 
 test_that("Inputting a non-string for the label type will cause an error", {
@@ -32,13 +34,17 @@ test_that("Inputting a non-string for the label type will cause an error", {
 })
 
 test_that("The speciationMS function returns a dataframe (epithet labels)", {
-  expect_s3_class(speciationMS(tree = tree, label_type = "epithet", occurrences = occs), "data.frame")
+  expect_s3_class(speciationMS(tree = tree, label_type = "epithet", 
+                               occurrences = occs), "data.frame")
 })
 
 test_that("The speciationMS function returns a dataframe (binomial labels)", {
-  expect_s3_class(speciationDR(tree = tree_b, label_type = "binomial", occurrences = occs), "data.frame")
+  expect_s3_class(speciationDR(tree = tree_b, label_type = "binomial", 
+                               occurrences = occs), "data.frame")
 })
 
-test_that("When a tree with binomial tip labels is used but the label type is specified as 'epithet', an error will occur", {
-  expect_error(speciationMS(tree = tree_b, label_type = "epithet", occurrences = occs))
+test_that("When a tree with binomial tip labels is used but the label type is 
+          specified as 'epithet', an error will occur", {
+  expect_error(speciationMS(tree = tree_b, label_type = "epithet", 
+                            occurrences = occs))
 })

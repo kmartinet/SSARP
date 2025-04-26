@@ -1,9 +1,27 @@
 #' Find the name of the land on which the occurrence points were found
 #' 
-#' Use various mapping tools to attempt to find the names of land masses where the occurrence points were found.
-#' @param occurrences The dataframe output by getData (or if using a custom dataframe, ensure that it has the following columns: decimalLongitude, decimalLatitude, acceptedScientificName, genericName, specificEpithet, datasetKey). The "datasetKey" column is important for GBIF records and identifies the dataset to which the occurrence record belongs. Custom dataframes without this style of data organization should fill the column with placeholder values.
-#' @param fillgaps (logical) Attempt to use Photon API to fill in gaps left by mapdata::map.where (TRUE) or only mapdata::map.where results (FALSE, default). While it is powerful, the Photon API does not have a standard location for island names in its returned information, so using it will likely require the returned dataframe to be cleaned by the user.
-#' @return A dataframe of the species name, longitude, latitude, and three parts of occurrence information. "First" is the name used to describe the largest possible area of land where the occurrence point is found. "Second" is the name used to describe the second-largest possible area of land that corresponds with the occurrence point. "Third" is the most specific area of land that corresponds with the occurrence point. Functions later in the SSARP pipeline default to checking whether "Third" has an entry, then look at "Second," and then "First."
+#' Use various mapping tools to attempt to find the names of land masses where 
+#' the occurrence points were found.
+#' @param occurrences The dataframe output by getData (or if using a custom 
+#' dataframe, ensure that it has the following columns: decimalLongitude, 
+#' decimalLatitude, acceptedScientificName, genericName, specificEpithet, 
+#' datasetKey). The "datasetKey" column is important for GBIF records and 
+#' identifies the dataset to which the occurrence record belongs. Custom 
+#' dataframes without this style of data organization should fill the column 
+#' with placeholder values.
+#' @param fillgaps (logical) Attempt to use Photon API to fill in gaps left by 
+#' mapdata::map.where (TRUE) or only mapdata::map.where results 
+#' (FALSE, default). While it is powerful, the Photon API does not have a 
+#' standard location for island names in its returned information, so using it 
+#' will likely require the returned dataframe to be cleaned by the user.
+#' @return A dataframe of the species name, longitude, latitude, and three parts
+#' of occurrence information. "First" is the name used to describe the largest 
+#' possible area of land where the occurrence point is found. "Second" is the 
+#' name used to describe the second-largest possible area of land that 
+#' corresponds with the occurrence point. "Third" is the most specific area of 
+#' land that corresponds with the occurrence point. Functions later in the SSARP
+#' pipeline default to checking whether "Third" has an entry, then look at 
+#' "Second," and then "First."
 #' @examples 
 #' \dontrun{
 #' key <- getKey(query = "Anolis", rank = "genus")
@@ -57,11 +75,15 @@ findLand <- function(occurrences, fillgaps = FALSE) {
   
   # Separate the where column into two separate columns - Country and Island
   # But sometimes there are three...
-  suppressWarnings(occs <- occs |> tidyr::separate(where2, c("First", "Second", "Third"), sep = ":"))
-  colnames(occs) <- c("SpeciesName", "Genus", "Species", "Longitude", "Latitude", "First", "Second", "Third", "datasetKey")
+  suppressWarnings(occs <- occs |> tidyr::separate(where2, 
+                                                  c("First", "Second", "Third"),
+                                                  sep = ":"))
+  colnames(occs) <- c("SpeciesName", "Genus", "Species", "Longitude", 
+                      "Latitude", "First", "Second", "Third", "datasetKey")
   
   if(fillgaps == TRUE){
-    # There might still be a lot of NA entries, so use Photon to try to fill in gaps
+    # There might still be a lot of NA entries, so use Photon to try to 
+    #  fill in gaps
     cli_alert_info("Filling gaps using Photon...")
     for(i in seq_len(nrow(occs))){
       
@@ -79,24 +101,29 @@ findLand <- function(occurrences, fillgaps = FALSE) {
                       longitude, "&lat=", latitude)
         
         # Create a user agent to tell Photon that SSARP is making the request
-        user <- user_agent("SSARP R Package (https://github.com/kmartinet/SSARP)")
+        user <- 
+          user_agent("SSARP R Package (https://github.com/kmartinet/SSARP)")
         
         # GET content from the Photon API, including the user agent in the call
         data <- content(GET(url = url, config = user), encoding = "UTF-8")
         
-        # Sometimes data$features has nothing in it, so first check if it has something
+        # Sometimes data$features has nothing in it, so first check if it 
+        # has something
         if(length(data$features) != 0){
           PhotonInfo <- data$features[[1]]$properties
           
-          # Different information is passed back sometimes, so try to find the best options
-          # First, check if a country is listed and put it in the appropriate column
+          # Different information is passed back sometimes, so try to find the 
+          #  best options
+          # First, check if a country is listed and put it in the appropriate 
+          #  column
           if(length(PhotonInfo$country) != 0){
             occs[i,6] <- as.character(PhotonInfo$country)
           }
           
           # Next, try to find the island name
           # Sometimes, it is in the "name" part of the Photon data
-          # If not, the "locality" part of the Photon data often has the island name
+          # If not, the "locality" part of the Photon data often has the island 
+          #  name
           if(length(PhotonInfo$name) != 0){
             occs[i,7] <- as.character(PhotonInfo$name)
           } else if(length(PhotonInfo$locality) != 0){

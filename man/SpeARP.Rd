@@ -7,15 +7,21 @@
 SpeARP(occurrences, npsi = 1)
 }
 \arguments{
-\item{occurrences}{The dataframe output by one of SSARP's speciation methods (speciationDR), or if using a custom dataframe, ensure that it has the following columns: areas, rate}
+\item{occurrences}{The dataframe output by one of SSARP's speciation
+methods (speciationDR), or if using a custom dataframe, ensure that it has
+the following columns: areas, rate}
 
-\item{npsi}{The maximum number of breakpoints to estimate for model selection.  Default: 1}
+\item{npsi}{The maximum number of breakpoints to estimate for model
+selection.  Default: 1}
 }
 \value{
-A list of 3 including: the summary output, the segmented regression object, and the aggregated dataframe used to create the plot
+A list of 3 including: the summary output, the segmented regression
+object, and the aggregated dataframe used to create the plot
 }
 \description{
-Use segmented regression to create a speciation-area relationship plot. The X axis represents log(island area) and the Y axis represents log(speciation rate)
+Use segmented regression to create a speciation-area relationship plot. The
+X axis represents log(island area) and the Y axis represents
+log(speciation rate)
 }
 \examples{
 \dontrun{
@@ -23,7 +29,9 @@ key <- getKey(query = "Anolis", rank = "genus")
 dat <- getData(key = key, limit = 100)
 land <- findLand(occurrences = dat)
 areas <- findAreas(occs = land)
-occ_speciation <- speciationBAMM(label_type = "epithet", occurrences = areas, edata = edata)
+occ_speciation <- speciationBAMM(label_type = "epithet", 
+                                 occurrences = areas, 
+                                 edata = edata)
 seg <- SpeARP(occurrences = occ_speciation, npsi = 1, MS = FALSE)
 summary <- seg[1]
 }

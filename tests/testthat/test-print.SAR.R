@@ -1,5 +1,7 @@
 # Dataframe for linear object plotting
-species_L <- c("Tropius", "Taillow", "Chikorita", "Girafarig", "Octillery", "Amaura", "Pangoro", "Fearow", "Pikachu", "Weepinbell", "Graveler", "Voltorb")
+species_L <- c("Tropius", "Taillow", "Chikorita", "Girafarig", "Octillery", 
+               "Amaura", "Pangoro", "Fearow", "Pikachu", "Weepinbell", 
+               "Graveler", "Voltorb")
 areas_L <- c(650, 650, 800, 800, 800, 600, 600, 1000, 1000, 1000, 1000, 1000)
 occ_L <- as.data.frame(cbind(species_L, areas_L))
 occ_L$areas_L <- as.numeric(occ_L$areas_L)
@@ -17,7 +19,8 @@ occ_one_bp$areas <- as.numeric(occ_one_bp$areas)
 
 ########
 
-test_that("Using print.SAR on a linear SAR will print the linear model summary, which is a list", {
+test_that("Using print.SAR on a linear SAR will print the linear model 
+          summary, which is a list", {
   p <- SARP(occ_L, npsi = 0)
   expect_type(print(p), "list")
 })
@@ -25,7 +28,8 @@ test_that("Using print.SAR on a linear SAR will print the linear model summary, 
 # Using suppressWarnings here because the test dataset is very simple, 
 # and while the best-fit model is a regression with one breakpoint, 
 # the "segemented" package gives warnings about the reliability of the results
-test_that("Using print.SAR on a segmented SAR with one breakpoint will print the segmented model summary, which is NULL", {
+test_that("Using print.SAR on a segmented SAR with one breakpoint will print 
+          the segmented model summary, which is NULL", {
   suppressWarnings(p <- SARP(occ_one_bp, npsi = 1))
   suppressWarnings(expect_type(print(p), "NULL"))
 })

@@ -12,7 +12,8 @@ getKey(query, rank)
 \item{rank}{The taxonimic rank associated with the search parameter}
 }
 \value{
-The taxon key that GBIF needs to search its database for occurrence records
+The taxon key that GBIF needs to search its database for occurrence
+records
 }
 \description{
 Use rgbif to find the best match for the name given and return the taxon key

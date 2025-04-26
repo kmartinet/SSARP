@@ -17,7 +17,8 @@
 The summary of your species-area relationship
 }
 \description{
-Function for printing the summary of species-area relationship objects from the SSARP::SARP() function
+Function for printing the summary of species-area relationship objects from
+the SSARP::SARP() function
 }
 \examples{
 \dontrun{
