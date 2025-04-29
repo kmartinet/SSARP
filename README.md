@@ -11,6 +11,8 @@ coverage](https://codecov.io/gh/kmartinet/SSARP/branch/main/graph/badge.svg)](ht
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Status at rOpenSci Software Peer
+Review](https://badges.ropensci.org/685_status.svg)](https://github.com/ropensci/software-review/issues/685)
 <!-- badges: end -->
 
 SSARP (Species-/Speciation-Area Relationship Projector) is an R package
