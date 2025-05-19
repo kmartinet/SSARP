@@ -65,11 +65,9 @@ The “speciation_occurrences” object is a dataframe containing island areas w
 ## Create Speciation-Area Relationship
 Next, we will use the “speciation_occurrences” object with the “SpeARP” function to create a SpAR. Just like the “SARP” function, the "SpeARP" function creates multiple regression objects with breakpoints up to the user-specified “npsi” parameter. For example, if “npsi” is two, “SpeARP” will generate regression objects with zero (linear regression), one, and two breakpoints. The function will then return the regression object with the lowest AIC score. The “npsi” parameter will be set to one in this example. Note that if linear regression (zero breakpoints) is better-supported than segmented regression with one breakpoint, the linear regression will be returned instead.
 
-The final parameter is the “MS” parameter, which tells *SSARP* whether the user generated speciation rate estimates using the “speciationMS” function (TRUE) or not (FALSE). This is an important parameter because if “speciationMS” is used, the speciation rate calculation already log-transforms the values. The other speciation rate estimation methods do not automatically log-transform the speciation rate values.
-
 
 ``` r
-SpeARP(occurrences = speciation_occurrences, npsi = 1, MS = TRUE)
+SpeARP(occurrences = speciation_occurrences, npsi = 1)
 ```
 
 ![This is the SpAR for *Anolis* including island-based occurrences within a polygon around Caribbean islands from the first 10000 records for the genus in GBIF! The best-fit model was a segmented regression with one breakpoint.](anolis_SpAR-1.png)
@@ -83,21 +81,20 @@ SpeARP(occurrences = speciation_occurrences, npsi = 1, MS = TRUE)
 ## 
 ## Estimated Break-Point(s):
 ##           Est. St.Err
-## psi1.x 19.924  1.002
+## psi1.x 19.924  1.019
 ## 
 ## Coefficients of the linear terms:
 ##               Estimate Std. Error t value Pr(>|t|)
-## (Intercept)  2.058e-11  2.158e-02    0.00        1
-## x           -1.244e-12  1.188e-03    0.00        1
-## U1.x         5.712e-03  2.085e-03    2.74       NA
+## (Intercept) -1.863e-11  2.193e-02   0.000        1
+## x            1.130e-12  1.206e-03   0.000        1
+## U1.x         5.712e-03  2.116e-03   2.699       NA
 ## 
-## Residual standard error: 0.01037 on 34 degrees of freedom
-## Multiple R-Squared: 0.3996,  Adjusted R-squared: 0.3466 
+## Residual standard error: 0.01053 on 33 degrees of freedom
+## Multiple R-Squared: 0.3983,  Adjusted R-squared: 0.3436 
 ## 
 ## Boot restarting based on 6 samples. Last fit:
-## Convergence attained in 3 iterations (rel. change 2.3011e-16)
+## Convergence attained in 3 iterations (rel. change 2.1387e-14)
 ```
-
 
 You will notice that two of the largest islands have a speciation rate of zero in this example. This very likely occurred because the calculation for speciation rate in Magallόn and Sanderson (2001) that “speciationMS” uses is based on monophyly, which can be disrupted on islands with non-native species occurrence records. When using the "speciationMS" function to estimate speciation rates for a SpAR, it is incredibly important to manually filter the returned occurrence records to remove non-native species.
 
