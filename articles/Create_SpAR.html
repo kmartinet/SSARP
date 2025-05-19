@@ -155,15 +155,8 @@ regression object with the lowest AIC score. The “npsi” parameter will
 be set to one in this example. Note that if linear regression (zero
 breakpoints) is better-supported than segmented regression with one
 breakpoint, the linear regression will be returned instead.</p>
-<p>The final parameter is the “MS” parameter, which tells <em>SSARP</em>
-whether the user generated speciation rate estimates using the
-“speciationMS” function (TRUE) or not (FALSE). This is an important
-parameter because if “speciationMS” is used, the speciation rate
-calculation already log-transforms the values. The other speciation rate
-estimation methods do not automatically log-transform the speciation
-rate values.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/SpeARP.html">SpeARP</a></span><span class="op">(</span>occurrences <span class="op">=</span> <span class="va">speciation_occurrences</span>, npsi <span class="op">=</span> <span class="fl">1</span>, MS <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/SpeARP.html">SpeARP</a></span><span class="op">(</span>occurrences <span class="op">=</span> <span class="va">speciation_occurrences</span>, npsi <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
 <img src="anolis_SpAR-1.png" alt="This is the SpAR for Anolis including island-based occurrences within a polygon around Caribbean islands from the first 10000 records for the genus in GBIF! The best-fit model was a segmented regression with one breakpoint."><div class="figcaption">This is the SpAR for <em>Anolis</em> including
 island-based occurrences within a polygon around Caribbean islands from
@@ -178,19 +171,19 @@ segmented regression with one breakpoint.</div>
 <span><span class="co">## </span></span>
 <span><span class="co">## Estimated Break-Point(s):</span></span>
 <span><span class="co">##           Est. St.Err</span></span>
-<span><span class="co">## psi1.x 19.924  1.002</span></span>
+<span><span class="co">## psi1.x 19.924  1.019</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Coefficients of the linear terms:</span></span>
 <span><span class="co">##               Estimate Std. Error t value Pr(&gt;|t|)</span></span>
-<span><span class="co">## (Intercept)  2.058e-11  2.158e-02    0.00        1</span></span>
-<span><span class="co">## x           -1.244e-12  1.188e-03    0.00        1</span></span>
-<span><span class="co">## U1.x         5.712e-03  2.085e-03    2.74       NA</span></span>
+<span><span class="co">## (Intercept) -1.863e-11  2.193e-02   0.000        1</span></span>
+<span><span class="co">## x            1.130e-12  1.206e-03   0.000        1</span></span>
+<span><span class="co">## U1.x         5.712e-03  2.116e-03   2.699       NA</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## Residual standard error: 0.01037 on 34 degrees of freedom</span></span>
-<span><span class="co">## Multiple R-Squared: 0.3996,  Adjusted R-squared: 0.3466 </span></span>
+<span><span class="co">## Residual standard error: 0.01053 on 33 degrees of freedom</span></span>
+<span><span class="co">## Multiple R-Squared: 0.3983,  Adjusted R-squared: 0.3436 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Boot restarting based on 6 samples. Last fit:</span></span>
-<span><span class="co">## Convergence attained in 3 iterations (rel. change 2.3011e-16)</span></span></code></pre>
+<span><span class="co">## Convergence attained in 3 iterations (rel. change 2.1387e-14)</span></span></code></pre>
 <p>You will notice that two of the largest islands have a speciation
 rate of zero in this example. This very likely occurred because the
 calculation for speciation rate in Magallόn and Sanderson (2001) that
