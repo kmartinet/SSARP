@@ -19,5 +19,5 @@ for the functionality of the SSARP package, so this function provides the
 user with a dataframe including the original, un-converted island names.
 }
 \examples{
-\dontrun{island_df <- get_island_areas()}
+island_df <- get_island_areas()
 }

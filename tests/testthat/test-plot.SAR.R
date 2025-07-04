@@ -21,7 +21,7 @@ occ_one_bp$areas <- as.numeric(occ_one_bp$areas)
 ########
 
 test_that("plot.SAR will plot a linear regression (type will be NULL)", {
-  p <- SARP(occ_L, npsi = 0)
+  p <- create_SAR(occ_L, npsi = 0)
   expect_type(plot(p), "NULL")
 })
 
@@ -29,6 +29,6 @@ test_that("plot.SAR will plot a linear regression (type will be NULL)", {
 # and while the best-fit model is a regression with one breakpoint, 
 # the "segemented" package gives warnings about the reliability of the results
 test_that("plot.SAR will plot a segmented regression (type will be NULL)", {
-  suppressWarnings(p <- SARP(occ_one_bp, npsi = 1))
+  suppressWarnings(p <- create_SAR(occ_one_bp, npsi = 1))
   suppressWarnings(expect_type(plot(p), "NULL"))
 })

@@ -21,7 +21,7 @@ occ_one_bp$areas <- as.numeric(occ_one_bp$areas)
 
 test_that("Using print.SAR on a linear SAR will print the linear model 
           summary, which is a list", {
-  p <- SARP(occ_L, npsi = 0)
+  p <- create_SAR(occ_L, npsi = 0)
   expect_type(print(p), "list")
 })
 
@@ -30,6 +30,6 @@ test_that("Using print.SAR on a linear SAR will print the linear model
 # the "segemented" package gives warnings about the reliability of the results
 test_that("Using print.SAR on a segmented SAR with one breakpoint will print 
           the segmented model summary, which is NULL", {
-  suppressWarnings(p <- SARP(occ_one_bp, npsi = 1))
+  suppressWarnings(p <- create_SAR(occ_one_bp, npsi = 1))
   suppressWarnings(expect_type(print(p), "NULL"))
 })

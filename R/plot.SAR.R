@@ -1,17 +1,24 @@
 #' Plot a species-area relationship
 #' 
 #' Function for plotting species-area relationship objects from the 
-#' SSARP::SARP() function
+#' `SSARP::create_SAR()` function
 #' @param x The SAR object that will be plotted
 #' @param ... Functions to pass to plot()
 #' @return A plot of your species-area relationship
 #' @examples 
-#' \dontrun{
-#' seg <- SARP(occurrences)
+#' # The GBIF key for the Anolis genus is 8782549
+#' #  Obtained with: key <- get_key(query = "Anolis", rank = "genus")
+#' key <- 8782549
+#' # Read in example dataset obtained through:
+#' #  dat <- get_data(key = key, limit = 100)
+#' dat <- read.csv(system.file("extdata",
+#'                             "SSARP_Example_Dat.csv",
+#'                             package = "SSARP"))
+#' occs <- find_land(occurrences = dat)
+#' areas <- find_areas(occs = occs)
+#' seg <- create_SAR(areas, npsi = 0)
 #' plot(seg)
-#' }
-#' @importFrom segmented segmented
-#' @importFrom graphics abline points
+#' 
 #' @export
 
 plot.SAR <- function(x, ...){
@@ -26,14 +33,14 @@ plot.SAR <- function(x, ...){
   
   # Segmented plotting
   if(!is.null(x[["segObj"]])){ 
-    plot(x[["segObj"]], rug = FALSE,
+    segmented::plot.segmented(x[["segObj"]], rug = FALSE,
          xlim = c(x_min, (x_max + 0.5)),
          ylim = c(y_min, (y_max + 0.5)),
          ylab = "Log Number of Species",
          xlab = expression(paste("Log Island Area (", "m"^"2", ")")),
          main = "Species-Area Relationship")
     # Add the points
-    points(x[["aggDF"]]$x, x[["aggDF"]]$y, pch = 19)
+    graphics::points(x[["aggDF"]]$x, x[["aggDF"]]$y, pch = 19)
   } 
   # Line plotting
   else if(!is.null(x[["linObj"]])){
@@ -44,6 +51,6 @@ plot.SAR <- function(x, ...){
          xlab = expression(paste("Log Island Area (", "m"^"2", ")")),
          main = "Species-Area Relationship",
          pch = 16)
-    abline(x[["linObj"]])
+    graphics::abline(x[["linObj"]])
   }
 }
