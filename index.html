@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">SSARP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +89,7 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/kmartinet/SSARP" class="external-link">SSARP</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Get the GBIF key for the Anolis genus</span></span>
-<span><span class="va">key</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/getKey.html">getKey</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">"Anolis"</span>, rank <span class="op">=</span> <span class="st">"genus"</span><span class="op">)</span></span>
+<span><span class="va">key</span> <span class="op">&lt;-</span> <span class="fu">getKey</span><span class="op">(</span>query <span class="op">=</span> <span class="st">"Anolis"</span>, rank <span class="op">=</span> <span class="st">"genus"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Print the key</span></span>
 <span><span class="va">key</span></span>
@@ -98,7 +98,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Get data for Anolis from GBIF in a specified polygon around Caribbean islands</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/getData.html">getData</a></span><span class="op">(</span>key <span class="op">=</span> <span class="va">key</span>, limit <span class="op">=</span> <span class="fl">10000</span>,</span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">getData</span><span class="op">(</span>key <span class="op">=</span> <span class="va">key</span>, limit <span class="op">=</span> <span class="fl">10000</span>,</span>
 <span>  geometry <span class="op">=</span> <span class="st">'POLYGON((-84.8 23.9, -84.7 16.4, -65.2 13.9, -63.1 11.0, -56.9 15.5, -60.5 21.9, -79.3 27.8, -79.8 24.8, -84.8 23.9))'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Print the first 5 lines of dat</span></span>
@@ -127,7 +127,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Find land mass names and exclude records not on land</span></span>
-<span><span class="va">land_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/findLand.html">findLand</a></span><span class="op">(</span>occurrences <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span>
+<span><span class="va">land_dat</span> <span class="op">&lt;-</span> <span class="fu">findLand</span><span class="op">(</span>occurrences <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Print first 5 lines of land_dat</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">land_dat</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
@@ -153,7 +153,7 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># Use the land mass names to get their areas</span></span>
-<span><span class="va">area_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/findAreas.html">findAreas</a></span><span class="op">(</span>occs <span class="op">=</span> <span class="va">land_dat</span><span class="op">)</span></span>
+<span><span class="va">area_dat</span> <span class="op">&lt;-</span> <span class="fu">findAreas</span><span class="op">(</span>occs <span class="op">=</span> <span class="va">land_dat</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Print the first 5 lines of area_dat</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">area_dat</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span>
@@ -183,7 +183,7 @@
 <p>Finally, we will generate the SAR using the “SARP” function. The “SARP” function creates multiple regression objects with breakpoints up to the user-specified “npsi” parameter. For example, if “npsi” is two, “SARP” will generate regression objects with zero (linear regression), one, and two breakpoints. The function will then return the regression object with the lowest AIC score. The “npsi” parameter will be set to one in this example. Note that if linear regression (zero breakpoints) is better-supported than segmented regression with one breakpoint, the linear regression will be returned instead.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="fu"><a href="reference/SARP.html">SARP</a></span><span class="op">(</span>occurrences <span class="op">=</span> <span class="va">area_dat</span>, npsi <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">SARP</span><span class="op">(</span>occurrences <span class="op">=</span> <span class="va">area_dat</span>, npsi <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co">#&gt; </span></span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co">#&gt;  ***Regression Model with Segmented Relationship(s)***</span></span>
@@ -216,9 +216,9 @@
 <ol style="list-style-type: decimal">
 <li>Use <code>getKey(query, rank)</code> to find the unique identifying key associated with your taxon of interest.<br>
 </li>
-<li>Use <code>getData(key, limit, geometry)</code> with the key found in Step 1 to access <em>limit</em> occurrence points from GBIF. There is a hard limit of 100,000 records for each call to <code><a href="reference/getData.html">getData()</a></code>, as set by <a href="https://www.gbif.org/tool/81747/rgbif" class="external-link"><em>rgbif</em></a>. The “geometry” parameter can be specified with a well-known text (WKT) representation of of geometry to restrict the geographic location of the returned occurrence records (see more about WKT below).</li>
+<li>Use <code>getData(key, limit, geometry)</code> with the key found in Step 1 to access <em>limit</em> occurrence points from GBIF. There is a hard limit of 100,000 records for each call to <code>getData()</code>, as set by <a href="https://www.gbif.org/tool/81747/rgbif" class="external-link"><em>rgbif</em></a>. The “geometry” parameter can be specified with a well-known text (WKT) representation of of geometry to restrict the geographic location of the returned occurrence records (see more about WKT below).</li>
 <li>Use <code>findLand(occ, fillgaps)</code> with the dataframe obtained in Step 2 to figure out the names of landmasses using the occurrence record GPS points and the <a href="https://cran.r-project.org/web/packages/maps/index.html" class="external-link"><em>maps</em> R package</a>. Setting the “fillgaps” parameter to <code>TRUE</code> will enable the use of <a href="https://photon.komoot.io/" class="external-link">Photon API</a> to fill in any missing landmass names left by the <em>maps</em> R package.</li>
-<li>Use <code>findAreas(occ, area_custom)</code> with the dataframe obtained in Step 3 to match the landmass names to a dataset that includes names of most islands on the planet and their areas. If the user would like to use a custom island area dataset instead of the built-in one, the “area_custom” parameter can be set to the name of the custom island area dataframe. 4a. If you’d like to only include occurrence records from islands, you can remove continental records by using <code>removeContinents(occ)</code> with the dataframe returned by <code><a href="reference/findAreas.html">findAreas()</a></code>
+<li>Use <code>findAreas(occ, area_custom)</code> with the dataframe obtained in Step 3 to match the landmass names to a dataset that includes names of most islands on the planet and their areas. If the user would like to use a custom island area dataset instead of the built-in one, the “area_custom” parameter can be set to the name of the custom island area dataframe. 4a. If you’d like to only include occurrence records from islands, you can remove continental records by using <code>removeContinents(occ)</code> with the dataframe returned by <code>findAreas()</code>
 </li>
 <li>Use <code>SARP(occ, npsi)</code> with the dataframe obtained in Step 4 to create a species-area relationship plot that reports information important to the associated regression. The “npsi” parameter indicates the maximum number of breakpoints the user would like to compare for model selection. The returned model and plot correspond with the best-fit model.</li>
 </ol>
@@ -229,9 +229,9 @@
 <ol style="list-style-type: decimal">
 <li>Use <code>getKey(query, rank)</code> to find the unique identifying key associated with your taxon of interest.<br>
 </li>
-<li>Use <code>getData(key, limit, geometry)</code> with the key found in Step 1 to access <em>limit</em> occurrence points from GBIF. There is a hard limit of 100,000 records for each call to <code><a href="reference/getData.html">getData()</a></code>, as set by <a href="https://www.gbif.org/tool/81747/rgbif" class="external-link"><em>rgbif</em></a>. The “geometry” parameter can be specified with a well-known text (WKT) representation of of geometry to restrict the geographic location of the returned occurrence records (see more about WKT below).</li>
+<li>Use <code>getData(key, limit, geometry)</code> with the key found in Step 1 to access <em>limit</em> occurrence points from GBIF. There is a hard limit of 100,000 records for each call to <code>getData()</code>, as set by <a href="https://www.gbif.org/tool/81747/rgbif" class="external-link"><em>rgbif</em></a>. The “geometry” parameter can be specified with a well-known text (WKT) representation of of geometry to restrict the geographic location of the returned occurrence records (see more about WKT below).</li>
 <li>Use <code>findLand(occ, fillgaps)</code> with the dataframe obtained in Step 2 to figure out the names of landmasses using the occurrence record GPS points and the <a href="https://cran.r-project.org/web/packages/maps/index.html" class="external-link"><em>maps</em> R package</a>. Setting the “fillgaps” parameter to <code>TRUE</code> will enable the use of <a href="https://photon.komoot.io/" class="external-link">Photon API</a> to fill in any missing landmass names left by the <em>maps</em> R package.</li>
-<li>Use <code>findAreas(occ, area_custom)</code> with the dataframe obtained in Step 3 to match the landmass names to a dataset that includes names of most islands on the planet and their areas. If the user would like to use a custom island area dataset instead of the built-in one, the “area_custom” parameter can be set to the name of the custom island area dataframe. 4a. If you’d like to only include occurrence records from islands, you can remove continental records by using <code>removeContinents(occ)</code> with the dataframe returned by <code><a href="reference/findAreas.html">findAreas()</a></code>
+<li>Use <code>findAreas(occ, area_custom)</code> with the dataframe obtained in Step 3 to match the landmass names to a dataset that includes names of most islands on the planet and their areas. If the user would like to use a custom island area dataset instead of the built-in one, the “area_custom” parameter can be set to the name of the custom island area dataframe. 4a. If you’d like to only include occurrence records from islands, you can remove continental records by using <code>removeContinents(occ)</code> with the dataframe returned by <code>findAreas()</code>
 </li>
 <li>Use either <code>speciationDR(tree, label_type, occ)</code> or <code>speciationMS(tree, label_type, occ)</code> with your own phylogenetic tree that corresponds with the taxa signified in previous steps, a classifier that describes your tip labels (whether the tip labels are simply species epithets or full scientific names), and the dataframe obtained in Step 4 to add tip speciation rates using the DR statistic (Jetz et al. 2012) or the lambda calculation for crown groups from Magallόn and Sanderson (2001) respectively to the occurrence dataframe. The user may also choose to estimate tip speciation rates from a BAMM analysis (Rabosky 2014) by using <code>speciationBAMM(label_type, occ, edata)</code> with a classifier that describes your tip labels (whether the tip labels are simply species epithets or full scientific names), the occurrence record dataframe obtained in Step 4, and a bammdata object generated by reading the event data file from a BAMM analysis with the <em>BAMMtools</em> package (Rabosky et al. 2014).</li>
 <li>Use <code>SpeARP(occ, npsi)</code> with the dataframe obtained in Step 5 to create a speciation-area relationship plot that reports information important to the associated regression. The “npsi” parameter indicates the maximum number of breakpoints the user would like to compare for model selection. The returned model and plot correspond with the best-fit model.</li>
@@ -240,7 +240,7 @@
 <div class="section level3">
 <h3 id="some-helpful-notes-about-well-known-text-wkt-representation-of-geometry">Some helpful notes about well-known text (WKT) representation of geometry<a class="anchor" aria-label="anchor" href="#some-helpful-notes-about-well-known-text-wkt-representation-of-geometry"></a>
 </h3>
-<p>When running <code><a href="reference/getData.html">getData()</a></code>, the user can specify a well-known text (WKT) representation of geometry to restrict the geographic location of the returned occurrence records. The rgbif::occ_search function that <code><a href="reference/getData.html">getData()</a></code> calls requires a counter-clockwise winding order for WKT. I find it helpful to think about WKT polygons in this way: imagine a square around your geographic area of interest and pick one of the corners as a starting point. The order of points in WKT format should follow counter-clockwise from the corner you picked first, and the final entry in the WKT string needs to be the same as the first entry. Additionally, while GPS points are typically represented in “latitude, longitude” format, WKT expects them in “longitude latitude” format with commas separating the points rather than individual longitude and latitude values. WKT polygons can have more specified points than included in this simple square example, and even include polygons nested within others or polygons with holes in the middle.</p>
+<p>When running <code>getData()</code>, the user can specify a well-known text (WKT) representation of geometry to restrict the geographic location of the returned occurrence records. The rgbif::occ_search function that <code>getData()</code> calls requires a counter-clockwise winding order for WKT. I find it helpful to think about WKT polygons in this way: imagine a square around your geographic area of interest and pick one of the corners as a starting point. The order of points in WKT format should follow counter-clockwise from the corner you picked first, and the final entry in the WKT string needs to be the same as the first entry. Additionally, while GPS points are typically represented in “latitude, longitude” format, WKT expects them in “longitude latitude” format with commas separating the points rather than individual longitude and latitude values. WKT polygons can have more specified points than included in this simple square example, and even include polygons nested within others or polygons with holes in the middle.</p>
 <div class="section level4">
 <h4 id="literature-cited">Literature Cited<a class="anchor" aria-label="anchor" href="#literature-cited"></a>
 </h4>
@@ -309,7 +309,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

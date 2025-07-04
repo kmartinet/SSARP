@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">SSARP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -48,52 +48,70 @@
 
       <dl><dt>
 
-          <code><a href="SARP.html">SARP()</a></code>
+          <code><a href="create_SAR.html">create_SAR()</a></code>
 
         </dt>
-        <dd>Create a species-area relationship plot (SARP)</dd>
+        <dd>Create a species-area relationship (SAR) plot</dd>
       </dl><dl><dt>
 
-          <code><a href="SpeARP.html">SpeARP()</a></code>
+          <code><a href="create_SpAR.html">create_SpAR()</a></code>
 
         </dt>
-        <dd>Create a speciation-area relationship plot</dd>
+        <dd>Create a speciation-area relationship plot (SpAR)</dd>
       </dl><dl><dt>
 
-          <code><a href="findAreas.html">findAreas()</a></code>
+          <code><a href="estimate_DR.html">estimate_DR()</a></code>
+
+        </dt>
+        <dd>Get speciation rates using the DR statistic (Jetz et al. 2012)</dd>
+      </dl><dl><dt>
+
+          <code><a href="estimate_MS.html">estimate_MS()</a></code>
+
+        </dt>
+        <dd>Get speciation rates following equation 4 in Magallon and Sanderson (2001)</dd>
+      </dl><dl><dt>
+
+          <code><a href="find_areas.html">find_areas()</a></code>
 
         </dt>
         <dd>Find areas of land masses.</dd>
       </dl><dl><dt>
 
-          <code><a href="findLand.html">findLand()</a></code>
+          <code><a href="find_land.html">find_land()</a></code>
 
         </dt>
         <dd>Find the name of the land on which the occurrence points were found</dd>
       </dl><dl><dt>
 
-          <code><a href="getData.html">getData()</a></code>
+          <code><a href="get_data.html">get_data()</a></code>
 
         </dt>
         <dd>Get occurrence data from GBIF</dd>
-      </dl><dl><dt>
-
-          <code><a href="getKey.html">getKey()</a></code>
-
-        </dt>
-        <dd>Retrieve taxon key from GBIF</dd>
-      </dl><dl><dt>
-
-          <code><a href="getSources.html">getSources()</a></code>
-
-        </dt>
-        <dd>Gather sources from GBIF data for citation</dd>
       </dl><dl><dt>
 
           <code><a href="get_island_areas.html">get_island_areas()</a></code>
 
         </dt>
         <dd>Access properly encoded island_area object</dd>
+      </dl><dl><dt>
+
+          <code><a href="get_key.html">get_key()</a></code>
+
+        </dt>
+        <dd>Retrieve taxon key from GBIF</dd>
+      </dl><dl><dt>
+
+          <code><a href="get_presence_absence.html">get_presence_absence()</a></code>
+
+        </dt>
+        <dd>Create a presence-absence dataframe for a given occurrence record dataframe</dd>
+      </dl><dl><dt>
+
+          <code><a href="get_sources.html">get_sources()</a></code>
+
+        </dt>
+        <dd>Gather sources from GBIF data for citation</dd>
       </dl><dl><dt>
 
           <code><a href="island_areas.html">island_areas</a></code>
@@ -114,13 +132,13 @@
         <dd>Print species-area relationship summary</dd>
       </dl><dl><dt>
 
-          <code><a href="quickSARP.html">quickSARP()</a></code>
+          <code><a href="quick_create_SAR.html">quick_create_SAR()</a></code>
 
         </dt>
         <dd>Quickly create a species-area relationship</dd>
       </dl><dl><dt>
 
-          <code><a href="removeContinents.html">removeContinents()</a></code>
+          <code><a href="remove_continents.html">remove_continents()</a></code>
 
         </dt>
         <dd>Remove continents from area dataframe.</dd>
@@ -130,18 +148,6 @@
 
         </dt>
         <dd>Get tip speciation rates from BAMM (Rabosky 2014) analysis</dd>
-      </dl><dl><dt>
-
-          <code><a href="speciationDR.html">speciationDR()</a></code>
-
-        </dt>
-        <dd>Get speciation rates using the DR statistic (Jetz et al. 2012)</dd>
-      </dl><dl><dt>
-
-          <code><a href="speciationMS.html">speciationMS()</a></code>
-
-        </dt>
-        <dd>Get speciation rates following equation 4 in Magallon and Sanderson (2001)</dd>
       </dl></div>
   </main></div>
 
@@ -151,7 +157,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>

@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">SSARP</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,19 +91,19 @@ islands.</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/kmartinet/SSARP" class="external-link">SSARP</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Get the GBIF key for the Anolis genus</span></span>
-<span><span class="va">key</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/getKey.html">getKey</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">"Anolis"</span>, rank <span class="op">=</span> <span class="st">"genus"</span><span class="op">)</span></span>
+<span><span class="va">key</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_key.html">get_key</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">"Anolis"</span>, rank <span class="op">=</span> <span class="st">"genus"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Get data for Anolis from GBIF from islands in the Caribbean</span></span>
-<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">SSARP</span><span class="fu">::</span><span class="fu"><a href="../reference/getData.html">getData</a></span><span class="op">(</span>key <span class="op">=</span> <span class="va">key</span>, limit <span class="op">=</span> <span class="fl">10000</span>, geometry <span class="op">=</span> <span class="st">'POLYGON((-84.8 23.9, -84.7 16.4, -65.2 13.9, -63.1 11.0, -56.9 15.5, -60.5 21.9, -79.3 27.8, -79.8 24.8, -84.8 23.9))'</span><span class="op">)</span></span>
+<span><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_data.html">get_data</a></span><span class="op">(</span>key <span class="op">=</span> <span class="va">key</span>, limit <span class="op">=</span> <span class="fl">10000</span>, geometry <span class="op">=</span> <span class="st">'POLYGON((-84.8 23.9, -84.7 16.4, -65.2 13.9, -63.1 11.0, -56.9 15.5, -60.5 21.9, -79.3 27.8, -79.8 24.8, -84.8 23.9))'</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Find land mass names</span></span>
-<span><span class="va">land_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/findLand.html">findLand</a></span><span class="op">(</span>occurrences <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span>
+<span><span class="va">land_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/find_land.html">find_land</a></span><span class="op">(</span>occurrences <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Use the land mass names to get their areas</span></span>
-<span><span class="va">area_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/findAreas.html">findAreas</a></span><span class="op">(</span>occs <span class="op">=</span> <span class="va">land_dat</span><span class="op">)</span></span>
+<span><span class="va">area_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/find_areas.html">find_areas</a></span><span class="op">(</span>occs <span class="op">=</span> <span class="va">land_dat</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Remove continents from the filtered occurrence record dataset</span></span>
-<span><span class="va">nocont_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/removeContinents.html">removeContinents</a></span><span class="op">(</span>occs <span class="op">=</span> <span class="va">area_dat</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">nocont_dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/remove_continents.html">remove_continents</a></span><span class="op">(</span>occs <span class="op">=</span> <span class="va">area_dat</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="calculate-speciation-rates">Calculate Speciation Rates<a class="anchor" aria-label="anchor" href="#calculate-speciation-rates"></a>
@@ -120,7 +120,9 @@ Caribbean. In order to read the tree, we must use the <em>ape</em> R
 package.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/emmanuelparadis/ape" class="external-link">ape</a></span><span class="op">)</span></span>
-<span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/read.tree.html" class="external-link">read.tree</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"Patton_Anolis_Trimmed.tree"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">tree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/ape/man/read.tree.html" class="external-link">read.tree</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, </span>
+<span>                              <span class="st">"Patton_Anolis_trimmed.tree"</span>, </span>
+<span>                              package <span class="op">=</span> <span class="st">"SSARP"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
 <img src="anolis_tree.png" alt="Phylogenetic tree from Patton et al. (2021) trimmed to include only anoles found on islands in the Caribbean."><div class="figcaption">Phylogenetic tree from Patton et al. (2021)
 trimmed to include only anoles found on islands in the Caribbean.</div>
@@ -131,32 +133,34 @@ includes three methods for estimating tip speciation rates: BAMM
 (Rabosky 2014), the lambda calculation for crown groups from Magallόn
 and Sanderson (2001), and DR (Jetz et al. 2012). In this example, we
 will use the lambda calculation for crown groups from Magallόn and
-Sanderson (2001) through the “speciationMS” function in <em>SSARP</em>.
+Sanderson (2001) through the <code><a href="../reference/estimate_MS.html">SSARP::estimate_MS()</a></code> function.
 The “label_type” parameter in this function tells <em>SSARP</em> whether
 the tip labels on the given tree include the full species name
 (binomial) or just the specific epithet (epithet).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculate tip speciation rates using the lambda calculation for crown groups from Magallόn and Sanderson (2001)</span></span>
-<span><span class="va">speciation_occurrences</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/speciationMS.html">speciationMS</a></span><span class="op">(</span>tree <span class="op">=</span> <span class="va">tree</span>, label_type <span class="op">=</span> <span class="st">"epithet"</span>, occurrences <span class="op">=</span> <span class="va">nocont_dat</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">speciation_occurrences</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/estimate_MS.html">estimate_MS</a></span><span class="op">(</span>tree <span class="op">=</span> <span class="va">tree</span>, label_type <span class="op">=</span> <span class="st">"epithet"</span>, occurrences <span class="op">=</span> <span class="va">nocont_dat</span><span class="op">)</span></span></code></pre></div>
 <p>The “speciation_occurrences” object is a dataframe containing island
 areas with their corresponding speciation rate as estimated by the
-“speciationMS” function.</p>
+<code><a href="../reference/estimate_MS.html">SSARP::estimate_MS()</a></code> function.</p>
 </div>
 <div class="section level2">
 <h2 id="create-speciation-area-relationship">Create Speciation-Area Relationship<a class="anchor" aria-label="anchor" href="#create-speciation-area-relationship"></a>
 </h2>
 <p>Next, we will use the “speciation_occurrences” object with the
-“SpeARP” function to create a SpAR. Just like the “SARP” function, the
-“SpeARP” function creates multiple regression objects with breakpoints
-up to the user-specified “npsi” parameter. For example, if “npsi” is
-two, “SpeARP” will generate regression objects with zero (linear
-regression), one, and two breakpoints. The function will then return the
-regression object with the lowest AIC score. The “npsi” parameter will
-be set to one in this example. Note that if linear regression (zero
-breakpoints) is better-supported than segmented regression with one
-breakpoint, the linear regression will be returned instead.</p>
+<code><a href="../reference/create_SpAR.html">SSARP::create_SpAR()</a></code> function to create a SpAR. Just like
+the <code><a href="../reference/create_SAR.html">SSARP::create_SAR()</a></code> function, the
+<code><a href="../reference/create_SpAR.html">SSARP::create_SpAR()</a></code> function creates multiple regression
+objects with breakpoints up to the user-specified “npsi” parameter. For
+example, if “npsi” is two, <code><a href="../reference/create_SpAR.html">SSARP::create_SpAR()</a></code> will
+generate regression objects with zero (linear regression), one, and two
+breakpoints. The function will then return the regression object with
+the lowest AIC score. The “npsi” parameter will be set to one in this
+example. Note that if linear regression (zero breakpoints) is
+better-supported than segmented regression with one breakpoint, the
+linear regression will be returned instead.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/SpeARP.html">SpeARP</a></span><span class="op">(</span>occurrences <span class="op">=</span> <span class="va">speciation_occurrences</span>, npsi <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/create_SpAR.html">create_SpAR</a></span><span class="op">(</span>occurrences <span class="op">=</span> <span class="va">speciation_occurrences</span>, npsi <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
 <img src="anolis_SpAR-1.png" alt="This is the SpAR for Anolis including island-based occurrences within a polygon around Caribbean islands from the first 10000 records for the genus in GBIF! The best-fit model was a segmented regression with one breakpoint."><div class="figcaption">This is the SpAR for <em>Anolis</em> including
 island-based occurrences within a polygon around Caribbean islands from
@@ -171,27 +175,27 @@ segmented regression with one breakpoint.</div>
 <span><span class="co">## </span></span>
 <span><span class="co">## Estimated Break-Point(s):</span></span>
 <span><span class="co">##           Est. St.Err</span></span>
-<span><span class="co">## psi1.x 19.924  1.019</span></span>
+<span><span class="co">## psi1.x 19.924  1.036</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Coefficients of the linear terms:</span></span>
 <span><span class="co">##               Estimate Std. Error t value Pr(&gt;|t|)</span></span>
-<span><span class="co">## (Intercept) -1.863e-11  2.193e-02   0.000        1</span></span>
-<span><span class="co">## x            1.130e-12  1.206e-03   0.000        1</span></span>
-<span><span class="co">## U1.x         5.712e-03  2.116e-03   2.699       NA</span></span>
+<span><span class="co">## (Intercept)  1.364e-12  2.233e-02   0.000        1</span></span>
+<span><span class="co">## x           -8.298e-14  1.227e-03   0.000        1</span></span>
+<span><span class="co">## U1.x         5.712e-03  2.150e-03   2.656       NA</span></span>
 <span><span class="co">## </span></span>
-<span><span class="co">## Residual standard error: 0.01053 on 33 degrees of freedom</span></span>
-<span><span class="co">## Multiple R-Squared: 0.3983,  Adjusted R-squared: 0.3436 </span></span>
+<span><span class="co">## Residual standard error: 0.01069 on 32 degrees of freedom</span></span>
+<span><span class="co">## Multiple R-Squared: 0.3968,  Adjusted R-squared: 0.3403 </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Boot restarting based on 6 samples. Last fit:</span></span>
-<span><span class="co">## Convergence attained in 3 iterations (rel. change 2.1387e-14)</span></span></code></pre>
+<span><span class="co">## Convergence attained in 2 iterations (rel. change 2.5337e-14)</span></span></code></pre>
 <p>You will notice that two of the largest islands have a speciation
 rate of zero in this example. This very likely occurred because the
 calculation for speciation rate in Magallόn and Sanderson (2001) that
-“speciationMS” uses is based on monophyly, which can be disrupted on
-islands with non-native species occurrence records. When using the
-“speciationMS” function to estimate speciation rates for a SpAR, it is
-incredibly important to manually filter the returned occurrence records
-to remove non-native species.</p>
+<code><a href="../reference/estimate_MS.html">SSARP::estimate_MS()</a></code> uses is based on monophyly, which can
+be disrupted on islands with non-native species occurrence records. When
+using the <code><a href="../reference/estimate_MS.html">SSARP::estimate_MS()</a></code> function to estimate
+speciation rates for a SpAR, it is incredibly important to manually
+filter the returned occurrence records to remove non-native species.</p>
 <div class="section level3">
 <h3 id="literature-cited">Literature Cited<a class="anchor" aria-label="anchor" href="#literature-cited"></a>
 </h3>
@@ -225,7 +229,7 @@ e89543.</li>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>
