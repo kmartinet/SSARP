@@ -54,18 +54,18 @@ the occurrence points were found.</p>
 
 
 <dl><dt id="arg-occurrences">occurrences<a class="anchor" aria-label="anchor" href="#arg-occurrences"></a></dt>
-<dd><p>The dataframe output by getData (or if using a custom
-dataframe, ensure that it has the following columns: decimalLongitude,
-decimalLatitude, acceptedScientificName, genericName, specificEpithet,
-datasetKey). The "datasetKey" column is important for GBIF records and
-identifies the dataset to which the occurrence record belongs. Custom
-dataframes without this style of data organization should fill the column
-with placeholder values.</p></dd>
+<dd><p>The dataframe output by <code><a href="get_data.html">SSARP::get_data()</a></code> (or if using
+a custom dataframe, ensure that it has the following columns:
+decimalLongitude, decimalLatitude, acceptedScientificName, genericName,
+specificEpithet, datasetKey). The "datasetKey" column is important for GBIF
+records and identifies the dataset to which the occurrence record belongs.
+Custom dataframes without this style of data organization should fill the
+column with placeholder values.</p></dd>
 
 
 <dt id="arg-fillgaps">fillgaps<a class="anchor" aria-label="anchor" href="#arg-fillgaps"></a></dt>
 <dd><p>(logical) Attempt to use Photon API to fill in gaps left by
-mapdata::map.where (TRUE) or only mapdata::map.where results
+<code>mapdata::map.where()</code> (TRUE) or only <code>mapdata::map.where()</code> results
 (FALSE, default). While it is powerful, the Photon API does not have a
 standard location for island names in its returned information, so using it
 will likely require the returned dataframe to be cleaned by the user.</p></dd>
