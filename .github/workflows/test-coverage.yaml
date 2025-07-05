@@ -27,6 +27,9 @@ jobs:
           extra-packages: any::covr, any::xml2
           needs: coverage
 
+      - name: Set env to run tests from source
+        run: echo "_R_CHECK_TESTS_FROM_SRC_=true" >> $GITHUB_ENV
+
       - name: Test coverage
         run: |
           cov <- covr::package_coverage(
