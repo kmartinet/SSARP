@@ -21,7 +21,7 @@ quick_create_SAR(
 \item{limit}{The number of GBIF occurrence records to obtain.}
 
 \item{geometry}{(character) A polygon written in Well Known Text (WKT)
-format to pass to the SSARP::get_data function. If no polygon is given,
+format to pass to the \code{SSARP::get_data()} function. If no polygon is given,
 records from across the globe will be returned.}
 
 \item{continent}{(logical) If TRUE, continental areas are removed from the

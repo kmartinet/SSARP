@@ -7,7 +7,7 @@
 get_key(query, rank)
 }
 \arguments{
-\item{query}{The search parameter to pass to rgbif's name_suggest() function}
+\item{query}{The search parameter to pass to \code{rgbif::name_suggest()}}
 
 \item{rank}{The taxonimic rank associated with the search parameter}
 }

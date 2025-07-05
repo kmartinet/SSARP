@@ -12,13 +12,13 @@ SSARP::getKey)}
 
 \item{limit}{The maximum number of occurrence records to return.
 Default: 100. NOTE: there is a hard maximum of 100,000 (see more information
-about the limit in rgbif::occ_search)}
+about the limit in \code{rgbif::occ_search()})}
 
 \item{geometry}{A counter-clockwise winding order well-known text (WKT)
-representation of geometry for use in the rgbif::occ_search call. This
+representation of geometry for use in the \code{rgbif::occ_search()} call. This
 parameter will restrict returned occurrence records to the specified
 geometry. More information about valid WKT objects can be found in the
-rgbif::occ_search vignette.}
+\code{rgbif::occ_search()} vignette.}
 }
 \value{
 A dataframe of occurrence records for the taxon of interest

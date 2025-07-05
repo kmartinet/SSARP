@@ -8,8 +8,9 @@ create_SpAR(occurrences, npsi = 1)
 }
 \arguments{
 \item{occurrences}{The dataframe output by one of SSARP's speciation
-methods (estimate_BAMM, estimate_DR, estimate_MS), or if using a custom
-dataframe, ensure that it has the following columns: areas, rate}
+methods (\code{SSARP::estimate_BAMM()}, \code{SSARP::estimate_DR()},
+\code{SSARP::estimate_MS()}), or if using a custom dataframe, ensure that it
+has the following columns: areas, rate}
 
 \item{npsi}{The maximum number of breakpoints to estimate for model
 selection.  Default: 1}

@@ -1,7 +1,9 @@
 # Read tree via extdata file
-tree <- ape::read.tree(system.file("extdata", 
-                              "Patton_Anolis_trimmed.tree", 
-                              package = "SSARP"))
+# tree <- ape::read.tree(system.file("extdata", 
+#                               "Patton_Anolis_trimmed.tree", 
+#                               package = "SSARP"))
+tree <- 
+  ape::read.tree(testthat::test_path("testdata/Patton_Anolis_trimmed.tree"))
 # Tree from: Patton, A.H., Harmon, L.J., del Rosario Castañeda, M., 
 #   Frank, H.K., Donihue, C.M., Herrel, A., & Losos, J.B. (2021). When adaptive 
 #   radiations collide: Different evolutionary trajectories between and within 

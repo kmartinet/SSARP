@@ -7,10 +7,10 @@
 remove_continents(occs)
 }
 \arguments{
-\item{occs}{The dataframe that is returned by SSARP::find_areas(). I do not
+\item{occs}{The dataframe that is returned by \code{SSARP::find_areas()}. I do not
 recommend using a custom dataframe for this function because it references
-areas given by the area database used in SSARP::find_areas(). If you must use
-a custom dataframe, please ensure  that the landmass areas are in the 9th
+areas given by the area database used in \code{SSARP::find_areas()}. If you must
+use a custom dataframe, please ensure  that the landmass areas are in the 9th
 column of the dataframe.}
 }
 \value{
@@ -19,7 +19,7 @@ A dataframe of the species name, island name, and island area
 }
 \description{
 Reference a list of continental areas to remove them from the dataframe
-output by SSARP::find_areas().
+output by \code{SSARP::find_areas()}.
 }
 \examples{
 # The GBIF key for the Anolis genus is 8782549

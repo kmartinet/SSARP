@@ -18,7 +18,7 @@ The summary of your species-area relationship
 }
 \description{
 Function for printing the summary of species-area relationship objects from
-the SSARP::create_SAR() function
+the \code{SSARP::create_SAR()} function
 }
 \examples{
 # The GBIF key for the Anolis genus is 8782549

@@ -16,7 +16,7 @@ A plot of your species-area relationship
 }
 \description{
 Function for plotting species-area relationship objects from the
-SSARP::create_SAR() function
+\code{SSARP::create_SAR()} function
 }
 \examples{
 # The GBIF key for the Anolis genus is 8782549

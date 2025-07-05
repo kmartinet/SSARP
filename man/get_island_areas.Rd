@@ -7,7 +7,7 @@
 get_island_areas()
 }
 \value{
-An edited version of the SSARP::island_areas object, which is a
+An edited version of the \code{SSARP::island_areas} object, which is a
 dataframe including the names, areas, and maximum elevations of islands
 from across the globe.
 }

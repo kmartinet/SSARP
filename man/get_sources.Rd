@@ -7,13 +7,13 @@
 get_sources(occs)
 }
 \arguments{
-\item{occs}{The occurrence record dataframe returned by SSARP::getData or
-SSARP::findAreas.}
+\item{occs}{The occurrence record dataframe returned by \code{SSARP::get_data()}
+or \code{SSARP::find_areas()}.}
 }
 \value{
 A dataframe of dataset keys and the number of occurrence records
-associated with each key that were gathered with SSARP::getData and/or
-filtered with SSARP::findAreas.
+associated with each key that were gathered with \code{SSARP::get_data()} and/or
+filtered with \code{SSARP::find_areas()}.
 }
 \description{
 When using data obtained via \code{SSARP::get_data()} and filtered with
@@ -36,8 +36,8 @@ source_df <- get_sources(occs = dat)
 \references{
 \itemize{
 \item \href{https://www.gbif.org/citation-guidelines}{GBIF citation guidelines}
-\item Data obtained via SSARP::getData and filtered with SSARP::findAreas falls
-under \href{https://www.gbif.org/derived-dataset/about}{the derived datasets distinction}
+\item Data obtained via \code{SSARP::get_data()} and filtered with
+\code{SSARP::find_areas()} falls under \href{https://www.gbif.org/derived-dataset/about}{the derived datasets distinction}
 \item \href{https://data-blog.gbif.org/post/derived-datasets/}{More information about creating derived datasets}
 }
 }

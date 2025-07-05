@@ -18,8 +18,8 @@ returned occurrence dataframe.}
 pipeline. If you would like to use a custom dataframe, please make sure that
 there are columns titled "Genus" and "Species"}
 
-\item{edata}{The eventdata object created by using the getEventData()
-function in BAMMtools}
+\item{edata}{The eventdata object created by using the
+\code{BAMMtools::getEventData()} function}
 }
 \value{
 A dataframe that includes speciation rates for each species in the

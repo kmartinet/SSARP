@@ -7,8 +7,8 @@
 get_presence_absence(occs)
 }
 \arguments{
-\item{occs}{The dataframe output by SSARP::findAreas, or if using a custom
-dataframe, ensure that it has the following named columns:
+\item{occs}{The dataframe output by \code{SSARP::find_areas()}, or if using a
+custom dataframe, ensure that it has the following named columns:
 \itemize{
 \item "areas" containing the areas associated with the land masses of interest
 \item "Species" containing the names of the species living on those islands
@@ -29,9 +29,9 @@ the given row, and a 0 represents the absence of that species on the island
 corresponding to the given row.
 }
 \description{
-Use a dataframe output by SSARP::findAreas to determine which species occur
-on specific islands by creating a presence-absence dataframe. A 1 represents
-presence and a 0 represents absence.
+Use a dataframe output by \code{SSARP::find_areas()} to determine which species
+occur on specific islands by creating a presence-absence dataframe. A 1
+represents presence and a 0 represents absence.
 }
 \examples{
 # The GBIF key for the Anolis genus is 8782549
