@@ -39,6 +39,3 @@ reference:
   - get_island_areas
   - get_presence_absence
   - get_sources
-  - plot
-  - print
-
