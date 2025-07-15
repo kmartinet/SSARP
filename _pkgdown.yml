@@ -18,6 +18,8 @@ navbar:
 reference:
 - title: Prepare Occurrence Records
   contents:
+  - get_data
+  - get_key
   - find_land
   - find_areas
   - remove_continents
@@ -36,6 +38,9 @@ reference:
 
 - title: Other Utilities
   contents:
+  - island_areas
   - get_island_areas
   - get_presence_absence
   - get_sources
+  - plot.SAR
+  - print.SAR
