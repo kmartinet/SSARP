@@ -10,6 +10,7 @@
 <url><loc>https://kmartinet.github.io/SSARP/reference/SSARP-package.html</loc></url>
 <url><loc>https://kmartinet.github.io/SSARP/reference/create_SAR.html</loc></url>
 <url><loc>https://kmartinet.github.io/SSARP/reference/create_SpAR.html</loc></url>
+<url><loc>https://kmartinet.github.io/SSARP/reference/estimate_BAMM.html</loc></url>
 <url><loc>https://kmartinet.github.io/SSARP/reference/estimate_DR.html</loc></url>
 <url><loc>https://kmartinet.github.io/SSARP/reference/estimate_MS.html</loc></url>
 <url><loc>https://kmartinet.github.io/SSARP/reference/find_areas.html</loc></url>
@@ -25,6 +26,5 @@
 <url><loc>https://kmartinet.github.io/SSARP/reference/print.SAR.html</loc></url>
 <url><loc>https://kmartinet.github.io/SSARP/reference/quick_create_SAR.html</loc></url>
 <url><loc>https://kmartinet.github.io/SSARP/reference/remove_continents.html</loc></url>
-<url><loc>https://kmartinet.github.io/SSARP/reference/speciationBAMM.html</loc></url>
 </urlset>
 
