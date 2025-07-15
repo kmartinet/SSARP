@@ -14,3 +14,31 @@ navbar:
         href: articles/Create_SAR.html
       - text: Create Speciation-Area Relationship
         href: articles/Create_SpAR.html
+
+reference:
+- title: Prepare Occurrence Records
+  contents:
+  - find_land
+  - find_areas
+  - remove_continents
+
+- title: Estimate Speciation Rates
+  contents:
+  - estimate_DR
+  - estimate_MS
+  - estimate_BAMM
+
+- title: Create Relationships
+  contents:
+  - create_SAR
+  - create_SpAR
+  - quick_create_SAR
+
+- title: Other Utilities
+  contents:
+  - get_island_areas
+  - get_presence_absence
+  - get_sources
+  - plot
+  - print
+

@@ -16,7 +16,7 @@
 #' there are columns titled "Genus", "Species", and "areas"
 #' @return A dataframe that includes speciation rates for each island in the 
 #' user-provided occurrence record dataframe.
-#' #' @references 
+#' @references 
 #' - Magallόn, S. & Sanderson, M.J. (2001). Absolute Diversification Rates in 
 #' Angiosperm Clades. Evolution, 55(9): 1762-1780.
 #' @examples 

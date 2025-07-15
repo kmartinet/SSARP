@@ -22,11 +22,6 @@ there are columns titled "Genus", "Species", and "areas"}
 \value{
 A dataframe that includes speciation rates for each island in the
 user-provided occurrence record dataframe.
-#' @references
-\itemize{
-\item Magallόn, S. & Sanderson, M.J. (2001). Absolute Diversification Rates in
-Angiosperm Clades. Evolution, 55(9): 1762-1780.
-}
 }
 \description{
 Use methodology from Magallon and Sanderson (2001) to estimate speciation
@@ -56,4 +51,10 @@ occ_speciation <- estimate_MS(tree = tree,
                               label_type = "epithet", 
                               occurrences = areas)
 
+}
+\references{
+\itemize{
+\item Magallόn, S. & Sanderson, M.J. (2001). Absolute Diversification Rates in
+Angiosperm Clades. Evolution, 55(9): 1762-1780.
+}
 }

@@ -2,6 +2,7 @@
 #' 
 #' Use the BAMMtools package (Rabosky et al. 2014) to extract tip speciation 
 #' rates from user-supplied BAMM analysis objects.
+#' 
 #' @param label_type Either "epithet" or "binomial" (default): describes the 
 #' type of tip label in the tree used for the BAMM analysis. If "epithet," only 
 #' the species epithet will be used to match speciation rates to tips in the 
@@ -15,6 +16,13 @@
 #' `BAMMtools::getEventData()` function
 #' @return A dataframe that includes speciation rates for each species in the 
 #' occurrence record dataframe
+#' @references 
+#' - Rabosky, D.L. (2014). Automatic Detection of Key Innovations, Rate Shifts, 
+#' and Diversity-Dependence on Phylogenetic Trees. PLOS ONE, 9(2): e89543.
+#' - Rabosky, D.L., Grundler, M., Anderson, C., Title, P., Shi, J.J., 
+#' Brown, J.W., Huang, H., & Larson, J.G. (2014), BAMMtools: an R package for 
+#' the analysis of evolutionary dynamics on phylogenetic trees. Methods in 
+#' Ecology and Evolution, 5: 701-707.
 #' @examples 
 #' \dontrun{
 #' key <- get_key(query = "Anolis", rank = "genus")
@@ -39,7 +47,7 @@
 #' }
 #' @export
 
-speciationBAMM <- function(label_type = "binomial", occurrences, edata) {
+estimate_BAMM <- function(label_type = "binomial", occurrences, edata) {
   # Checkmate input validation
   checkmate::assertString(label_type)
   checkmate::assertDataFrame(occurrences)

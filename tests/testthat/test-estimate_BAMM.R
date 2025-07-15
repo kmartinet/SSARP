@@ -86,23 +86,23 @@ occ_mat <- as.matrix(occ_simple)
 
 test_that("Inputting a matrix instead of a dataframe for occurrence records 
           will cause an error", {
-  expect_error(speciationBAMM(label_type = "epithet", 
+  expect_error(estimate_BAMM(label_type = "epithet", 
                               occurrences = occ_mat, edata = edata_test))
 })
 
 test_that("Inputting a non-string for the label type will cause an error", {
-  expect_error(speciationBAMM(label_type = 1, 
+  expect_error(estimate_BAMM(label_type = 1, 
                               occurrences = occ_simple, edata = edata_test))
 })
 
-test_that("The speciationBAMM function returns a dataframe (epithet labels)", {
-  expect_s3_class(speciationBAMM(label_type = "epithet", 
+test_that("The estimate_BAMM function returns a dataframe (epithet labels)", {
+  expect_s3_class(estimate_BAMM(label_type = "epithet", 
                                  occurrences = occ_simple, 
                                  edata = edata_test), "data.frame")
 })
 
-test_that("The speciationBAMM function returns a dataframe (binomial labels)", {
-  expect_s3_class(speciationBAMM(label_type = "binomial", 
+test_that("The estimate_BAMM function returns a dataframe (binomial labels)", {
+  expect_s3_class(estimate_BAMM(label_type = "binomial", 
                                  occurrences = occ_simple, 
                                  edata = edata_test), "data.frame")
 })

@@ -26,12 +26,18 @@ A dataframe that includes speciation rates for each species in the
 occurrence record dataframe
 }
 \description{
-Use methodology from Sun and Folk (2020) to calculate the DR statistic for
-each tip of a given tree and output a dataframe for use in SSARP's
-speciation-area relationship pipeline. This method also removes any species
-rows without rates (this is most likely to occur when the tree does not have
-all of the species included in the occurrence record dataframe). The tree
-read in the examples below is modified from Patton et al. (2021).
+DR stands for “diversification rate,” but it is ultimately a better
+estimation of speciation rate than net diversification (Belmaker and Jetz
+2015; Quintero and Jetz 2018) and returns results similar to BAMM’s tip
+speciation rate estimations (Title and Rabosky 2019).
+}
+\details{
+This function uses methodology from Sun and Folk (2020) to calculate the DR
+statistic for each tip of a given tree and output a dataframe for use in
+SSARP's speciation-area relationship pipeline. This method also removes any
+species rows without rates (this is most likely to occur when the tree does
+not have all of the species included in the occurrence record dataframe).
+The tree read in the examples below is modified from Patton et al. (2021).
 }
 \examples{
 # The GBIF key for the Anolis genus is 8782549
@@ -57,14 +63,22 @@ occ_speciation <- estimate_DR(tree = tree,
 }
 \references{
 \itemize{
+\item Belmaker, J., & Jetz, W. (2015). Relative roles of ecological and
+energetic constraints, diversification rates and region history on global
+species richness gradients. Ecology Letters, 18: 563–571.
 \item Jetz, W., Thomas, G.H, Joy, J.B., Harmann, K., & Mooers, A.O. (2012). The
 global diversity of birds in space and time. Nature, 491: 444-448.
 \item Patton, A.H., Harmon, L.J., del Rosario Castañeda, M.,
 Frank, H.K., Donihue, C.M., Herrel, A., & Losos, J.B. (2021). When adaptive
 radiations collide: Different evolutionary trajectories between and within
 island and mainland lizard clades. PNAS, 118(42): e2024451118.
+\item Quintero, I., & Jetz, W. (2018). Global elevational diversity and
+diversification of birds. Nature, 555, 246–250.
 \item Sun, M. & Folk, R.A. (2020). Cactusolo/rosid_NCOMMS-19-37964-T: Code and
 data for rosid_NCOMMS-19-37964 (Version V.1.0). Zenodo.
 http://doi.org/10.5281/zenodo.3843441
+\item Title P.O. & Rabosky D.L. (2019). Tip rates, phylogenies and
+diversification: What are we estimating, and how good are the estimates?
+Methods in Ecology and Evolution. 10: 821–834.
 }
 }
