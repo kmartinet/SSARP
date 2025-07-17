@@ -1,4 +1,4 @@
-#' Get tip speciation rates from BAMM (Rabosky 2014) analysis
+#' Get tip speciation rates from BAMM (Rabosky 2014) analysis 
 #' 
 #' Use the BAMMtools package (Rabosky et al. 2014) to extract tip speciation 
 #' rates from user-supplied BAMM analysis objects.
@@ -70,14 +70,15 @@ estimate_BAMM <- function(label_type = "binomial", occurrences, edata) {
     for(i in names(speciation_rates)){
       occurrences <- occurrences |>
         dplyr::mutate(rate = dplyr::case_when(
-          grepl(i, Species) ~ speciation_rates[[i]],
+          grepl(i, specificEpithet) ~ speciation_rates[[i]],
           TRUE ~ rate # Keeps values for non-matching rows
         ))
     }
   } else if(label_type == "binomial"){
     # The occurrence record dataframe has separate "Genus" and "Species" 
     #  columns, so they should be combined for this label type
-    occurrences$Binomial <- paste(occurrences$Genus, occurrences$Species, 
+    occurrences$Binomial <- paste(occurrences$genericName, 
+                                  occurrences$specificEpithet, 
                                   sep = " ")
     # Now, for each name in speciation_rates, look for that name in the Binomial
     #  column of the occurrence record dataframe and add the appropriate rate

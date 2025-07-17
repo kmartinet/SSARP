@@ -1,7 +1,8 @@
 # Create test dataframe for find_areas occs input
 occs <- as.data.frame(matrix(ncol = 9, nrow = 2))
-colnames(occs) <- c("SpeciesName", "Genus", "Species", "Longitude", 
-                    "Latitude", "First", "Second", "Third", "datasetKey")
+colnames(occs) <- c("acceptedScientificName", "genericName", "specificEpithet", 
+                    "decimalLongitude", "decimalLatitude", "First", 
+                    "Second", "Third", "datasetKey")
 
 # Test dataframe for find_areas occs input with values
 occs_vals <- occs
@@ -18,8 +19,9 @@ colnames(custom_area) <- c("Name", "Area")
 
 # Test matrix for find_areas occs input
 occ_mat <- matrix(ncol = 9, nrow = 2)
-colnames(occ_mat) <- c("SpeciesName", "Genus", "Species", "Longitude", 
-                       "Latitude", "First", "Second", "Third", "datasetKey")
+colnames(occs) <- c("acceptedScientificName", "genericName", "specificEpithet", 
+                    "decimalLongitude", "decimalLatitude", "First", 
+                    "Second", "Third", "datasetKey")
 occ_mat[1,] <- c("Anolis first", "Anolis", "first", -81.948509, 28.028463, 
                  "USA", "Florida", "Lakeland", 1)
 occ_mat[2,] <- c("Anolis second", "Anolis", "second", -81.949353, 28.028047, 

@@ -21,22 +21,33 @@ In this vignette, we will create a SpAR for the lizard genus *Anolis*, as a cont
 First, we will generate the "nocont_dat" object from the SAR vignette, which includes occurrence records and their associated island names and areas for *Anolis* lizards that live on Caribbean islands.
 
 ```{r SAR_dat, message = FALSE}
+library(rgbif)
 library(SSARP)
 
 # Get the GBIF key for the Anolis genus
-key <- get_key(query = "Anolis", rank = "genus")
+query <- "Anolis"
+rank <- "Genus"
+
+suggestions <- rgbif::name_suggest(q = query, rank = rank)
+
+key <- as.numeric(suggestions$data[1,1])
 
 # Get data for Anolis from GBIF from islands in the Caribbean
-dat <- get_data(key = key, limit = 10000, geometry = 'POLYGON((-84.8 23.9, -84.7 16.4, -65.2 13.9, -63.1 11.0, -56.9 15.5, -60.5 21.9, -79.3 27.8, -79.8 24.8, -84.8 23.9))')
+occurrences <- rgbif::occ_search(taxonKey = key, 
+                                hasCoordinate = TRUE, 
+                                limit = limit,
+                                geometry = 'POLYGON((-84.8 23.9, -84.7 16.4, -65.2 13.9, -63.1 11.0, -56.9 15.5, -60.5 21.9, -79.3 27.8, -79.8 24.8, -84.8 23.9))')
+
+dat <- occurrences$data
 
 # Find land mass names
-land_dat <- find_land(occurrences = dat)
+land_dat <- SSARP::find_land(occurrences = dat)
 
 # Use the land mass names to get their areas
-area_dat <- find_areas(occs = land_dat)
+area_dat <- SSARP::find_areas(occs = land_dat)
 
 # Remove continents from the filtered occurrence record dataset
-nocont_dat <- remove_continents(occs = area_dat)
+nocont_dat <- SSARP::remove_continents(occs = area_dat)
 
 ```
 
@@ -59,7 +70,7 @@ Now that we have a phylogenetic tree, we can estimate tip speciation rates for u
 
 ```{r }
 # Calculate tip speciation rates using the lambda calculation for crown groups from Magallόn and Sanderson (2001)
-speciation_occurrences <- estimate_MS(tree = tree, label_type = "epithet", occurrences = nocont_dat)
+speciation_occurrences <- SSARP::estimate_MS(tree = tree, label_type = "epithet", occurrences = nocont_dat)
 
 ```
 
@@ -69,7 +80,7 @@ The “speciation_occurrences” object is a dataframe containing island areas w
 Next, we will use the “speciation_occurrences” object with the `SSARP::create_SpAR()` function to create a SpAR. Just like the `SSARP::create_SAR()` function, the `SSARP::create_SpAR()` function creates multiple regression objects with breakpoints up to the user-specified “npsi” parameter. For example, if “npsi” is two, `SSARP::create_SpAR()` will generate regression objects with zero (linear regression), one, and two breakpoints. The function will then return the regression object with the lowest AIC score. The “npsi” parameter will be set to one in this example. Note that if linear regression (zero breakpoints) is better-supported than segmented regression with one breakpoint, the linear regression will be returned instead.
 
 ```{r anolis_SpAR}
-create_SpAR(occurrences = speciation_occurrences, npsi = 1)
+SSARP::create_SpAR(occurrences = speciation_occurrences, npsi = 1)
 
 ```
 ![This is the SpAR for *Anolis* including island-based occurrences within a polygon around Caribbean islands from the first 10000 records for the genus in GBIF! The best-fit model was a segmented regression with one breakpoint.](anolis_SpAR-1.png)

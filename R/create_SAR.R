@@ -33,11 +33,11 @@ create_SAR <- function(occurrences, npsi = 1) {
   #   formula Species ~ Area means to group scientific names by area
   #   function(x) length(unique(x)) tells it to give me the number of unique 
   #     species for each unique island area
-  agg <- stats::aggregate(data = occurrences, Species ~ areas, 
+  agg <- stats::aggregate(data = occurrences, specificEpithet ~ areas, 
                    function(x) length(unique(x)))
   
   # Segmented package prefers tidy dataframes, so make one for it
-  dat <- data.frame(x = log(agg$areas), y = log(agg$Species))
+  dat <- data.frame(x = log(agg$areas), y = log(agg$specificEpithet))
   
   # Run a linear model on the data to use in creating 
   #  segmented/breakpoint regression

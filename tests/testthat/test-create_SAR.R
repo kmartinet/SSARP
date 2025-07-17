@@ -1,25 +1,25 @@
 # Test occurrence record dataframe
-Species <- c("Tropius", "Taillow", "Chikorita", "Girafarig", "Octillery", 
-             "Amaura", "Pangoro", "Fearow", "Pikachu", "Weepinbell", 
-             "Graveler", "Voltorb")
+specificEpithet <- c("Tropius", "Taillow", "Chikorita", "Girafarig", 
+                     "Octillery", "Amaura", "Pangoro", "Fearow", "Pikachu", 
+                     "Weepinbell", "Graveler", "Voltorb")
 areas <- c(650, 650, 800, 800, 800, 600, 600, 1000, 1000, 1000, 1000, 1000)
-occ <- as.data.frame(cbind(Species, areas))
+occ <- as.data.frame(cbind(specificEpithet, areas))
 occ$areas <- as.numeric(occ$areas)
 
 occ_mat <- as.matrix(occ)
 
 # Occurrence record dataframe for single breakpoint
-Species <- c("one", "one", "one", "one", "one", "one",
+specificEpithet <- c("one", "one", "one", "one", "one", "one",
              "one", "two", "three",
              "one", "two", "three", "four", "five")
 areas <- c(100, 100, 100, 200, 300, 400, 
            600, 600, 600,
            700, 700, 700, 700, 700)
-occ_one_bp <- as.data.frame(cbind(Species, areas))
+occ_one_bp <- as.data.frame(cbind(specificEpithet, areas))
 occ_one_bp$areas <- as.numeric(occ_one_bp$areas)
 
 # Occurrence record dataframe for two breakpoints
-Species <- c("one", "one", "one", "one",
+specificEpithet <- c("one", "one", "one", "one",
              "one", "two",
              "one", "two", "three",
              "one", "two", "three", "four",
@@ -35,7 +35,7 @@ areas <- c(100, 200, 300, 400,
            900, 900, 900, 900, 900,
            1000, 1000, 1000, 1000, 1000,
            1100, 1100, 1100, 1100, 1100)
-occ_two_bp <- as.data.frame(cbind(Species, areas))
+occ_two_bp <- as.data.frame(cbind(specificEpithet, areas))
 occ_two_bp$areas <- as.numeric(occ_two_bp$areas)
 
 ########

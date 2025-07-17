@@ -37,8 +37,9 @@
 get_presence_absence <- function(occs) {
   # Create a dataframe that counts how many records there are for each species
   #  in each island
-  new_occs <- reshape2::dcast(occs, areas ~ Species, fun.aggregate = length, 
-                    value.var = "Species")
+  new_occs <- reshape2::dcast(occs, areas ~ specificEpithet, 
+                              fun.aggregate = length, 
+                              value.var = "specificEpithet")
   
   # We want those counts to be 1 if the species is there and 0 if it is not, so
   #  we need to replace the numbers greater than 1 with a 1

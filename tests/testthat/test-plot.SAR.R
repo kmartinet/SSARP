@@ -5,16 +5,16 @@ species_L <- c("Tropius", "Taillow", "Chikorita", "Girafarig", "Octillery",
 areas_L <- c(650, 650, 800, 800, 800, 600, 600, 1000, 1000, 1000, 1000, 1000)
 occ_L <- as.data.frame(cbind(species_L, areas_L))
 occ_L$areas_L <- as.numeric(occ_L$areas_L)
-colnames(occ_L) <- c("Species", "areas")
+colnames(occ_L) <- c("specificEpithet", "areas")
 
 # Occurrence record dataframe for single breakpoint
-Species <- c("one", "one", "one", "one", "one", "one",
+specificEpithet <- c("one", "one", "one", "one", "one", "one",
              "one", "two", "three",
              "one", "two", "three", "four", "five")
 areas <- c(100, 100, 100, 200, 300, 400, 
            600, 600, 600,
            700, 700, 700, 700, 700)
-occ_one_bp <- as.data.frame(cbind(Species, areas))
+occ_one_bp <- as.data.frame(cbind(specificEpithet, areas))
 occ_one_bp$areas <- as.numeric(occ_one_bp$areas)
 
 

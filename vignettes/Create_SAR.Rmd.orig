@@ -26,42 +26,35 @@ In order to construct a species-area relationship with *SSARP*, we will:
 ## Gathering Occurrence Data
 GBIF (Global Biodiversity Information Facility) provides an easy method for gathering occurrence data for taxa of interest. *SSARP* uses functions from the *rgbif* package to gather occurrence records associated with a given taxon. The user may also provide their own data for use in creating a SAR, but we will use GBIF in this example.
 
-In order to access data from GBIF, we must first determine the unique identifying key associated with the taxon of interest. We will use the `SSARP::get_key()` function from *SSARP* to obtain this key.
+A tutorial for gathering occurrence records from GBIF can be found [in the "Get Occurrence Records from GBIF" vignette here](https://kmartinet.github.io/SSARP/articles/Get_Data.html). This example will use `rgbif::occ_search()` for simplicity, but please note that `rgbif::occ_download()` is more appropriate for gathering data used in research. Here, we will gather the first 10000 occurrence records for island-dwelling *Anolis* lizards in the Caribbean restricted by a WKT polygon (see the vignette linked above for more information).
 
-```{r getKey}
-library(SSARP)
+```{r get_data}
+library(rgbif)
 
-# Get the GBIF key for the Anolis genus
-key <- get_key(query = "Anolis", rank = "genus")
+query <- "Anolis"
+rank <- "Genus"
 
-# Print key
-key
+suggestions <- rgbif::name_suggest(q = query, rank = rank)
 
-```
+key <- as.numeric(suggestions$data[1,1])
 
-Now that we have the key associated with *Anolis*, we will use this key with the `SSARP::get_data()` function to gather georeferenced occurrence records from GBIF. The “limit” parameter will be set to 10000 in this case for a quick illustration of *SSARP*’s functionality, but this parameter can be as large as 100,000 (the hard limit from *rgbif* for the number of records returned).
+occurrences <- rgbif::occ_search(taxonKey = key, 
+                                hasCoordinate = TRUE, 
+                                limit = limit,
+                                geometry = 'POLYGON((-84.8 23.9, -84.7 16.4, -65.2 13.9, -63.1 11.0, -56.9 15.5, -60.5 21.9, -79.3 27.8, -79.8 24.8, -84.8 23.9))')
 
-We are only interested in occurrence records for island-dwelling anole lizards located in the Caribbean, so we will geographically restrict the returned data to this area by setting the “geometry” parameter to a polygon in Well Known Text (WKT) format that encompasses the Caribbean islands (Figure 1).
+dat <- occurrences$data
 
-![Figure 1. The GPS points associated with the WKT polygon in this example.](CaribbeanSpots_Final.png)
-
-
-```{r }
-
-# Get data for Anolis from GBIF in the specified polygon
-dat <- get_data(key = key, limit = 10000, geometry = 'POLYGON((-84.8 23.9, -84.7 16.4, -65.2 13.9, -63.1 11.0, -56.9 15.5, -60.5 21.9, -79.3 27.8, -79.8 24.8, -84.8 23.9))')
-
-# Print first 5 lines of dat
-head(dat, n = 5)
 ```
 
 ## Finding Land Mass Names and Areas
 Once the occurrence data is returned, we will use each occurrence record’s GPS point to determine the land mass on which the species was found and find the area associated with that land mass using a database of island areas and names from *SSARP*.
 
 ```{r }
+library(SSARP)
 
 # Find land mass names
-land_dat <- find_land(occurrences = dat)
+land_dat <- SSARP::find_land(occurrences = dat)
 
 # Print first 5 lines of land_dat
 head(land_dat, n = 5)
@@ -74,7 +67,7 @@ Now that we have determined the names of the land masses associated with each oc
 ```{r, message = FALSE}
 
 # Use the land mass names to get their areas
-area_dat <- find_areas(occs = land_dat)
+area_dat <- SSARP::find_areas(occs = land_dat)
 
 # Print first 5 lines of area_dat
 head(area_dat, n = 5)
@@ -85,7 +78,7 @@ Now, our occurrence record dataframe includes records with GPS points that are a
 The `SSARP::remove_continents()` function removes any continental occurrence records, which is useful when the user is only interested in island-dwelling species (as we are in this example). While the data obtained by using the `SSARP::get_data()` function was geographically restricted, potential user error in specifying the polygon in WKT format often leads to accidental continental records that will be removed by using this function.
 
 ```{r }
-nocont_dat <- remove_continents(occs = area_dat)
+nocont_dat <- SSARP::remove_continents(occs = area_dat)
 
 ```
 
@@ -94,7 +87,7 @@ Finally, we will generate the SAR using the `SSARP::create_SAR` function. The `S
 
 
 ``` r
-create_SAR(occurrences = nocont_dat, npsi = 1)
+SSARP::create_SAR(occurrences = nocont_dat, npsi = 1)
 ```
 
 ![Figure 2. This is the species-area relationship (SAR) for *Anolis* including island-based occurrences within a polygon around Caribbean islands from the first 10000 records for the genus in GBIF! The best-fit model was a segmented regression with one breakpoint.](anolis_SAR-1.png)

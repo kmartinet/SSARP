@@ -12,8 +12,8 @@ tree <- ape::read.tree("https://raw.githubusercontent.com/kmartinet/SSARP/refs/h
 #   island and mainland lizard clades. PNAS, 118(42): e2024451118.
 
 # Create simple dataframe for testing with fictional area assignments
-Species <- tree$tip.label
-Genus <- rep("Anolis", length(Species))
+specificEpithet <- tree$tip.label
+genericName <- rep("Anolis", length(specificEpithet))
 areas <- c(rep(12000, 8), 
            rep(14000, 9),
            rep(15000, 10),
@@ -21,11 +21,11 @@ areas <- c(rep(12000, 8),
            rep(13000, 9),
            rep(17000, 14),
            rep(19000, 34))
-occs <- as.data.frame(cbind(Genus, Species, areas))
+occs <- as.data.frame(cbind(genericName, specificEpithet, areas))
 
 # Create a tree with binomial labels
 tree_b <- tree
-binom_names <- paste(Genus, Species, sep = " ")
+binom_names <- paste(genericName, specificEpithet, sep = " ")
 tree_b$tip.label <- binom_names
 
 # Matrix version of dataframe

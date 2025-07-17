@@ -80,8 +80,10 @@ find_land <- function(occurrences, fillgaps = FALSE) {
   suppressWarnings(occs <- occs |> tidyr::separate(where2, 
                                                   c("First", "Second", "Third"),
                                                   sep = ":"))
-  colnames(occs) <- c("SpeciesName", "Genus", "Species", "Longitude", 
-                      "Latitude", "First", "Second", "Third", "datasetKey")
+  colnames(occs) <- c("acceptedScientificName", "genericName", 
+                      "specificEpithet", "decimalLongitude", 
+                      "decimalLatitude", "First", "Second", "Third", 
+                      "datasetKey")
   
   if(fillgaps == TRUE){
     # There might still be a lot of NA entries, so use Photon to try to 

@@ -53,14 +53,16 @@ estimate_MS <- function(tree, label_type = "binomial", occurrences){
   # If the user specified label_type = "epithet"
   if(label_type == "epithet"){
     # Organize species into island groups
-    island_groups <- tapply(occurrences$Species, occurrences$areas, unique)
+    island_groups <- tapply(occurrences$specificEpithet, 
+                            occurrences$areas, unique)
   } else if(label_type == "binomial"){
     # The occurrence record dataframe has separate "genus" and "species" 
     #  columns, so they should be combined for this label type
     # First, double-check that the "Species" column doesn't have any NAs
-    occurrences <- occurrences[!is.na(occurrences$Species),]
+    occurrences <- occurrences[!is.na(occurrences$specificEpithet),]
     # Then create a new column with the full name
-    occurrences$Binomial <- paste(occurrences$Genus, occurrences$Species, 
+    occurrences$Binomial <- paste(occurrences$genericName, 
+                                  occurrences$specificEpithet, 
                                   sep = " ")
     # Organize species into island groups
     island_groups <- tapply(occurrences$Binomial, occurrences$areas, unique)

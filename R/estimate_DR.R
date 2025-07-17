@@ -100,14 +100,15 @@ estimate_DR <- function(tree, label_type = "binomial", occurrences) {
     for(i in names(speciation_rates)){
       sp_occ <- sp_occ |>
         dplyr::mutate(rate = dplyr::case_when(
-          grepl(i, Species) ~ speciation_rates[[i]],
+          grepl(i, specificEpithet) ~ speciation_rates[[i]],
           TRUE ~ rate # Keeps values for non-matching rows
         ))
     }
   } else if(label_type == "binomial"){
     # The occurrence record dataframe has separate "genus" and "species" 
     #  columns, so they should be combined for this label type
-    sp_occ$Binomial <- paste(sp_occ$Genus, sp_occ$Species, sep = " ")
+    sp_occ$Binomial <- paste(sp_occ$genericName, 
+                             sp_occ$specificEpithet, sep = " ")
     # Now, for each name in speciation_rates, look for that name in the Binomial
     #  column of the occurrence record dataframe and add the appropriate rate
     for(i in names(speciation_rates)){

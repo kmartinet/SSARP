@@ -70,13 +70,13 @@ class(edata_test) <- 'bammdata'
 # The occurrence record input only needs "Genus" and "Species" columns, 
 #  so a simple dataframe can be created for testing 
 #  (without real occurrence data)
-Species <- tree$tip.label
-Genus <- rep("Anolis", length(Species))
-occ_simple <- as.data.frame(cbind(Genus, Species))
+specificEpithet <- tree$tip.label
+genericName <- rep("Anolis", length(specificEpithet))
+occ_simple <- as.data.frame(cbind(genericName, specificEpithet))
 
 # Create a tree with binomial labels
 tree_b <- tree
-binom_names <- paste(Genus, Species, sep = " ")
+binom_names <- paste(genericName, specificEpithet, sep = " ")
 tree_b$tip.label <- binom_names
 
 # Matrix version of dataframe
