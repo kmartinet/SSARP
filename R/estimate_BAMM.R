@@ -11,7 +11,7 @@
 #' returned occurrence dataframe.
 #' @param occurrences The occurrence record dataframe output from the SSARP 
 #' pipeline. If you would like to use a custom dataframe, please make sure that 
-#' there are columns titled "Genus" and "Species"
+#' there are columns titled "genericName" and "specificEpithet"
 #' @param edata The eventdata object created by using the 
 #' `BAMMtools::getEventData()` function
 #' @return A dataframe that includes speciation rates for each species in the 
@@ -51,6 +51,10 @@ estimate_BAMM <- function(label_type = "binomial", occurrences, edata) {
   # Checkmate input validation
   checkmate::assertString(label_type)
   checkmate::assertDataFrame(occurrences)
+  checkmate::testSubset(c("specificEpithet", "genericName"), names(occurrences))
+  # Ensure columns are correct type
+  checkmate::assertCharacter(occurrences$specificEpithet)
+  checkmate::assertCharacter(occurrences$genericName)
   
   # Create a named number vector of speciation rates
   speciation_rates <- edata$meanTipLambda

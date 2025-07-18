@@ -4,11 +4,12 @@
 #' masses relevant to the taxon of interest.
 #' @param occs The dataframe that is returned by `SSARP::find_land()`. If using 
 #' a custom occurrence record dataframe, ensure that it has the following 
-#' columns in order: "SpeciesName", "Genus", "Species", "Longitude", "Latitude", 
-#' "First", "Second", "Third", "datasetKey". The "datasetKey" column is 
-#' important for GBIF records and identifies the dataset to which the occurrence
-#' record belongs. Custom dataframes without this style of data organization 
-#' should fill the column with placeholder values.
+#' columns: "acceptedScientificName", "genericName", "specificEpithet", 
+#' "decimalLongitude", "decimalLatitude", "First", "Second", "Third", 
+#' "datasetKey". The "datasetKey" column is important for GBIF records and 
+#' identifies the dataset to which the occurrence record belongs. Custom 
+#' dataframes without this style of data organization should fill the column 
+#' with placeholder values.
 #' @param area_custom A dataframe including names of land masses and their 
 #' associated areas. This dataframe should be provided when the user would like 
 #' to bypass using the built-in database of island names and areas. Please 
@@ -41,7 +42,7 @@ find_areas <- function(occs, area_custom = NULL) {
       cli::cli_alert_warning("No data in occurrence record dataframe")
       break
     }
-    if(is.na(occs[i,8]) && is.na(occs[i,7]) && is.na(occs[i,6])) {
+    if(is.na(occs[i,"Third"]) && is.na(occs[i,"Second"]) && is.na(occs[i,"First"])) {
       minus[i] <- i
     }
   }
@@ -74,12 +75,12 @@ find_areas <- function(occs, area_custom = NULL) {
       cli::cli_alert_warning("No data in occurrence record dataframe")
       break
     }
-    if(!is.na(occs[i,8])) {
-      islands[i] <- occs[i,8]
-    } else if (!is.na(occs[i,7])){
-      islands[i] <- occs[i,7]
-    } else if (!is.na(occs[i,6])){
-      islands[i] <- occs[i,6]
+    if(!is.na(occs[i,"Third"])) {
+      islands[i] <- occs[i,"Third"]
+    } else if (!is.na(occs[i,"Second"])){
+      islands[i] <- occs[i,"Second"]
+    } else if (!is.na(occs[i,"First"])){
+      islands[i] <- occs[i,"First"]
     }
   }
   
@@ -141,12 +142,12 @@ find_areas <- function(occs, area_custom = NULL) {
   
   for(i in seq_len(nrow(occs))) {
     
-    if(!is.na(occs[i,8]) && island_dict$has(occs[i,8])){
-      areas[i] <- island_dict$get(occs[i,8])
-    } else if(!is.na(occs[i,7]) && island_dict$has(occs[i,7])){
-      areas[i] <- island_dict$get(occs[i,7])
-    } else if(!is.na(occs[i,6]) && island_dict$has(occs[i,6])){
-      areas[i] <- island_dict$get(occs[i,6])
+    if(!is.na(occs[i,"Third"]) && island_dict$has(occs[i,"Third"])){
+      areas[i] <- island_dict$get(occs[i,"Third"])
+    } else if(!is.na(occs[i,"Second"]) && island_dict$has(occs[i,"Second"])){
+      areas[i] <- island_dict$get(occs[i,"Second"])
+    } else if(!is.na(occs[i,"First"]) && island_dict$has(occs[i,"First"])){
+      areas[i] <- island_dict$get(occs[i,"First"])
     } else {
       areas[i] <- NA
     }

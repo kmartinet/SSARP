@@ -16,7 +16,7 @@ returned occurrence dataframe.}
 
 \item{occurrences}{The occurrence record dataframe output from the SSARP
 pipeline. If you would like to use a custom dataframe, please make sure that
-there are columns titled "Genus" and "Species"}
+there are columns titled "genericName" and "specificEpithet"}
 
 \item{edata}{The eventdata object created by using the
 \code{BAMMtools::getEventData()} function}

@@ -188,19 +188,19 @@ I find it helpful to think about WKT polygons in this way: imagine a polygon aro
 
 For a visual example, here is a polygon situated around Caribbean islands (Figure 1).
 
-![Figure 1. The GPS points associated with the WKT polygon in this example.](CaribbeanSpots_Final.png){width=100%}
+![Figure 1. The GPS points associated with the WKT polygon in this example.](CaribbeanSpots_Final.jpg){width=100%}
 
 The WKT polygon for this example is 'POLYGON((-84.8 23.9, -84.7 16.4, -65.2 13.9, -63.1 11.0, -56.9 15.5, -60.5 21.9, -79.3 27.8, -79.8 24.8, -84.8 23.9))'. The first point, normally represented by "23.9, -84.8" but written as "-84.8 23.9" for WKT, is circled in orange in Figure 2.
 
-![Figure 2. The first point in this example.](FirstSpot.png){width=100%}
+![Figure 2. The first point in this example.](FirstSpot.jpg){width=100%}
 
 Then, the next point, normally represented by "16.4, -84.7" but written as "-84.7 16.4" for WKT, follows counter-clockwise from the first one (circled in Figure 3).
 
-![Figure 3. The second point in this example.](SecondSpot.png){width=100%}
+![Figure 3. The second point in this example.](SecondSpot.jpg){width=100%}
 
 The rest of the points then follow in the order labeled in orange numbers in Figure 4. Make sure to close the polygon by ending the WKT string with the same point that you started with ("-84.8 23.9" in this case, represented by both 1 and 9 on Figure 4).
 
-![Figure 4. Order of points used in WKT polygon example. Numbers 1 and 9 are the same point because the polygon must start and end with the same point.](NumberSpots.png){width=100%}
+![Figure 4. Order of points used in WKT polygon example. Numbers 1 and 9 are the same point because the polygon must start and end with the same point.](NumberSpots.jpg){width=100%}
 
 WKT polygons may be used in both `rgbif::occ_download()` and `rgbif::occ_search()` as seen below. Please note that variables created earlier in this document are referenced here:
 

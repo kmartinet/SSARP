@@ -53,6 +53,14 @@ colnames(occ_two_bp) <- c("rate", "areas")
 # Matrix occ
 occ_mat <- as.matrix(occ_one_bp)
 
+# Occurrence record df with incorrect column names
+occ_name <- occ_one_bp
+colnames(occ_name) <- c("test1", "test2")
+
+# Occurrence record df with correct column names, but incorrect types
+occ_types <- occ_one_bp
+occ_types$areas <- as.character(occ_types$areas)
+occ_types$rate <- as.character(occ_types$rate)
 
 ########
 
@@ -74,4 +82,14 @@ test_that("The create_SpAR function returns a list (one breakpoint)", {
 
 test_that("The create_SpAR function returns a list (two breakpoints)", {
   expect_type(create_SpAR(occ_two_bp, npsi = 2), "list")
+})
+
+test_that("Inputting a dataframe without required column names causes an 
+          error", {
+            expect_error(create_SpAR(occ_name, npsi = 0))
+})
+
+test_that("Inputting a dataframe with required column names, but incorrect
+          types causes an error", {
+            expect_error(create_SpAR(occ_types, npsi = 0))
 })

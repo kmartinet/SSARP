@@ -33,6 +33,7 @@ suggestions <- rgbif::name_suggest(q = query, rank = rank)
 key <- as.numeric(suggestions$data[1,1])
 
 # Get data for Anolis from GBIF from islands in the Caribbean
+limit <- 10000
 occurrences <- rgbif::occ_search(taxonKey = key, 
                                 hasCoordinate = TRUE, 
                                 limit = limit,

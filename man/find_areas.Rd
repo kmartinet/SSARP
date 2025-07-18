@@ -9,11 +9,12 @@ find_areas(occs, area_custom = NULL)
 \arguments{
 \item{occs}{The dataframe that is returned by \code{SSARP::find_land()}. If using
 a custom occurrence record dataframe, ensure that it has the following
-columns in order: "SpeciesName", "Genus", "Species", "Longitude", "Latitude",
-"First", "Second", "Third", "datasetKey". The "datasetKey" column is
-important for GBIF records and identifies the dataset to which the occurrence
-record belongs. Custom dataframes without this style of data organization
-should fill the column with placeholder values.}
+columns: "acceptedScientificName", "genericName", "specificEpithet",
+"decimalLongitude", "decimalLatitude", "First", "Second", "Third",
+"datasetKey". The "datasetKey" column is important for GBIF records and
+identifies the dataset to which the occurrence record belongs. Custom
+dataframes without this style of data organization should fill the column
+with placeholder values.}
 
 \item{area_custom}{A dataframe including names of land masses and their
 associated areas. This dataframe should be provided when the user would like

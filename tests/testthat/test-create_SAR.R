@@ -38,6 +38,15 @@ areas <- c(100, 200, 300, 400,
 occ_two_bp <- as.data.frame(cbind(specificEpithet, areas))
 occ_two_bp$areas <- as.numeric(occ_two_bp$areas)
 
+# Occurrence record df with incorrect column names
+occ_name <- occ
+colnames(occ_name) <- c("test1", "test2")
+
+# Occurrence record df with correct column names, but incorrect types
+occ_types <- occ
+occ_types$specificEpithet <- as.factor(occ_types$specificEpithet)
+occ_types$areas <- as.character(occ_types$areas)
+
 ########
 
 test_that("The create_SAR function returns a list (zero breakpoints)", {
@@ -63,3 +72,12 @@ test_that("Inputting a non-numeric into npsi throws an error", {
   expect_error(create_SAR(occ, npsi = "test"))
 })
 
+test_that("Inputting a dataframe without required column names causes an 
+          error", {
+            expect_error(create_SAR(occ_name, npsi = 0))
+})
+
+test_that("Inputting a dataframe with required column names, but incorrect
+          types causes an error", {
+            expect_error(create_SAR(occ_types, npsi = 0))
+})

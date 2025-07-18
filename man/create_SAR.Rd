@@ -7,8 +7,9 @@
 create_SAR(occurrences, npsi = 1)
 }
 \arguments{
-\item{occurrences}{The dataframe output by \code{SSARP::find_areas()} (or if using
-a custom dataframe, ensure that it has the following columns: Species, areas)}
+\item{occurrences}{The dataframe output by \code{SSARP::find_areas()} (or if
+using  a custom dataframe, ensure that it has the following columns:
+specificEpithet, areas)}
 
 \item{npsi}{The maximum number of breakpoints to estimate for model
 selection.  Default: 1}

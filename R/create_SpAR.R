@@ -29,6 +29,10 @@ create_SpAR <- function(occurrences, npsi = 1) {
   # Checkmate input validation
   checkmate::assertDataFrame(occurrences)
   checkmate::assertNumeric(npsi)
+  checkmate::testSubset(c("areas", "rate"), names(occurrences))
+  # Ensure columns are correct type
+  checkmate::assertNumeric(occurrences$areas)
+  checkmate::assertNumeric(occurrences$rate)
   
   # The purpose of this function is to create either a linear or segmented 
   #    regression to visualize the relationship between speciation rate and 

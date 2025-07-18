@@ -37,6 +37,8 @@ suggestions <- rgbif::name_suggest(q = query, rank = rank)
 
 key <- as.numeric(suggestions$data[1,1])
 
+limit <- 10000
+
 occurrences <- rgbif::occ_search(taxonKey = key, 
                                 hasCoordinate = TRUE, 
                                 limit = limit,
@@ -60,11 +62,11 @@ head(land_dat, n = 5)
 ```
 
 ```
-##                                                    SpeciesName  Genus      Species  Longitude  Latitude
+##                                                   SpeciesName  Genus      Species  Longitude  Latitude
 ## 1 Anolis hispaniolae (Köhler, Zimmer, Mcgrath & Hedges, 2019) Anolis  hispaniolae -70.597156 19.098515
-## 2                                  Anolis distichus Cope, 1861 Anolis    distichus  -68.40635  18.67363
-## 3                             Anolis roquet (Bonnaterre, 1789) Anolis       roquet -60.893013  14.77053
-## 4                             Anolis roquet (Bonnaterre, 1789) Anolis       roquet -60.893013  14.77053
+## 2                                 Anolis distichus Cope, 1861 Anolis    distichus  -68.40635  18.67363
+## 3                            Anolis roquet (Bonnaterre, 1789) Anolis       roquet -60.893013  14.77053
+## 4                            Anolis roquet (Bonnaterre, 1789) Anolis       roquet -60.893013  14.77053
 ## 5                  Anolis cristatellus Duméril & Bibron, 1837 Anolis cristatellus -66.123847 18.471217
 ##                First Second Third                           datasetKey
 ## 1 Dominican Republic   <NA>  <NA> 50c9509d-22c7-4a22-a47d-8c48425ef4a7
@@ -88,12 +90,12 @@ head(area_dat, n = 5)
 ```
 
 ```
-##                                                    SpeciesName  Genus     Species  Longitude  Latitude
+##                                                   SpeciesName  Genus     Species  Longitude  Latitude
 ## 1 Anolis hispaniolae (Köhler, Zimmer, Mcgrath & Hedges, 2019) Anolis hispaniolae -70.597156 19.098515
-## 2                                  Anolis distichus Cope, 1861 Anolis   distichus  -68.40635  18.67363
-## 3                             Anolis roquet (Bonnaterre, 1789) Anolis      roquet -60.893013  14.77053
-## 4                             Anolis roquet (Bonnaterre, 1789) Anolis      roquet -60.893013  14.77053
-## 8                             Anolis evermanni Stejneger, 1904 Anolis   evermanni -66.314592  18.29657
+## 2                                 Anolis distichus Cope, 1861 Anolis   distichus  -68.40635  18.67363
+## 3                            Anolis roquet (Bonnaterre, 1789) Anolis      roquet -60.893013  14.77053
+## 4                            Anolis roquet (Bonnaterre, 1789) Anolis      roquet -60.893013  14.77053
+## 8                            Anolis evermanni Stejneger, 1904 Anolis   evermanni -66.314592  18.29657
 ##                First Second Third                           datasetKey       areas
 ## 1 Dominican Republic   <NA>  <NA> 50c9509d-22c7-4a22-a47d-8c48425ef4a7 83104562500
 ## 2 Dominican Republic   <NA>  <NA> 50c9509d-22c7-4a22-a47d-8c48425ef4a7 83104562500

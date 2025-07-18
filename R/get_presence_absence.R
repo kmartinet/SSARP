@@ -7,13 +7,13 @@
 #' custom dataframe, ensure that it has the following named columns:
 #' - "areas" containing the areas associated with the land masses of interest
 #' - "Species" containing the names of the species living on those islands
-#' - A 6th column containing locality information. In the SSARP workflow, this 
-#' column is called "First" and contains the country name
-#' - A 7th column containing locality information. In the SSARP workflow, this 
-#' column is called "Second" and contains a province or island name
-#' - An 8th column containing locality information. In the SSARP workflow, this 
-#' column is called "Third" and contains the island name if the 7th column does 
-#' not contain the island name
+#' - "First" containing locality information. In the SSARP workflow, this 
+#' column contains the country name
+#' - "Second" containing locality information. In the SSARP workflow, this 
+#' column contains a province or island name
+#' - "Third" containing locality information. In the SSARP workflow, this 
+#' column contains the island name if the 7th column does not contain the 
+#' island name
 #' @return A dataframe with a row for each island in the given occurrence 
 #' record dataframe and a column for each species. Within each species column, 
 #' a 1 represents the presence of that species on the island corresponding to 
@@ -59,7 +59,7 @@ get_presence_absence <- function(occs) {
     
     # Pick the first occurrence of the ith area to get the name
     area_names <- rbind(area_names, occs[which(occs$areas == new_occs[i,1])[1],
-                                         c(6:8)])
+                                         c("First", "Second", "Third")])
   }
   
   # Now cbind area_names to new_occs

@@ -95,10 +95,10 @@ find_land <- function(occurrences, fillgaps = FALSE) {
         cli::cli_alert_warning("Occurrence record dataframe has no entries")
         break
       }
-      if(is.na(occs[i,6])){
+      if(is.na(occs[i,"First"])){
         # Get lon and lat
-        longitude <- occs[i,4]
-        latitude <- occs[i,5]
+        longitude <- occs[i,"decimalLongitude"]
+        latitude <- occs[i,"decimalLatitude"]
         
         # Create Photon URL
         url <- paste0("http://photon.komoot.io/reverse?lon=", 

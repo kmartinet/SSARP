@@ -12,13 +12,13 @@ custom dataframe, ensure that it has the following named columns:
 \itemize{
 \item "areas" containing the areas associated with the land masses of interest
 \item "Species" containing the names of the species living on those islands
-\item A 6th column containing locality information. In the SSARP workflow, this
-column is called "First" and contains the country name
-\item A 7th column containing locality information. In the SSARP workflow, this
-column is called "Second" and contains a province or island name
-\item An 8th column containing locality information. In the SSARP workflow, this
-column is called "Third" and contains the island name if the 7th column does
-not contain the island name
+\item "First" containing locality information. In the SSARP workflow, this
+column contains the country name
+\item "Second" containing locality information. In the SSARP workflow, this
+column contains a province or island name
+\item "Third" containing locality information. In the SSARP workflow, this
+column contains the island name if the 7th column does not contain the
+island name
 }}
 }
 \value{

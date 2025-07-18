@@ -3,8 +3,9 @@
 #' Use segmented regression to create a species-area relationship (SAR) plot. 
 #' The X axis represents log(island area) and the Y axis represents log(number 
 #' of species)
-#' @param occurrences The dataframe output by `SSARP::find_areas()` (or if using  
-#' a custom dataframe, ensure that it has the following columns: Species, areas)
+#' @param occurrences The dataframe output by `SSARP::find_areas()` (or if 
+#' using  a custom dataframe, ensure that it has the following columns:
+#' specificEpithet, areas)
 #' @param npsi The maximum number of breakpoints to estimate for model 
 #' selection.  Default: 1
 #' @return A list of 3 including: the summary output, the segmented regression 
@@ -29,6 +30,10 @@ create_SAR <- function(occurrences, npsi = 1) {
   # Checkmate input validation
   checkmate::assertDataFrame(occurrences)
   checkmate::assertNumeric(npsi)
+  checkmate::testSubset(c("specificEpithet", "areas"), names(occurrences))
+  # Ensure columns are correct type
+  checkmate::assertCharacter(occurrences$specificEpithet)
+  checkmate::assertNumeric(occurrences$areas)
   
   #   formula Species ~ Area means to group scientific names by area
   #   function(x) length(unique(x)) tells it to give me the number of unique 

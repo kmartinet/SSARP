@@ -10,8 +10,8 @@ remove_continents(occs)
 \item{occs}{The dataframe that is returned by \code{SSARP::find_areas()}. I do not
 recommend using a custom dataframe for this function because it references
 areas given by the area database used in \code{SSARP::find_areas()}. If you must
-use a custom dataframe, please ensure  that the landmass areas are in the 9th
-column of the dataframe.}
+use a custom dataframe, please ensure  that the landmass areas are in a
+column called "areas"}
 }
 \value{
 A dataframe of the species name, island name, and island area

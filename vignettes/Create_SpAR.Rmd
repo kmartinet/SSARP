@@ -32,6 +32,7 @@ suggestions <- rgbif::name_suggest(q = query, rank = rank)
 key <- as.numeric(suggestions$data[1,1])
 
 # Get data for Anolis from GBIF from islands in the Caribbean
+limit <- 10000
 occurrences <- rgbif::occ_search(taxonKey = key, 
                                 hasCoordinate = TRUE, 
                                 limit = limit,
@@ -85,21 +86,26 @@ SSARP::create_SpAR(occurrences = speciation_occurrences, npsi = 1)
 
 ```
 ## 
-## Call:
-## lm(formula = y ~ x, data = dat)
+## 	***Regression Model with Segmented Relationship(s)***
 ## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.007145 -0.002877 -0.001888 -0.001448  0.039785 
+## Call: 
+## segmented.lm(obj = linear, seg.Z = ~x, npsi = 1, control = seg.control(display = FALSE))
 ## 
-## Coefficients:
+## Estimated Break-Point(s):
+##           Est. St.Err
+## psi1.x 19.924  1.036
+## 
+## Coefficients of the linear terms:
 ##               Estimate Std. Error t value Pr(>|t|)
-## (Intercept) -0.0154562  0.0166191  -0.930    0.365
-## x            0.0008854  0.0008174   1.083    0.294
+## (Intercept)  1.364e-12  2.233e-02   0.000        1
+## x           -8.298e-14  1.227e-03   0.000        1
+## U1.x         5.712e-03  2.150e-03   2.656       NA
 ## 
-## Residual standard error: 0.01025 on 17 degrees of freedom
-## Multiple R-squared:  0.06455,	Adjusted R-squared:  0.009525 
-## F-statistic: 1.173 on 1 and 17 DF,  p-value: 0.2939
+## Residual standard error: 0.01069 on 32 degrees of freedom
+## Multiple R-Squared: 0.3968,  Adjusted R-squared: 0.3403 
+## 
+## Boot restarting based on 6 samples. Last fit:
+## Convergence attained in 2 iterations (rel. change 2.5337e-14)
 ```
 ![This is the SpAR for *Anolis* including island-based occurrences within a polygon around Caribbean islands from the first 10000 records for the genus in GBIF! The best-fit model was a segmented regression with one breakpoint.](anolis_SpAR-1.png)
 

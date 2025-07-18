@@ -82,6 +82,15 @@ tree_b$tip.label <- binom_names
 # Matrix version of dataframe
 occ_mat <- as.matrix(occ_simple)
 
+# Occurrence record df with incorrect column names
+occ_name <- occ_simple
+colnames(occ_name) <- c("test1", "test2")
+
+# Occurrence record df with correct column names, but incorrect types
+occ_types <- occ_simple
+occ_types$genericName <- as.factor(occ_types$genericName)
+occ_types$specificEpithet <- as.factor(occ_types$specificEpithet)
+
 ########
 
 test_that("Inputting a matrix instead of a dataframe for occurrence records 
@@ -105,4 +114,18 @@ test_that("The estimate_BAMM function returns a dataframe (binomial labels)", {
   expect_s3_class(estimate_BAMM(label_type = "binomial", 
                                  occurrences = occ_simple, 
                                  edata = edata_test), "data.frame")
+})
+
+test_that("Inputting a dataframe without required column names causes an 
+          error", {
+            expect_error(estimate_BAMM(label_type = "epithet",
+                                       occurrences = occ_name,
+                                       edata = edata_test))
+})
+
+test_that("Inputting a dataframe with required column names, but incorrect
+          types causes an error", {
+            expect_error(estimate_BAMM(label_type = "epithet",
+                                       occurrences = occ_types,
+                                       edata = edata_test))
 })

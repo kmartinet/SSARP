@@ -17,7 +17,6 @@ Imports:
   mapdata,
   maps,
   reshape2,
-  rgbif,
   segmented,
   stringi,
   tidyr
@@ -32,5 +31,6 @@ Depends:
 Suggests: 
     testthat (>= 3.0.0),
     rmarkdown,
-    knitr (>= 1.46)
+    knitr (>= 1.46),
+    rgbif
 Config/testthat/edition: 3

@@ -4,6 +4,9 @@ names <- c("one", "two", "three", "four")
 areas <- c(5.50e13, 3.04e13, 10, 15)
 occs[,8] <- names
 occs[,10] <- areas
+colnames(occs) <- c("acceptedScientificName", "genericName", "specificEpithet", 
+                    "decimalLongitude", "decimalLatitude", "First", "Second", 
+                    "Third", "datasetKey", "areas")
 
 # Test matrix
 occs_mat <- matrix(nrow = 1, ncol = 1)
