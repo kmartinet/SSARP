@@ -4,7 +4,7 @@
 \alias{find_areas}
 \title{Find areas of land masses.}
 \usage{
-find_areas(occs, area_custom = NULL)
+find_areas(occs, area_custom = NULL, shapefile = NULL, names = NULL)
 }
 \arguments{
 \item{occs}{The dataframe that is returned by \code{ssarp::find_land()}. If using
@@ -19,15 +19,41 @@ with placeholder values.}
 \item{area_custom}{A dataframe including names of land masses and their
 associated areas. This dataframe should be provided when the user would like
 to bypass using the built-in database of island names and areas. Please
-ensure that the custom dataframe includes the land mass's area in column 3
-and the name in column 5. (Optional)}
+ensure that the custom dataframe includes the land mass's area in a column
+called "AREA" and the name in a column called "Name". (Optional)}
+
+\item{shapefile}{A shapefile (.shp) containing spatial information for
+the geographic locations of interest. (Optional)}
+
+\item{names}{If the user would like to restrict which polygons in the
+shapefile are included in the returned occurrence record dataframe, they can
+be specified here as a vector. If the user does not provide a vector, all of
+the non-NA names in the shapefile will be included
+(as found in shapefile$name). (Optional)}
 }
 \value{
 A dataframe of the species name, island name, and island area
 }
 \description{
-Reference a dataset of island names and areas to find the areas of the land
-masses relevant to the taxon of interest.
+Find the areas of the land masses relevant to the taxon of interest with two
+options: a database of island names and areas, or a user-provided shapefile.
+}
+\details{
+The first method is to reference a built-in dataset of island names
+and areas to find the areas of the landmasses relevant to the taxon of
+interest. The user may also decide to input their own custom dataframe
+including names of relevant land masses and their associated areas to
+bypass using \emph{ssarp}'s built-in dataset.
+
+The second method is to reference a user-supplied shapefile containing
+spatial information for the landmasses of interest in order to determine
+their areas.
+
+While the word "landmasses" was used heavily in this documentation, users
+supplying their own custom area dataframe or shapefile are encouraged to
+use this function in the \emph{ssarp} workflow to create species- and speciation-
+area relationships for island-like systems such as lakes, fragmented habitat,
+and mountain peaks.
 }
 \examples{
 # The GBIF key for the Anolis genus is 8782549

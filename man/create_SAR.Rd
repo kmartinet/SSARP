@@ -40,6 +40,7 @@ areas <- find_areas(occs = land)
 
 seg <- create_SAR(occurrences = areas,
                   npsi = 1,
-                  visualize = TRUE)
+                  visualize = FALSE)
+plot(seg)
 summary <- seg[1]
 }

@@ -18,7 +18,9 @@ Imports:
   maps,
   reshape2,
   segmented,
+  sf,
   stringi,
+  terra,
   tidyr
 LazyData: true
 Encoding: UTF-8

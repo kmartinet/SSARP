@@ -73,15 +73,15 @@ test_that("Inputting a non-numeric into npsi throws an error", {
 })
 
 test_that("The create_SpAR function returns a list (zero breakpoints)", {
-  expect_type(create_SpAR(occ_zero_bp, npsi = 0), "list")
+  expect_type(create_SpAR(occ_zero_bp, npsi = 0, visualize = TRUE), "list")
 })
 
 test_that("The create_SpAR function returns a list (one breakpoint)", {
-  expect_type(create_SpAR(occ_one_bp, npsi = 1), "list")
+  expect_type(create_SpAR(occ_one_bp, npsi = 1, visualize = TRUE), "list")
 })
 
 test_that("The create_SpAR function returns a list (two breakpoints)", {
-  expect_type(create_SpAR(occ_two_bp, npsi = 2), "list")
+  expect_type(create_SpAR(occ_two_bp, npsi = 2, visualize = TRUE), "list")
 })
 
 test_that("Inputting a dataframe without required column names causes an 

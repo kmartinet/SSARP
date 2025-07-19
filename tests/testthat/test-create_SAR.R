@@ -50,18 +50,20 @@ occ_types$areas <- as.character(occ_types$areas)
 ########
 
 test_that("The create_SAR function returns a list (zero breakpoints)", {
-  expect_type(create_SAR(occ, npsi = 0), "list")
+  expect_type(create_SAR(occ, npsi = 0, visualize = TRUE), "list")
 })
 
 # Using suppressWarnings here because the test dataset is very simple, 
 # and while the best-fit model is a regression with one breakpoint, 
 # the "segemented" package gives warnings about the reliability of the results
 test_that("The create_SAR function returns a list (one breakpoint)", {
-  suppressWarnings(expect_type(create_SAR(occ_one_bp, npsi = 1), "list"))
+  suppressWarnings(expect_type(create_SAR(occ_one_bp, 
+                                          npsi = 1,
+                                          visualize = TRUE), "list"))
 })
 
 test_that("The create_SAR function returns a list (two breakpoints)", {
-  expect_type(create_SAR(occ_two_bp, npsi = 2), "list")
+  expect_type(create_SAR(occ_two_bp, npsi = 2, visualize = TRUE), "list")
 })
 
 test_that("Inputting a matrix instead of a dataframe causes an error", {

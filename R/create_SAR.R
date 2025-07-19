@@ -36,6 +36,7 @@ create_SAR <- function(occurrences, npsi = 1, visualize = FALSE) {
   checkmate::assertDataFrame(occurrences)
   checkmate::assertNumeric(npsi)
   checkmate::testSubset(c("specificEpithet", "areas"), names(occurrences))
+  checkmate::assertLogical(visualize)
   # Ensure columns are correct type
   checkmate::assertCharacter(occurrences$specificEpithet)
   checkmate::assertNumeric(occurrences$areas)

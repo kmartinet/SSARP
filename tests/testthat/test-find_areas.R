@@ -15,7 +15,7 @@ occs_vals[,5] <- as.numeric(occs_vals[,5])
 
 # Test dataframe for find_areas custom area input
 custom_area <- as.data.frame(matrix(ncol = 2, nrow = 2))
-colnames(custom_area) <- c("Name", "Area")
+colnames(custom_area) <- c("Name", "AREA")
 
 # Test matrix for find_areas occs input
 occ_mat <- matrix(ncol = 9, nrow = 2)
@@ -48,6 +48,26 @@ occ_types$First <- as.factor(occ_types$First)
 occ_types$Second <- as.factor(occ_types$Second)
 occ_types$Third <- as.factor(occ_types$Third)
 
+### Spatial inputs ###
+# Create test SpatVector with WKT polygon
+# This polygon is around the University of Arizona
+test_SpatVector <- terra::vect("POLYGON ((-110.96 32.23, -110.96 32.22, 
+                               -110.94 32.227, -110.94 32.234, -110.96 32.23))")
+test_SpatVector$name <- "UA"
+test_SpatVector$areas <- 791255.92 # m^2
+test_SpatVector$featurecla <- "campus"
+
+# New dataframe for spatial testing
+occs_spat <- occs
+occs_spat[1,] <- c("Aspidoscelis sonorae", "Aspidoscelis", "sonorae",
+                   32.2318081, -110.9469145,  "One", "Two", "Three", 1)
+occs_spat[2,] <- c("Aspidoscelis sonorae", "Aspidoscelis", "sonorae",
+                   32.2292764, -110.9536270,  "One", "Two", "Three", 1)
+occs_spat[,4] <- as.numeric(occs_spat[,4])
+occs_spat[,5] <- as.numeric(occs_spat[,5])
+
+# names vector for spatial testing
+names <- "UA"
 
 ########
 
@@ -84,3 +104,24 @@ test_that("Inputting a dataframe without the correct types will cause an error",
           {
             expect_error(find_areas(occ_types))
 })
+
+test_that("Using the spatial components of find_areas returns a dataframe
+          (includes names)", {
+  expect_s3_class(find_areas(occs = occs_spat,
+                             shapefile = test_SpatVector,
+                             names = names), "data.frame")
+})
+
+test_that("Using the spatial components of find_areas returns a message
+          when no 'names' variable is specified", {
+            expect_message(find_areas(occs = occs_spat,
+                                       shapefile = test_SpatVector), 
+          "Using all names in the shapefile, this might extend processing time")
+})
+
+test_that("Inputting something other than a shapefile in 'shapefile' will
+          cause an error", {
+            expect_error(find_areas(occs = occs_spat,
+                                    shapefile = 1))
+})
+

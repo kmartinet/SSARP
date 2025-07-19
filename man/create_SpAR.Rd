@@ -4,7 +4,7 @@
 \alias{create_SpAR}
 \title{Create a speciation-area relationship plot (SpAR)}
 \usage{
-create_SpAR(occurrences, npsi = 1)
+create_SpAR(occurrences, npsi = 1, visualize = FALSE)
 }
 \arguments{
 \item{occurrences}{The dataframe output by one of ssarp's speciation
@@ -14,6 +14,9 @@ has the following columns: areas, rate}
 
 \item{npsi}{The maximum number of breakpoints to estimate for model
 selection.  Default: 1}
+
+\item{visualize}{(boolean) Whether the plot should be displayed when the
+function is called. Default: FALSE}
 }
 \value{
 A list of 3 including: the summary output, the segmented regression
@@ -45,6 +48,9 @@ occ_speciation <- estimate_MS(tree = tree,
                               label_type = "epithet",
                               occurrences = areas)
 
-seg <- create_SpAR(occurrences = occ_speciation, npsi = 1)
+seg <- create_SpAR(occurrences = occ_speciation, 
+                   npsi = 1,
+                   visualize = FALSE)
+plot(seg)
 summary <- seg[1]
 }
