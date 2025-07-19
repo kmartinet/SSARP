@@ -81,3 +81,39 @@ test_that("Inputting a dataframe with required column names, but incorrect
           types causes an error", {
             expect_error(create_SAR(occ_types, npsi = 0))
 })
+
+##### Ensuring calculations are correct #####
+test_that("The slope is calculated correctly (zero breakpoints)", {
+  model <- create_SAR(occ, npsi = 0)
+  slope <- round(model$summary$coefficients[2], digits = 4)
+  expect_setequal(slope, 1.8734)
+})
+
+# Using suppressWarnings here because the test dataset is very simple, 
+# and while the best-fit model is a regression with one breakpoint, 
+# the "segemented" package gives warnings about the reliability of the results
+test_that("The slopes and breakpoint are calculated correctly 
+          (one breakpoint)", {
+          suppressWarnings(model <- create_SAR(occ_one_bp, npsi = 1))
+          slope1 <- round(model$summary$coefficients[2], digits = 4)
+          slope2 <- round(model$summary$coefficients[3], digits = 4)
+          bp <- round(model$summary$psi[2], digits = 4)
+          expect_setequal(slope1, 0)
+          expect_setequal(slope2, 3.3138)
+          expect_setequal(bp, 6.0654)
+})
+
+test_that("The slopes and breakpoints are calculated correctly 
+          (two breakpoints)", {
+          model <- create_SAR(occ_two_bp, npsi = 2)
+          slope1 <- round(model$summary$coefficients[2], digits = 4)
+          slope2 <- round(model$summary$coefficients[3], digits = 4)
+          slope3 <- round(model$summary$coefficients[4], digits = 4)
+          bp1 <- round(model$summary$psi[3], digits = 4)
+          bp2 <- round(model$summary$psi[4], digits = 4)
+          expect_setequal(slope1, 0)
+          expect_setequal(slope2, 2.4763)
+          expect_setequal(slope3, -2.4763)
+          expect_setequal(bp1, 5.9677)
+          expect_setequal(bp2, 6.6176)
+ })

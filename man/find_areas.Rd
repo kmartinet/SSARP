@@ -7,7 +7,7 @@
 find_areas(occs, area_custom = NULL)
 }
 \arguments{
-\item{occs}{The dataframe that is returned by \code{SSARP::find_land()}. If using
+\item{occs}{The dataframe that is returned by \code{ssarp::find_land()}. If using
 a custom occurrence record dataframe, ensure that it has the following
 columns: "acceptedScientificName", "genericName", "specificEpithet",
 "decimalLongitude", "decimalLatitude", "First", "Second", "Third",
@@ -31,13 +31,13 @@ masses relevant to the taxon of interest.
 }
 \examples{
 # The GBIF key for the Anolis genus is 8782549
-#  Obtained with: key <- get_key(query = "Anolis", rank = "genus")
-key <- 8782549
-# Read in example dataset obtained through:
-#  dat <- get_data(key = key, limit = 100)
+# Read in example dataset filtered from:
+#  dat <- rgbif::occ_search(taxonKey = 8782549, 
+#                           hasCoordinate = TRUE,
+#                           limit = 10000)
 dat <- read.csv(system.file("extdata",
-                            "SSARP_Example_Dat.csv",
-                            package = "SSARP"))
+                            "ssarp_Example_Dat.csv",
+                            package = "ssarp"))
 occs <- find_land(occurrences = dat)
 areas <- find_areas(occs = occs)
 }

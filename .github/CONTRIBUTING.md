@@ -1,6 +1,6 @@
-# Contributing to SSARP
+# Contributing to ssarp
 
-Thank you for considering contributing to *SSARP*! The following guidelines were created by editing the CONTRIBUTING.md file created by `usethis::use_tidy_contributing()`.
+Thank you for considering contributing to *ssarp*! The following guidelines were created by editing the CONTRIBUTING.md file created by `usethis::use_tidy_contributing()`.
 
 ## Fixing typos
 
@@ -17,7 +17,7 @@ See tidyverse's guide on [how to create a great issue](https://code-review.tidyv
 
 ### Pull request process
 
-*   Fork the package and clone onto your computer. If you haven't done this before, we recommend using `usethis::create_from_github("kmartinet/SSARP", fork = TRUE)`.
+*   Fork the package and clone onto your computer. If you haven't done this before, we recommend using `usethis::create_from_github("kmartinet/ssarp", fork = TRUE)`.
 
 *   Install all development dependencies with `devtools::install_dev_deps()`, and then make sure the package passes R CMD check by running `devtools::check()`. 
     If R CMD check fails with an error, it's a good idea to ask for help before continuing. Warnings about non-ASCII strings in the `island_areas` object and the files in the `vignettes` subdirectory can be safely ignored.

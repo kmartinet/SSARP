@@ -93,3 +93,36 @@ test_that("Inputting a dataframe with required column names, but incorrect
           types causes an error", {
             expect_error(create_SpAR(occ_types, npsi = 0))
 })
+
+##### Ensuring calculations are correct #####
+test_that("The slope is calculated correctly (zero breakpoints)", {
+  model <- create_SpAR(occ_zero_bp, npsi = 0)
+  slope <- round(model$summary$coefficients[2], digits = 4)
+  expect_setequal(slope, -0.0171)
+})
+
+test_that("The slopes and breakpoint are calculated correctly 
+          (one breakpoint)", {
+            model <- create_SpAR(occ_one_bp, npsi = 1)
+            slope1 <- round(model$summary$coefficients[2], digits = 4)
+            slope2 <- round(model$summary$coefficients[3], digits = 4)
+            bp <- round(model$summary$psi[2], digits = 4)
+            expect_setequal(slope1, 0)
+            expect_setequal(slope2, 0.0057)
+            expect_setequal(bp, 19.9237)
+})
+
+test_that("The slopes and breakpoints are calculated correctly 
+          (two breakpoints)", {
+            model <- create_SpAR(occ_two_bp, npsi = 2)
+            slope1 <- round(model$summary$coefficients[2], digits = 4)
+            slope2 <- round(model$summary$coefficients[3], digits = 4)
+            slope3 <- round(model$summary$coefficients[4], digits = 4)
+            bp1 <- round(model$summary$psi[3], digits = 4)
+            bp2 <- round(model$summary$psi[4], digits = 4)
+            expect_setequal(slope1, 0)
+            expect_setequal(slope2, 1.6385)
+            expect_setequal(slope3, -1.6385)
+            expect_setequal(bp1, 5.9811)
+            expect_setequal(bp2, 6.6516)
+})

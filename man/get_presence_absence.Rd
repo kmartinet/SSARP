@@ -7,16 +7,17 @@
 get_presence_absence(occs)
 }
 \arguments{
-\item{occs}{The dataframe output by \code{SSARP::find_areas()}, or if using a
+\item{occs}{The dataframe output by \code{ssarp::find_areas()}, or if using a
 custom dataframe, ensure that it has the following named columns:
 \itemize{
 \item "areas" containing the areas associated with the land masses of interest
-\item "Species" containing the names of the species living on those islands
-\item "First" containing locality information. In the SSARP workflow, this
+\item "specificEpithet" containing the names of the species living on those
+islands
+\item "First" containing locality information. In the ssarp workflow, this
 column contains the country name
-\item "Second" containing locality information. In the SSARP workflow, this
+\item "Second" containing locality information. In the ssarp workflow, this
 column contains a province or island name
-\item "Third" containing locality information. In the SSARP workflow, this
+\item "Third" containing locality information. In the ssarp workflow, this
 column contains the island name if the 7th column does not contain the
 island name
 }}
@@ -29,19 +30,19 @@ the given row, and a 0 represents the absence of that species on the island
 corresponding to the given row.
 }
 \description{
-Use a dataframe output by \code{SSARP::find_areas()} to determine which species
+Use a dataframe output by \code{ssarp::find_areas()} to determine which species
 occur on specific islands by creating a presence-absence dataframe. A 1
 represents presence and a 0 represents absence.
 }
 \examples{
 # The GBIF key for the Anolis genus is 8782549
-#  Obtained with: key <- get_key(query = "Anolis", rank = "genus")
-key <- 8782549
-# Read in example dataset obtained through:
-#  dat <- get_data(key = key, limit = 100)
+# Read in example dataset filtered from:
+#  dat <- rgbif::occ_search(taxonKey = 8782549, 
+#                           hasCoordinate = TRUE,
+#                           limit = 10000)
 dat <- read.csv(system.file("extdata",
-                            "SSARP_Example_Dat.csv",
-                            package = "SSARP"))
+                            "ssarp_Example_Dat.csv",
+                            package = "ssarp"))
 land <- find_land(occurrences = dat)
 areas <- find_areas(occs = land)
 pres_abs <- get_presence_absence(areas)

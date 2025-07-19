@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(SSARP)
+library(ssarp)
 
-test_check("SSARP")
+test_check("ssarp")

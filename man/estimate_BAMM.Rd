@@ -14,7 +14,7 @@ returned occurrence dataframe. If "binomial," the full species name
 (including genus) will be used to match speciation rates to tips in the
 returned occurrence dataframe.}
 
-\item{occurrences}{The occurrence record dataframe output from the SSARP
+\item{occurrences}{The occurrence record dataframe output from the ssarp
 pipeline. If you would like to use a custom dataframe, please make sure that
 there are columns titled "genericName" and "specificEpithet"}
 
@@ -30,27 +30,32 @@ Use the BAMMtools package (Rabosky et al. 2014) to extract tip speciation
 rates from user-supplied BAMM analysis objects.
 }
 \examples{
-\dontrun{
-key <- get_key(query = "Anolis", rank = "genus")
-dat <- get_data(key = key, limit = 100)
+# The GBIF key for the Anolis genus is 8782549
+# Read in example dataset filtered from:
+#  dat <- rgbif::occ_search(taxonKey = 8782549, 
+#                           hasCoordinate = TRUE,
+#                           limit = 10000)
+dat <- read.csv(system.file("extdata",
+                            "ssarp_Example_Dat.csv",
+                            package = "ssarp"))
 land <- find_land(occurrences = dat)
 areas <- find_areas(occs = land)
 
 # Read tree from Patton et al. (2021), trimmed to Caribbean species
-tree <- ape::read.tree(system.file("extdata", 
-                             "Patton_Anolis_trimmed.tree", 
-                             package = "SSARP"))
+tree <- ape::read.tree(system.file("extdata",
+                             "Patton_Anolis_trimmed.tree",
+                             package = "ssarp"))
 
 # Event data file from an external BAMM run
-event_data <- system.file("extdata", 
+event_data <- system.file("extdata",
                           "event_data_Patton_Anolis.txt",
-                           package = "SSARP")
+                           package = "ssarp")
+                           
 edata <- BAMMtools::getEventData(phy = tree, eventdata = event_data)
 
-occ_speciation <- speciationBAMM(label_type = "epithet", 
-                                 occurrences = areas , 
+occ_speciation <- estimate_BAMM(label_type = "epithet",
+                                 occurrences = areas ,
                                  edata = edata)
-}
 }
 \references{
 \itemize{

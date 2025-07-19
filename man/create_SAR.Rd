@@ -7,7 +7,7 @@
 create_SAR(occurrences, npsi = 1)
 }
 \arguments{
-\item{occurrences}{The dataframe output by \code{SSARP::find_areas()} (or if
+\item{occurrences}{The dataframe output by \code{ssarp::find_areas()} (or if
 using  a custom dataframe, ensure that it has the following columns:
 specificEpithet, areas)}
 
@@ -25,13 +25,13 @@ of species)
 }
 \examples{
 # The GBIF key for the Anolis genus is 8782549
-#  Obtained with: key <- get_key(query = "Anolis", rank = "genus")
-key <- 8782549
-# Read in example dataset obtained through:
-#  dat <- get_data(key = key, limit = 100)
+# Read in example dataset filtered from:
+#  dat <- rgbif::occ_search(taxonKey = 8782549, 
+#                           hasCoordinate = TRUE,
+#                           limit = 10000)
 dat <- read.csv(system.file("extdata",
-                            "SSARP_Example_Dat.csv",
-                            package = "SSARP"))
+                            "ssarp_Example_Dat.csv",
+                            package = "ssarp"))
 land <- find_land(occurrences = dat)
 areas <- find_areas(occs = land)
 

@@ -33,6 +33,22 @@ occs_small <- occs_vals[,1:5]
 # Uniq_islands to test full find_areas grep sequence
 uniq_islands <- c("Aappalaartoq", "Abbotts Harbour", "A Chau Island")
 
+# Occurrence record df with incorrect column names
+occ_name <- occs_vals
+colnames(occ_name) <- c(1:9)
+
+# Occurrence record df with correct column names, but incorrect types
+occ_types <- occs_vals
+occ_types$acceptedScientificName <- as.factor(occ_types$acceptedScientificName)
+occ_types$genericName <- as.factor(occ_types$genericName)
+occ_types$specificEpithet <- as.factor(occ_types$specificEpithet)
+occ_types$decimalLongitude <- as.character(occ_types$decimalLongitude)
+occ_types$decimalLatitude <- as.character(occ_types$decimalLatitude)
+occ_types$First <- as.factor(occ_types$First)
+occ_types$Second <- as.factor(occ_types$Second)
+occ_types$Third <- as.factor(occ_types$Third)
+
+
 ########
 
 test_that("Inputting an empty custom area dataframe will result in an empty 
@@ -57,4 +73,14 @@ test_that("The find_areas function returns a dataframe", {
 
 test_that("The find_areas function returns a dataframe with 10 columns", {
   expect_equal(ncol(find_areas(occs_vals)), 10)
+})
+
+test_that("Inputting a dataframe without the correct column names will cause
+          an error", {
+          expect_error(find_areas(occ_name))
+})
+
+test_that("Inputting a dataframe without the correct types will cause an error",
+          {
+            expect_error(find_areas(occ_types))
 })

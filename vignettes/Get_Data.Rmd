@@ -8,9 +8,22 @@ vignette: >
 ---
 
 ## Introduction
-The main goal of the *SSARP* R package is to create species-area relationships (SARs) when occurrence records are given as input, and speciation-area relationships (SpARs) when occurrence records and a phylogeny associated with the taxa of interest are given as input.
+The *ssarp* R package has two main goals: create species-area relationships (SARs) when occurrence records are given as input, and create speciation-area reltionships (SpARs) when occurrence records and a phylogeny associated with the taxa of interest are given as input.
 
-In this vignette, we will explore different options for gathering occurrence records using the *rgbif* package, which allows us to access data on GBIF (Global Biodiversity Information Facility) through the use of the GBIF API. These records can then be used in *SSARP*'s workflow to [create SARs](https://kmartinet.github.io/SSARP/articles/Create_SAR.html) and [create SpARs](https://kmartinet.github.io/SSARP/articles/Create_SpAR.html).
+The observation that species richness increases with increasing area is a fundamental law of ecology, and a disruption in this relationship may be associated with habitat loss, habitat fragmentation, and increasing numbers of non-native species. Creating SARs for island-dwelling species helps researchers understand how trends in biodiversity across archipelagos are changing due to these effects.
+
+Creating SpARs, which plot speciation rates against the area of the island on which the associated species live, for the same island-dwelling species allows researchers to further explore drivers of biodiversity across archipelagos.
+
+The creation of both of these relationships requires occurrence records for the taxa of interest.
+
+In this vignette, we will explore different options for gathering occurrence records using the *rgbif* package, which allows us to access data on GBIF (Global Biodiversity Information Facility) through the use of the GBIF API. These records can then be used in *ssarp*'s workflow to [create SARs](https://kmartinet.github.io/ssarp/articles/Create_SAR.html) and [create SpARs](https://kmartinet.github.io/ssarp/articles/Create_SpAR.html).
+
+Here, we will discuss the following main topics:
+
+* How to obtain a taxon key with `rgbif` for use in querying GBIF's database of occurrence records
+* How to use `rgbif::occ_download()` to obtain occurrence records for the taxon of interest
+* How to use `rgbif::occ_search()` to obtain occurrence records for the taxon of interest
+* How to restrict occurrence records to a specific geographic range using WKT geometry with `rgbif::occ_download()` and `rgbif::occ_search()`
 
 ## Obtaining a Taxon Key
 In order to access data from GBIF, we must first determine the unique identifying key associated with the taxon of interest. We will use the `rgbif::name_suggest()` function to find this key. To illustrate the use of `rgbif::occ_download()`, we will focus on the lizard species *Anolis allisoni*. 
@@ -56,7 +69,7 @@ The `rgbif::occ_download()` call includes the following elements:
 * `pred("taxonKey", key)`: The taxon key for *Anolis allisoni* that we saved above.
 * `pred("hasCoordinate"`, TRUE): Ensures that all returned records have an associated GPS coordinate.
 * `pred("hasGeospatialIssue"`, FALSE): Ensures that none of the returned records have a known geospatial issue.
-* `format = "DWCA"`: The most data-rich return format for the data. Contains information necessary for downstream *SSARP* functions.
+* `format = "DWCA"`: The most data-rich return format for the data. Contains information necessary for downstream *ssarp* functions.
 
 ```{}
 download_key <- rgbif::occ_download(pred("taxonKey", key),
@@ -97,7 +110,7 @@ head(dat)
 ## # ℹ Use `colnames()` to see all variable names
 ```
 
-The `dat` object is now ready to be used with the rest of the *SSARP* pipeline!
+The `dat` object is now ready to be used with the rest of the *ssarp* pipeline!
 
 ## Downloading Occurrence Records Using occ_search()
 While `rgbif::occ_download()` is the optimal method for gathering occurrence data from GBIF, the `rgbif::occ_search()` function is very useful for quick downloads that allow the user to explore occurrence records before committing to downloading a full dataset.
@@ -161,15 +174,15 @@ head(dat)
 ## #   stateProvince <chr>, year <int>, month <int>, day <int>, eventDate <chr>, startDayOfYear <int>, …
 ```
 
-The `dat` object is now ready to be used with the rest of the *SSARP* pipeline for further exploration! If you would like to use this data in a publication, please consider using `rgbif::occ_download()` instead so that there is a DOI automatically associated with the data.
+The `dat` object is now ready to be used with the rest of the *ssarp* pipeline for further exploration! If you would like to use this data in a publication, please consider using `rgbif::occ_download()` instead so that there is a DOI automatically associated with the data.
 
-If you must use data obtained through `rgbif::occ_search()` in a publication, you must create a Derived Dataset. The `SSARP::get_sources()` function helps users create a dataframe of dataset keys and the number of occurrence records associated with each key, which is necessary for uploading a Derived Dataset.
+If you must use data obtained through `rgbif::occ_search()` in a publication, you must create a Derived Dataset. The `ssarp::get_sources()` function helps users create a dataframe of dataset keys and the number of occurrence records associated with each key, which is necessary for uploading a Derived Dataset.
 
 Find [the definition of a Derived Dataset here](https://www.gbif.org/derived-dataset/about) and [more information about their creation here](https://data-blog.gbif.org/post/derived-datasets/).
 
-The `SSARP::get_sources()` function may be used as seen below:
+The `ssarp::get_sources()` function may be used as seen below:
 ```{}
-source_df <- SSARP::get_sources(dat)
+source_df <- ssarp::get_sources(dat)
 
 # Print first 5 lines of source_df
 head(source_df)

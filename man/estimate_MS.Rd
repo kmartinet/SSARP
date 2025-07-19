@@ -15,9 +15,9 @@ type of tip label in the provided tree. If "epithet," only the species
 epithet will be used when interacting with the tree. If "binomial," the full
 species name (including genus) will be used when interacting with the tree.}
 
-\item{occurrences}{The occurrence record dataframe output from the SSARP
+\item{occurrences}{The occurrence record dataframe output from the ssarp
 pipeline. If you would like to use a custom dataframe, please make sure that
-there are columns titled "Genus", "Species", and "areas"}
+there are columns titled "specificEpithet", "genericName", and "areas"}
 }
 \value{
 A dataframe that includes speciation rates for each island in the
@@ -26,29 +26,29 @@ user-provided occurrence record dataframe.
 \description{
 Use methodology from Magallon and Sanderson (2001) to estimate speciation
 rates using a user-provided phylogeny and output a dataframe for use in
-SSARP's speciation-area relationship pipeline. This method also removes any
+ssarp's speciation-area relationship pipeline. This method also removes any
 species rows without rates (this is most likely to occur when the tree does
 not have all of the species included in the occurrence record dataframe)
 }
 \examples{
 # The GBIF key for the Anolis genus is 8782549
-#  Obtained with: key <- get_key(query = "Anolis", rank = "genus")
-key <- 8782549
-# Read in example dataset obtained through:
-#  dat <- get_data(key = key, limit = 100)
+# Read in example dataset filtered from:
+#  dat <- rgbif::occ_search(taxonKey = 8782549, 
+#                           hasCoordinate = TRUE,
+#                           limit = 10000)
 dat <- read.csv(system.file("extdata",
-                            "SSARP_Example_Dat.csv",
-                            package = "SSARP"))
+                            "ssarp_Example_Dat.csv",
+                            package = "ssarp"))
 land <- find_land(occurrences = dat)
 areas <- find_areas(occs = land)
 
 # Read tree from Patton et al. (2021), trimmed to Caribbean species
-tree <- ape::read.tree(system.file("extdata", 
-                                   "Patton_Anolis_trimmed.tree", 
-                                   package = "SSARP"))
-                              
-occ_speciation <- estimate_MS(tree = tree, 
-                              label_type = "epithet", 
+tree <- ape::read.tree(system.file("extdata",
+                                   "Patton_Anolis_trimmed.tree",
+                                   package = "ssarp"))
+
+occ_speciation <- estimate_MS(tree = tree,
+                              label_type = "epithet",
                               occurrences = areas)
 
 }

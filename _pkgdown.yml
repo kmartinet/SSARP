@@ -1,4 +1,4 @@
-url: https://kmartinet.github.io/SSARP/
+url: https://kmartinet.github.io/ssarp/
 template:
   bootstrap: 5
 
@@ -18,8 +18,6 @@ navbar:
 reference:
 - title: Prepare Occurrence Records
   contents:
-  - get_data
-  - get_key
   - find_land
   - find_areas
   - remove_continents

@@ -1,11 +1,11 @@
 {
   "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
   "@type": "SoftwareSourceCode",
-  "identifier": "SSARP",
+  "identifier": "ssarp",
   "description": "Create Species- and Speciation-Area Relationships for any taxa.",
-  "name": "SSARP: SSARP (Species-/Speciation-Area Relationship Projector)",
-  "codeRepository": "https://github.com/kmartinet/SSARP",
-  "issueTracker": "https://github.com/kmartinet/SSARP/issues",
+  "name": "ssarp: ssarp (Species-/Speciation-Area Relationship Projector)",
+  "codeRepository": "https://github.com/kmartinet/ssarp",
+  "issueTracker": "https://github.com/kmartinet/ssarp/issues",
   "license": "https://spdx.org/licenses/GPL-2.0",
   "version": "0.2.0",
   "programmingLanguage": {
@@ -183,5 +183,5 @@
     "SystemRequirements": null
   },
   "fileSize": "351.929KB",
-  "readme": "https://github.com/kmartinet/SSARP/blob/main/README.md"
+  "readme": "https://github.com/kmartinet/ssarp/blob/main/README.md"
 }

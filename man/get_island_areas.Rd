@@ -7,7 +7,7 @@
 get_island_areas()
 }
 \value{
-An edited version of the \code{SSARP::island_areas} object, which is a
+An edited version of the \code{ssarp::island_areas} object, which is a
 dataframe including the names, areas, and maximum elevations of islands
 from across the globe.
 }
@@ -15,7 +15,7 @@ from across the globe.
 In order to address an R CMD check warning about non-ASCII characters in the
 island_area object, these characters in the island names had to be converted
 to an ASCII format. The non-ASCII accents in the island names are important
-for the functionality of the SSARP package, so this function provides the
+for the functionality of the ssarp package, so this function provides the
 user with a dataframe including the original, un-converted island names.
 }
 \examples{

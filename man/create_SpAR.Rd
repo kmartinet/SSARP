@@ -7,9 +7,9 @@
 create_SpAR(occurrences, npsi = 1)
 }
 \arguments{
-\item{occurrences}{The dataframe output by one of SSARP's speciation
-methods (\code{SSARP::estimate_BAMM()}, \code{SSARP::estimate_DR()},
-\code{SSARP::estimate_MS()}), or if using a custom dataframe, ensure that it
+\item{occurrences}{The dataframe output by one of ssarp's speciation
+methods (\code{ssarp::estimate_BAMM()}, \code{ssarp::estimate_DR()},
+\code{ssarp::estimate_MS()}), or if using a custom dataframe, ensure that it
 has the following columns: areas, rate}
 
 \item{npsi}{The maximum number of breakpoints to estimate for model
@@ -25,15 +25,26 @@ X axis represents log(island area) and the Y axis represents
 log(speciation rate)
 }
 \examples{
-\dontrun{
-key <- get_key(query = "Anolis", rank = "genus")
-dat <- get_data(key = key, limit = 100)
+# The GBIF key for the Anolis genus is 8782549
+# Read in example dataset filtered from:
+#  dat <- rgbif::occ_search(taxonKey = 8782549, 
+#                           hasCoordinate = TRUE,
+#                           limit = 10000)
+dat <- read.csv(system.file("extdata",
+                            "ssarp_Example_Dat.csv",
+                            package = "ssarp"))
 land <- find_land(occurrences = dat)
 areas <- find_areas(occs = land)
-occ_speciation <- estimate_BAMM(label_type = "epithet", 
-                                 occurrences = areas, 
-                                 edata = edata)
+
+# Read tree from Patton et al. (2021), trimmed to Caribbean species
+tree <- ape::read.tree(system.file("extdata",
+                                   "Patton_Anolis_trimmed.tree",
+                                   package = "ssarp"))
+
+occ_speciation <- estimate_MS(tree = tree,
+                              label_type = "epithet",
+                              occurrences = areas)
+
 seg <- create_SpAR(occurrences = occ_speciation, npsi = 1)
 summary <- seg[1]
-}
 }

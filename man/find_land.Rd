@@ -7,7 +7,7 @@
 find_land(occurrences, fillgaps = FALSE)
 }
 \arguments{
-\item{occurrences}{The dataframe output by \code{SSARP::get_data()} (or if using
+\item{occurrences}{The dataframe output by \code{ssarp::get_data()} (or if using
 a custom dataframe, ensure that it has the following columns:
 decimalLongitude, decimalLatitude, acceptedScientificName, genericName,
 specificEpithet, datasetKey). The "datasetKey" column is important for GBIF
@@ -27,7 +27,7 @@ of occurrence information. "First" is the name used to describe the largest
 possible area of land where the occurrence point is found. "Second" is the
 name used to describe the second-largest possible area of land that
 corresponds with the occurrence point. "Third" is the most specific area of
-land that corresponds with the occurrence point. Functions later in the SSARP
+land that corresponds with the occurrence point. Functions later in the ssarp
 pipeline default to checking whether "Third" has an entry, then look at
 "Second," and then "First."
 }
@@ -37,13 +37,13 @@ the occurrence points were found.
 }
 \examples{
 # The GBIF key for the Anolis genus is 8782549
-#  Obtained with: key <- get_key(query = "Anolis", rank = "genus")
-key <- 8782549
-# Read in example dataset obtained through:
-#  dat <- get_data(key = key, limit = 100)
+# Read in example dataset filtered from:
+#  dat <- rgbif::occ_search(taxonKey = 8782549, 
+#                           hasCoordinate = TRUE,
+#                           limit = 10000)
 dat <- read.csv(system.file("extdata",
-                            "SSARP_Example_Dat.csv",
-                            package = "SSARP"))
+                            "ssarp_Example_Dat.csv",
+                            package = "ssarp"))
 occs <- find_land(occurrences = dat, fillgaps = FALSE)
 
 }
