@@ -75,8 +75,16 @@ function is called. Default: FALSE</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A list of 3 including: the summary output, the segmented regression
-object, and the aggregated dataframe used to create the plot</p>
+    <p>A list of 4 including: the summary output, the regression
+object, the aggregated dataframe used to create the plot, and the AIC scores
+used in model selection</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>If the user would prefer to create their own plot of the
+<code>ssarp::create_SAR()</code> output, the <code>aggDF</code> element of the returned list
+includes the raw points from the plot created here. They can be accessed
+as demonstrated in the Examples section.</p>
     </div>
 
     <div class="section level2">
@@ -102,7 +110,11 @@ object, and the aggregated dataframe used to create the plot</p>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'areas' not found</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">seg</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'seg' not found</span>
-<span class="r-in"><span><span class="va">summary</span> <span class="op">&lt;-</span> <span class="va">seg</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="va">summary</span> <span class="op">&lt;-</span> <span class="va">seg</span><span class="op">$</span><span class="va">summary</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'seg' not found</span>
+<span class="r-in"><span><span class="va">model_object</span> <span class="op">&lt;-</span> <span class="va">seg</span><span class="op">$</span><span class="va">segObj</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'seg' not found</span>
+<span class="r-in"><span><span class="va">points</span> <span class="op">&lt;-</span> <span class="va">seg</span><span class="op">$</span><span class="va">aggDF</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'seg' not found</span>
 </code></pre></div>
     </div>
