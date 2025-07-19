@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Get Occurrence Records from GBIF • SSARP</title>
+<title>Get Occurrence Records from GBIF • ssarp</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
@@ -18,7 +18,7 @@
 
     <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
-    <a class="navbar-brand me-2" href="../index.html">SSARP</a>
+    <a class="navbar-brand me-2" href="../index.html">ssarp</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
@@ -30,10 +30,11 @@
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
+<li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/Create_SAR.html">Create Species-Area Relationship</a></li>
+<li><a class="dropdown-item" href="../articles/Get_Data.html">Get Occurrence Records from GBIF</a></li>
+    <li><a class="dropdown-item" href="../articles/Create_SAR.html">Create Species-Area Relationship</a></li>
     <li><a class="dropdown-item" href="../articles/Create_SpAR.html">Create Speciation-Area Relationship</a></li>
   </ul>
 </li>
@@ -42,7 +43,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/kmartinet/SSARP/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/kmartinet/ssarp/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -59,7 +60,7 @@
       <h1>Get Occurrence Records from GBIF</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/kmartinet/SSARP/blob/main/vignettes/Get_Data.Rmd" class="external-link"><code>vignettes/Get_Data.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/kmartinet/ssarp/blob/main/vignettes/Get_Data.Rmd" class="external-link"><code>vignettes/Get_Data.Rmd</code></a></small>
       <div class="d-none name"><code>Get_Data.Rmd</code></div>
     </div>
 
@@ -68,18 +69,50 @@
 <div class="section level2">
 <h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h2>
-<p>The main goal of the <em>SSARP</em> R package is to create
-species-area relationships (SARs) when occurrence records are given as
-input, and speciation-area relationships (SpARs) when occurrence records
-and a phylogeny associated with the taxa of interest are given as
-input.</p>
+<p>The <em>ssarp</em> R package has two main goals: create species-area
+relationships (SARs) when occurrence records are given as input, and
+create speciation-area reltionships (SpARs) when occurrence records and
+a phylogeny associated with the taxa of interest are given as input.</p>
+<p>The observation that species richness increases with increasing area
+is a fundamental law of ecology, and a disruption in this relationship
+may be associated with habitat loss, habitat fragmentation, and
+increasing numbers of non-native species. Creating SARs for
+island-dwelling species helps researchers understand how trends in
+biodiversity across archipelagos are changing due to these effects.</p>
+<div class="float">
+<img src="anolis_SAR-1.png" style="width:100.0%" alt="The SAR for island-dwelling species of the lizard genus Anolis created using ssarp. Species richness increases as island size increases in a pattern best-explained by a breakpoint regression."><div class="figcaption">The SAR for island-dwelling species of the
+lizard genus <em>Anolis</em> created using <em>ssarp</em>. Species
+richness increases as island size increases in a pattern best-explained
+by a breakpoint regression.</div>
+</div>
+<p><br></p>
+<p>Creating SpARs, which plot speciation rates against the area of the
+island on which the associated species live, for the same
+island-dwelling species allows researchers to further explore drivers of
+biodiversity across archipelagos.</p>
+<p>The creation of both of these relationships requires occurrence
+records for the taxa of interest.</p>
 <p>In this vignette, we will explore different options for gathering
 occurrence records using the <em>rgbif</em> package, which allows us to
 access data on GBIF (Global Biodiversity Information Facility) through
 the use of the GBIF API. These records can then be used in
-<em>SSARP</em>’s workflow to <a href="https://kmartinet.github.io/SSARP/articles/Create_SAR.html">create
-SARs</a> and <a href="https://kmartinet.github.io/SSARP/articles/Create_SpAR.html">create
+<em>ssarp</em>’s workflow to <a href="https://kmartinet.github.io/ssarp/articles/Create_SAR.html">create
+SARs</a> and <a href="https://kmartinet.github.io/ssarp/articles/Create_SpAR.html">create
 SpARs</a>.</p>
+<p>Here, we will discuss the following main topics:</p>
+<ul>
+<li>How to obtain a taxon key with <code>rgbif</code> for use in
+querying GBIF’s database of occurrence records</li>
+<li>How to use <code><a href="https://docs.ropensci.org/rgbif/reference/occ_download.html" class="external-link">rgbif::occ_download()</a></code> to obtain occurrence
+records for the taxon of interest</li>
+<li>How to use <code><a href="https://docs.ropensci.org/rgbif/reference/occ_search.html" class="external-link">rgbif::occ_search()</a></code> to obtain occurrence
+records for the taxon of interest</li>
+<li>How to restrict occurrence records to a specific geographic range
+using WKT geometry with <code><a href="https://docs.ropensci.org/rgbif/reference/occ_download.html" class="external-link">rgbif::occ_download()</a></code> and
+<code><a href="https://docs.ropensci.org/rgbif/reference/occ_search.html" class="external-link">rgbif::occ_search()</a></code>
+</li>
+<li>A suggestion for curating occurrence records from GBIF</li>
+</ul>
 </div>
 <div class="section level2">
 <h2 id="obtaining-a-taxon-key">Obtaining a Taxon Key<a class="anchor" aria-label="anchor" href="#obtaining-a-taxon-key"></a>
@@ -167,7 +200,7 @@ records have an associated GPS coordinate.</li>
 the returned records have a known geospatial issue.</li>
 <li>
 <code>format = "DWCA"</code>: The most data-rich return format for
-the data. Contains information necessary for downstream <em>SSARP</em>
+the data. Contains information necessary for downstream <em>ssarp</em>
 functions.</li>
 </ul>
 <pre><code><span><span class="va">download_key</span> <span class="op">&lt;-</span> <span class="fu">rgbif</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rgbif/reference/occ_download.html" class="external-link">occ_download</a></span><span class="op">(</span><span class="fu"><a href="https://docs.ropensci.org/rgbif/reference/download_predicate_dsl.html" class="external-link">pred</a></span><span class="op">(</span><span class="st">"taxonKey"</span>, <span class="va">key</span><span class="op">)</span>,</span>
@@ -213,7 +246,7 @@ into the current R Environment as the <code>dat</code> object.</p>
 <span><span class="co">## #   pathway &lt;lgl&gt;, georeferenceVerificationStatus &lt;chr&gt;, occurrenceStatus &lt;chr&gt;, preparations &lt;chr&gt;, …</span></span>
 <span><span class="co">## # ℹ Use `colnames()` to see all variable names</span></span></code></pre>
 <p>The <code>dat</code> object is now ready to be used with the rest of
-the <em>SSARP</em> pipeline!</p>
+the <em>ssarp</em> pipeline!</p>
 </div>
 <div class="section level2">
 <h2 id="downloading-occurrence-records-using-occ_search">Downloading Occurrence Records Using occ_search()<a class="anchor" aria-label="anchor" href="#downloading-occurrence-records-using-occ_search"></a>
@@ -285,22 +318,22 @@ have an associated GPS coordinate.</li>
 <span><span class="co">## #   iucnRedListCategory &lt;chr&gt;, dateIdentified &lt;chr&gt;, coordinateUncertaintyInMeters &lt;dbl&gt;, continent &lt;chr&gt;,</span></span>
 <span><span class="co">## #   stateProvince &lt;chr&gt;, year &lt;int&gt;, month &lt;int&gt;, day &lt;int&gt;, eventDate &lt;chr&gt;, startDayOfYear &lt;int&gt;, …</span></span></code></pre>
 <p>The <code>dat</code> object is now ready to be used with the rest of
-the <em>SSARP</em> pipeline for further exploration! If you would like
+the <em>ssarp</em> pipeline for further exploration! If you would like
 to use this data in a publication, please consider using
 <code><a href="https://docs.ropensci.org/rgbif/reference/occ_download.html" class="external-link">rgbif::occ_download()</a></code> instead so that there is a DOI
 automatically associated with the data.</p>
 <p>If you must use data obtained through
 <code><a href="https://docs.ropensci.org/rgbif/reference/occ_search.html" class="external-link">rgbif::occ_search()</a></code> in a publication, you must create a
-Derived Dataset. The <code><a href="../reference/get_sources.html">SSARP::get_sources()</a></code> function helps
+Derived Dataset. The <code><a href="../reference/get_sources.html">ssarp::get_sources()</a></code> function helps
 users create a dataframe of dataset keys and the number of occurrence
 records associated with each key, which is necessary for uploading a
 Derived Dataset.</p>
 <p>Find <a href="https://www.gbif.org/derived-dataset/about" class="external-link">the
 definition of a Derived Dataset here</a> and <a href="https://data-blog.gbif.org/post/derived-datasets/" class="external-link">more
 information about their creation here</a>.</p>
-<p>The <code><a href="../reference/get_sources.html">SSARP::get_sources()</a></code> function may be used as seen
+<p>The <code><a href="../reference/get_sources.html">ssarp::get_sources()</a></code> function may be used as seen
 below:</p>
-<pre><code><span><span class="va">source_df</span> <span class="op">&lt;-</span> <span class="fu">SSARP</span><span class="fu">::</span><span class="fu"><a href="../reference/get_sources.html">get_sources</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
+<pre><code><span><span class="va">source_df</span> <span class="op">&lt;-</span> <span class="fu">ssarp</span><span class="fu">::</span><span class="fu"><a href="../reference/get_sources.html">get_sources</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Print first 5 lines of source_df</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">source_df</span><span class="op">)</span></span></code></pre>
@@ -328,7 +361,7 @@ latitude values.</p>
 <p>For a visual example, here is a polygon situated around Caribbean
 islands (Figure 1).</p>
 <div class="float">
-<img src="CaribbeanSpots_Final.png" style="width:100.0%" alt="Figure 1. The GPS points associated with the WKT polygon in this example."><div class="figcaption">Figure 1. The GPS points associated with the WKT
+<img src="CaribbeanSpots_Final.jpg" style="width:100.0%" alt="Figure 1. The GPS points associated with the WKT polygon in this example."><div class="figcaption">Figure 1. The GPS points associated with the WKT
 polygon in this example.</div>
 </div>
 <p>The WKT polygon for this example is ‘POLYGON((-84.8 23.9, -84.7 16.4,
@@ -337,13 +370,13 @@ polygon in this example.</div>
 but written as “-84.8 23.9” for WKT, is circled in orange in Figure
 2.</p>
 <div class="float">
-<img src="FirstSpot.png" style="width:100.0%" alt="Figure 2. The first point in this example."><div class="figcaption">Figure 2. The first point in this example.</div>
+<img src="FirstSpot.jpg" style="width:100.0%" alt="Figure 2. The first point in this example."><div class="figcaption">Figure 2. The first point in this example.</div>
 </div>
 <p>Then, the next point, normally represented by “16.4, -84.7” but
 written as “-84.7 16.4” for WKT, follows counter-clockwise from the
 first one (circled in Figure 3).</p>
 <div class="float">
-<img src="SecondSpot.png" style="width:100.0%" alt="Figure 3. The second point in this example."><div class="figcaption">Figure 3. The second point in this
+<img src="SecondSpot.jpg" style="width:100.0%" alt="Figure 3. The second point in this example."><div class="figcaption">Figure 3. The second point in this
 example.</div>
 </div>
 <p>The rest of the points then follow in the order labeled in orange
@@ -351,7 +384,7 @@ numbers in Figure 4. Make sure to close the polygon by ending the WKT
 string with the same point that you started with (“-84.8 23.9” in this
 case, represented by both 1 and 9 on Figure 4).</p>
 <div class="float">
-<img src="NumberSpots.png" style="width:100.0%" alt="Figure 4. Order of points used in WKT polygon example. Numbers 1 and 9 are the same point because the polygon must start and end with the same point."><div class="figcaption">Figure 4. Order of points used in WKT polygon
+<img src="NumberSpots.jpg" style="width:100.0%" alt="Figure 4. Order of points used in WKT polygon example. Numbers 1 and 9 are the same point because the polygon must start and end with the same point."><div class="figcaption">Figure 4. Order of points used in WKT polygon
 example. Numbers 1 and 9 are the same point because the polygon must
 start and end with the same point.</div>
 </div>
@@ -370,6 +403,24 @@ variables created earlier in this document are referenced here:</p>
 <span>                                hasCoordinate <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                                limit <span class="op">=</span> <span class="va">limit</span>,</span>
 <span>                                geometry <span class="op">=</span> <span class="st">'POLYGON((-84.8 23.9, -84.7 16.4, -65.2 13.9, -63.1 11.0, -56.9 15.5, -60.5 21.9, -79.3 27.8, -79.8 24.8, -84.8 23.9))'</span><span class="op">)</span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="curating-gbif-occurrence-records">Curating GBIF Occurrence Records<a class="anchor" aria-label="anchor" href="#curating-gbif-occurrence-records"></a>
+</h2>
+<p>Occurrence records returned from <code><a href="https://docs.ropensci.org/rgbif/reference/occ_download.html" class="external-link">rgbif::occ_download()</a></code>
+and <code><a href="https://docs.ropensci.org/rgbif/reference/occ_search.html" class="external-link">rgbif::occ_search()</a></code> might include uninformative points.
+For example, GPS points associated with occurrence records might
+represent a location in the middle of the ocean when they were meant to
+represent a location on an island. The <code><a href="../reference/find_land.html">ssarp::find_land()</a></code>
+function helps remedy this particular problem, but further data curation
+might be necessary. <a href="https://docs.ropensci.org/CoordinateCleaner/" class="external-link">The
+CoordinateCleaner R package</a> is an excellent resource for further
+curating data downloaded from GBIF.</p>
+<p><code>CoordinateCleaner</code> sometimes flags valid records on small
+islands as invalid because of buffer settings. Cross-referencing these
+flagged records with the dataframe returned by
+<code><a href="../reference/find_land.html">ssarp::find_land()</a></code> is a great way to ensure that the user
+is incorporating all valid records in their analyses.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

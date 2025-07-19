@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Construct a Species-Area Relationship with SSARP • SSARP</title>
+<title>Construct a Species-Area Relationship with ssarp • ssarp</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Construct a Species-Area Relationship with SSARP">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Construct a Species-Area Relationship with ssarp">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -18,7 +18,7 @@
 
     <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
 
-    <a class="navbar-brand me-2" href="../index.html">SSARP</a>
+    <a class="navbar-brand me-2" href="../index.html">ssarp</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.3.0</small>
 
@@ -33,7 +33,8 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/Create_SAR.html">Create Species-Area Relationship</a></li>
+<li><a class="dropdown-item" href="../articles/Get_Data.html">Get Occurrence Records from GBIF</a></li>
+    <li><a class="dropdown-item" href="../articles/Create_SAR.html">Create Species-Area Relationship</a></li>
     <li><a class="dropdown-item" href="../articles/Create_SpAR.html">Create Speciation-Area Relationship</a></li>
   </ul>
 </li>
@@ -42,7 +43,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
-<li class="nav-item"><a class="external-link nav-link" href="https://github.com/kmartinet/SSARP/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/kmartinet/ssarp/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -56,10 +57,10 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>Construct a Species-Area Relationship with SSARP</h1>
+      <h1>Construct a Species-Area Relationship with ssarp</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/kmartinet/SSARP/blob/main/vignettes/Create_SAR.Rmd" class="external-link"><code>vignettes/Create_SAR.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/kmartinet/ssarp/blob/main/vignettes/Create_SAR.Rmd" class="external-link"><code>vignettes/Create_SAR.Rmd</code></a></small>
       <div class="d-none name"><code>Create_SAR.Rmd</code></div>
     </div>
 
@@ -77,15 +78,15 @@ habitat fragmentation, and increasing numbers of non-native species.
 Creating SARs for island-dwelling species helps researchers understand
 how trends in biodiversity across archipelagos are changing due to these
 effects.</p>
-<p>The goal of this vignette is to use the <em>SSARP</em> R package to
+<p>The goal of this vignette is to use the <em>ssarp</em> R package to
 create a SAR for <em>Anolis</em>, a well-studied genus of lizards. We
 will focus on <em>Anolis</em> occurrence records from the Caribbean
-Islands. More information about the <em>SSARP</em> package and a
+Islands. More information about the <em>ssarp</em> package and a
 comparison to a previously published SAR for <em>Anolis</em> can be
 found <a href="https://www.biorxiv.org/content/10.1101/2024.12.31.630948v1" class="external-link">in
 the manuscript associated with the package</a>.</p>
 <p>In order to construct a species-area relationship with
-<em>SSARP</em>, we will:</p>
+<em>ssarp</em>, we will:</p>
 <ul>
 <li>Gather occurrence data from GBIF</li>
 <li>Filter out invalid occurrence records</li>
@@ -98,11 +99,11 @@ the manuscript associated with the package</a>.</p>
 </h2>
 <p>GBIF (Global Biodiversity Information Facility) provides an easy
 method for gathering occurrence data for taxa of interest.
-<em>SSARP</em> uses functions from the <em>rgbif</em> package to gather
+<em>ssarp</em> uses functions from the <em>rgbif</em> package to gather
 occurrence records associated with a given taxon. The user may also
 provide their own data for use in creating a SAR, but we will use GBIF
 in this example.</p>
-<p>A tutorial for gathering occurrence records from GBIF can be found <a href="https://kmartinet.github.io/SSARP/articles/Get_Data.html">in the
+<p>A tutorial for gathering occurrence records from GBIF can be found <a href="https://kmartinet.github.io/ssarp/articles/Get_Data.html">in the
 “Get Occurrence Records from GBIF” vignette here</a>. This example will
 use <code><a href="https://docs.ropensci.org/rgbif/reference/occ_search.html" class="external-link">rgbif::occ_search()</a></code> for simplicity, but please note
 that <code><a href="https://docs.ropensci.org/rgbif/reference/occ_download.html" class="external-link">rgbif::occ_download()</a></code> is more appropriate for
@@ -120,6 +121,8 @@ more information).</p>
 <span></span>
 <span><span class="va">key</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">suggestions</span><span class="op">$</span><span class="va">data</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
+<span><span class="va">limit</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
+<span></span>
 <span><span class="va">occurrences</span> <span class="op">&lt;-</span> <span class="fu">rgbif</span><span class="fu">::</span><span class="fu"><a href="https://docs.ropensci.org/rgbif/reference/occ_search.html" class="external-link">occ_search</a></span><span class="op">(</span>taxonKey <span class="op">=</span> <span class="va">key</span>, </span>
 <span>                                hasCoordinate <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                                limit <span class="op">=</span> <span class="va">limit</span>,</span>
@@ -133,20 +136,20 @@ more information).</p>
 <p>Once the occurrence data is returned, we will use each occurrence
 record’s GPS point to determine the land mass on which the species was
 found and find the area associated with that land mass using a database
-of island areas and names from <em>SSARP</em>.</p>
+of island areas and names from <em>ssarp</em>.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/kmartinet/SSARP" class="external-link">SSARP</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/kmartinet/ssarp" class="external-link">ssarp</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Find land mass names</span></span>
-<span><span class="va">land_dat</span> <span class="op">&lt;-</span> <span class="fu">SSARP</span><span class="fu">::</span><span class="fu"><a href="../reference/find_land.html">find_land</a></span><span class="op">(</span>occurrences <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span>
+<span><span class="va">land_dat</span> <span class="op">&lt;-</span> <span class="fu">ssarp</span><span class="fu">::</span><span class="fu"><a href="../reference/find_land.html">find_land</a></span><span class="op">(</span>occurrences <span class="op">=</span> <span class="va">dat</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Print first 5 lines of land_dat</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">land_dat</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##                                                    SpeciesName  Genus      Species  Longitude  Latitude</span></span>
+<pre><code><span><span class="co">##                                                   SpeciesName  Genus      Species  Longitude  Latitude</span></span>
 <span><span class="co">## 1 Anolis hispaniolae (Köhler, Zimmer, Mcgrath &amp; Hedges, 2019) Anolis  hispaniolae -70.597156 19.098515</span></span>
-<span><span class="co">## 2                                  Anolis distichus Cope, 1861 Anolis    distichus  -68.40635  18.67363</span></span>
-<span><span class="co">## 3                             Anolis roquet (Bonnaterre, 1789) Anolis       roquet -60.893013  14.77053</span></span>
-<span><span class="co">## 4                             Anolis roquet (Bonnaterre, 1789) Anolis       roquet -60.893013  14.77053</span></span>
+<span><span class="co">## 2                                 Anolis distichus Cope, 1861 Anolis    distichus  -68.40635  18.67363</span></span>
+<span><span class="co">## 3                            Anolis roquet (Bonnaterre, 1789) Anolis       roquet -60.893013  14.77053</span></span>
+<span><span class="co">## 4                            Anolis roquet (Bonnaterre, 1789) Anolis       roquet -60.893013  14.77053</span></span>
 <span><span class="co">## 5                  Anolis cristatellus Duméril &amp; Bibron, 1837 Anolis cristatellus -66.123847 18.471217</span></span>
 <span><span class="co">##                First Second Third                           datasetKey</span></span>
 <span><span class="co">## 1 Dominican Republic   &lt;NA&gt;  &lt;NA&gt; 50c9509d-22c7-4a22-a47d-8c48425ef4a7</span></span>
@@ -155,7 +158,7 @@ of island areas and names from <em>SSARP</em>.</p>
 <span><span class="co">## 4         Martinique   &lt;NA&gt;  &lt;NA&gt; 50c9509d-22c7-4a22-a47d-8c48425ef4a7</span></span>
 <span><span class="co">## 5               &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt; 50c9509d-22c7-4a22-a47d-8c48425ef4a7</span></span></code></pre>
 <p>The locality information is split across three columns: “First,”
-“Second,” and “Third.” The mapping utilities that <em>SSARP</em> uses
+“Second,” and “Third.” The mapping utilities that <em>ssarp</em> uses
 sometimes output different levels of specificity for locality
 information (up to three different levels), so these columns provide
 space for these different levels. The island name that we are interested
@@ -171,16 +174,16 @@ with each occurrence record, we will find the area associated with each
 land mass.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Use the land mass names to get their areas</span></span>
-<span><span class="va">area_dat</span> <span class="op">&lt;-</span> <span class="fu">SSARP</span><span class="fu">::</span><span class="fu"><a href="../reference/find_areas.html">find_areas</a></span><span class="op">(</span>occs <span class="op">=</span> <span class="va">land_dat</span><span class="op">)</span></span>
+<span><span class="va">area_dat</span> <span class="op">&lt;-</span> <span class="fu">ssarp</span><span class="fu">::</span><span class="fu"><a href="../reference/find_areas.html">find_areas</a></span><span class="op">(</span>occs <span class="op">=</span> <span class="va">land_dat</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Print first 5 lines of area_dat</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">area_dat</span>, n <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##                                                    SpeciesName  Genus     Species  Longitude  Latitude</span></span>
+<pre><code><span><span class="co">##                                                   SpeciesName  Genus     Species  Longitude  Latitude</span></span>
 <span><span class="co">## 1 Anolis hispaniolae (Köhler, Zimmer, Mcgrath &amp; Hedges, 2019) Anolis hispaniolae -70.597156 19.098515</span></span>
-<span><span class="co">## 2                                  Anolis distichus Cope, 1861 Anolis   distichus  -68.40635  18.67363</span></span>
-<span><span class="co">## 3                             Anolis roquet (Bonnaterre, 1789) Anolis      roquet -60.893013  14.77053</span></span>
-<span><span class="co">## 4                             Anolis roquet (Bonnaterre, 1789) Anolis      roquet -60.893013  14.77053</span></span>
-<span><span class="co">## 8                             Anolis evermanni Stejneger, 1904 Anolis   evermanni -66.314592  18.29657</span></span>
+<span><span class="co">## 2                                 Anolis distichus Cope, 1861 Anolis   distichus  -68.40635  18.67363</span></span>
+<span><span class="co">## 3                            Anolis roquet (Bonnaterre, 1789) Anolis      roquet -60.893013  14.77053</span></span>
+<span><span class="co">## 4                            Anolis roquet (Bonnaterre, 1789) Anolis      roquet -60.893013  14.77053</span></span>
+<span><span class="co">## 8                            Anolis evermanni Stejneger, 1904 Anolis   evermanni -66.314592  18.29657</span></span>
 <span><span class="co">##                First Second Third                           datasetKey       areas</span></span>
 <span><span class="co">## 1 Dominican Republic   &lt;NA&gt;  &lt;NA&gt; 50c9509d-22c7-4a22-a47d-8c48425ef4a7 83104562500</span></span>
 <span><span class="co">## 2 Dominican Republic   &lt;NA&gt;  &lt;NA&gt; 50c9509d-22c7-4a22-a47d-8c48425ef4a7 83104562500</span></span>
@@ -190,24 +193,24 @@ land mass.</p>
 <p>Now, our occurrence record dataframe includes records with GPS points
 that are associated with a land mass, along with the areas of those land
 masses (in m^2).</p>
-<p>The <code><a href="../reference/remove_continents.html">SSARP::remove_continents()</a></code> function removes any
+<p>The <code><a href="../reference/remove_continents.html">ssarp::remove_continents()</a></code> function removes any
 continental occurrence records, which is useful when the user is only
 interested in island-dwelling species (as we are in this example). While
-the data obtained by using the <code><a href="../reference/get_data.html">SSARP::get_data()</a></code> function
+the data obtained by using the <code><a href="https://rdrr.io/pkg/SSARP/man/get_data.html" class="external-link">ssarp::get_data()</a></code> function
 was geographically restricted, potential user error in specifying the
 polygon in WKT format often leads to accidental continental records that
 will be removed by using this function.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">nocont_dat</span> <span class="op">&lt;-</span> <span class="fu">SSARP</span><span class="fu">::</span><span class="fu"><a href="../reference/remove_continents.html">remove_continents</a></span><span class="op">(</span>occs <span class="op">=</span> <span class="va">area_dat</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">nocont_dat</span> <span class="op">&lt;-</span> <span class="fu">ssarp</span><span class="fu">::</span><span class="fu"><a href="../reference/remove_continents.html">remove_continents</a></span><span class="op">(</span>occs <span class="op">=</span> <span class="va">area_dat</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="create-species-area-relationship">Create Species-Area Relationship<a class="anchor" aria-label="anchor" href="#create-species-area-relationship"></a>
 </h2>
 <p>Finally, we will generate the SAR using the
-<code><a href="../reference/create_SAR.html">SSARP::create_SAR</a></code> function. The
-<code><a href="../reference/create_SAR.html">SSARP::create_SAR()</a></code> function creates multiple regression
+<code><a href="../reference/create_SAR.html">ssarp::create_SAR</a></code> function. The
+<code><a href="../reference/create_SAR.html">ssarp::create_SAR()</a></code> function creates multiple regression
 objects with breakpoints up to the user-specified “npsi” parameter. For
-example, if “npsi” is two, <code><a href="../reference/create_SAR.html">SSARP::create_SAR()</a></code> will
+example, if “npsi” is two, <code><a href="../reference/create_SAR.html">ssarp::create_SAR()</a></code> will
 generate regression objects with zero (linear regression), one, and two
 breakpoints. The function will then return the regression object with
 the lowest AIC score. The “npsi” parameter will be set to one in this
@@ -215,7 +218,7 @@ example. Note that if linear regression (zero breakpoints) is
 better-supported than segmented regression with one breakpoint, the
 linear regression will be returned instead.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">SSARP</span><span class="fu">::</span><span class="fu"><a href="../reference/create_SAR.html">create_SAR</a></span><span class="op">(</span>occurrences <span class="op">=</span> <span class="va">nocont_dat</span>, npsi <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">ssarp</span><span class="fu">::</span><span class="fu"><a href="../reference/create_SAR.html">create_SAR</a></span><span class="op">(</span>occurrences <span class="op">=</span> <span class="va">nocont_dat</span>, npsi <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <div class="float">
 <img src="anolis_SAR-1.png" alt="Figure 2. This is the species-area relationship (SAR) for Anolis including island-based occurrences within a polygon around Caribbean islands from the first 10000 records for the genus in GBIF! The best-fit model was a segmented regression with one breakpoint."><div class="figcaption">Figure 2. This is the species-area relationship
 (SAR) for <em>Anolis</em> including island-based occurrences within a
@@ -223,7 +226,7 @@ polygon around Caribbean islands from the first 10000 records for the
 genus in GBIF! The best-fit model was a segmented regression with one
 breakpoint.</div>
 </div>
-<p>The <code><a href="../reference/create_SAR.html">SSARP::create_SAR()</a></code> function will also output the
+<p>The <code><a href="../reference/create_SAR.html">ssarp::create_SAR()</a></code> function will also output the
 summary for the best-fit model for the data (displayed above).</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
