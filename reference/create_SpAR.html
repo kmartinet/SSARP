@@ -50,7 +50,7 @@ log(speciation rate)</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_SpAR</span><span class="op">(</span><span class="va">occurrences</span>, npsi <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">create_SpAR</span><span class="op">(</span><span class="va">occurrences</span>, npsi <span class="op">=</span> <span class="fl">1</span>, visualize <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -67,6 +67,11 @@ has the following columns: areas, rate</p></dd>
 <dt id="arg-npsi">npsi<a class="anchor" aria-label="anchor" href="#arg-npsi"></a></dt>
 <dd><p>The maximum number of breakpoints to estimate for model
 selection.  Default: 1</p></dd>
+
+
+<dt id="arg-visualize">visualize<a class="anchor" aria-label="anchor" href="#arg-visualize"></a></dt>
+<dd><p>(boolean) Whether the plot should be displayed when the
+function is called. Default: FALSE</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -103,8 +108,12 @@ object, and the aggregated dataframe used to create the plot</p>
 <span class="r-in"><span>                              occurrences <span class="op">=</span> <span class="va">areas</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'areas' not found</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">seg</span> <span class="op">&lt;-</span> <span class="fu">create_SpAR</span><span class="op">(</span>occurrences <span class="op">=</span> <span class="va">occ_speciation</span>, npsi <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">seg</span> <span class="op">&lt;-</span> <span class="fu">create_SpAR</span><span class="op">(</span>occurrences <span class="op">=</span> <span class="va">occ_speciation</span>, </span></span>
+<span class="r-in"><span>                   npsi <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>                   visualize <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'occ_speciation' not found</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">seg</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'seg' not found</span>
 <span class="r-in"><span><span class="va">summary</span> <span class="op">&lt;-</span> <span class="va">seg</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'seg' not found</span>
 </code></pre></div>
