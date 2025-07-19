@@ -8,6 +8,8 @@
 #' specificEpithet, areas)
 #' @param npsi The maximum number of breakpoints to estimate for model
 #' selection.  Default: 1
+#' @param visualize (boolean) Whether the plot should be displayed when the 
+#' function is called. Default: FALSE
 #' @return A list of 3 including: the summary output, the segmented regression
 #' object, and the aggregated dataframe used to create the plot
 #' @examples
@@ -22,11 +24,14 @@
 #' land <- find_land(occurrences = dat)
 #' areas <- find_areas(occs = land)
 #'
-#' seg <- create_SAR(areas)
+#' seg <- create_SAR(occurrences = areas,
+#'                   npsi = 1,
+#'                   visualize = FALSE)
+#' plot(seg)
 #' summary <- seg[1]
 #' @export
 
-create_SAR <- function(occurrences, npsi = 1) {
+create_SAR <- function(occurrences, npsi = 1, visualize = FALSE) {
   # Checkmate input validation
   checkmate::assertDataFrame(occurrences)
   checkmate::assertNumeric(npsi)
@@ -89,16 +94,19 @@ create_SAR <- function(occurrences, npsi = 1) {
 
   # If the min_score is index 1, then the best-fit model is linear
   if (min_score == 1) {
-    plot(
-      dat,
-      xlim = c(x_min, (x_max + 0.5)),
-      ylim = c(y_min, (y_max + 0.5)),
-      ylab = "Log Number of Species",
-      xlab = expression(paste("Log Island Area (", "m"^"2", ")")),
-      main = "Species-Area Relationship",
-      pch = 16
-    )
-    graphics::abline(linear)
+    # Plot linear regression (if the user wants)
+    if(visualize){
+      plot(
+        dat,
+        xlim = c(x_min, (x_max + 0.5)),
+        ylim = c(y_min, (y_max + 0.5)),
+        ylab = "Log Number of Species",
+        xlab = expression(paste("Log Island Area (", "m"^"2", ")")),
+        main = "Species-Area Relationship",
+        pch = 16
+      )
+      graphics::abline(linear)
+    }
 
     summary_line <- summary(linear)
 
@@ -125,18 +133,20 @@ create_SAR <- function(occurrences, npsi = 1) {
       control = segmented::seg.control(display = FALSE)
     )
 
-    # Plot the breakpoint regression line
-    plot(
-      seg,
-      rug = FALSE,
-      xlim = c(x_min, (x_max + 0.5)),
-      ylim = c(y_min, (y_max + 0.5)),
-      ylab = "Log Number of Species",
-      xlab = expression(paste("Log Island Area (", "m"^"2", ")")),
-      main = "Species-Area Relationship"
-    )
-    # Add the points
-    graphics::points(dat$x, dat$y, pch = 19)
+    # Plot the breakpoint regression line (if user wants)
+    if(visualize){
+      plot(
+        seg,
+        rug = FALSE,
+        xlim = c(x_min, (x_max + 0.5)),
+        ylim = c(y_min, (y_max + 0.5)),
+        ylab = "Log Number of Species",
+        xlab = expression(paste("Log Island Area (", "m"^"2", ")")),
+        main = "Species-Area Relationship"
+      )
+      # Add the points
+      graphics::points(dat$x, dat$y, pch = 19)
+    }
 
     # Save the summary as an object to add to the result list
     summary_seg <- summary(seg)
@@ -167,7 +177,9 @@ create_SAR <- function(occurrences, npsi = 1) {
 
     # Plot defaults to multiple outputs when npsi > 1, so my npsi = 1 plot
     #  doesn't apply
-    plot(seg)
+    if(visualize){
+      plot(seg)
+    }
 
     # Save the summary as an object to add to the result list
     summary_seg <- summary(seg)

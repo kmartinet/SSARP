@@ -10,6 +10,8 @@ navbar:
     articles:
       text: Articles
       menu:
+      - text: Get Occurrence Records from GBIF
+        href: articles/Get_Data.html
       - text: Create Species-Area Relationship
         href: articles/Create_SAR.html
       - text: Create Speciation-Area Relationship
@@ -32,7 +34,6 @@ reference:
   contents:
   - create_SAR
   - create_SpAR
-  - quick_create_SAR
 
 - title: Other Utilities
   contents:

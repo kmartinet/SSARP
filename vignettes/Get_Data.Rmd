@@ -12,6 +12,10 @@ The *ssarp* R package has two main goals: create species-area relationships (SAR
 
 The observation that species richness increases with increasing area is a fundamental law of ecology, and a disruption in this relationship may be associated with habitat loss, habitat fragmentation, and increasing numbers of non-native species. Creating SARs for island-dwelling species helps researchers understand how trends in biodiversity across archipelagos are changing due to these effects.
 
+![The SAR for island-dwelling species of the lizard genus *Anolis* created using *ssarp*. Species richness increases as island size increases in a pattern best-explained by a breakpoint regression.](anolis_SAR-1.png){width=100%}
+
+<br>
+
 Creating SpARs, which plot speciation rates against the area of the island on which the associated species live, for the same island-dwelling species allows researchers to further explore drivers of biodiversity across archipelagos.
 
 The creation of both of these relationships requires occurrence records for the taxa of interest.
@@ -24,6 +28,7 @@ Here, we will discuss the following main topics:
 * How to use `rgbif::occ_download()` to obtain occurrence records for the taxon of interest
 * How to use `rgbif::occ_search()` to obtain occurrence records for the taxon of interest
 * How to restrict occurrence records to a specific geographic range using WKT geometry with `rgbif::occ_download()` and `rgbif::occ_search()`
+* A suggestion for curating occurrence records from GBIF
 
 ## Obtaining a Taxon Key
 In order to access data from GBIF, we must first determine the unique identifying key associated with the taxon of interest. We will use the `rgbif::name_suggest()` function to find this key. To illustrate the use of `rgbif::occ_download()`, we will focus on the lizard species *Anolis allisoni*. 
@@ -231,3 +236,8 @@ occurrences <- rgbif::occ_search(taxonKey = key,
                                 limit = limit,
                                 geometry = 'POLYGON((-84.8 23.9, -84.7 16.4, -65.2 13.9, -63.1 11.0, -56.9 15.5, -60.5 21.9, -79.3 27.8, -79.8 24.8, -84.8 23.9))')
 ```
+
+## Curating GBIF Occurrence Records
+Occurrence records returned from `rgbif::occ_download()` and `rgbif::occ_search()` might include uninformative points. For example, GPS points associated with occurrence records might represent a location in the middle of the ocean when they were meant to represent a location on an island. The `ssarp::find_land()` function helps remedy this particular problem, but further data curation might be necessary. [The CoordinateCleaner R package](https://docs.ropensci.org/CoordinateCleaner/) is an excellent resource for further curating data downloaded from GBIF.
+
+`CoordinateCleaner` sometimes flags valid records on small islands as invalid because of buffer settings. Cross-referencing these flagged records with the dataframe returned by `ssarp::find_land()` is a great way to ensure that the user is incorporating all valid records in their analyses.

@@ -7,7 +7,7 @@
 #                              package = "ssarp"))
 
 if (!curl::has_internet()) {
-  message("No internet connection. Cannot run estimate_DR tests without 
+  cli::cli_alert_info("No internet connection. Cannot run estimate_DR tests without 
           downloading phylogenetic tree from GitHub.")
 } else {
   tree <- ape::read.tree("https://raw.githubusercontent.com/kmartinet/ssarp/refs/heads/main/vignettes/Patton_Anolis_Trimmed.tree")

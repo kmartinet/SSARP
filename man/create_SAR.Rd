@@ -4,7 +4,7 @@
 \alias{create_SAR}
 \title{Create a species-area relationship (SAR) plot}
 \usage{
-create_SAR(occurrences, npsi = 1)
+create_SAR(occurrences, npsi = 1, visualize = FALSE)
 }
 \arguments{
 \item{occurrences}{The dataframe output by \code{ssarp::find_areas()} (or if
@@ -13,6 +13,9 @@ specificEpithet, areas)}
 
 \item{npsi}{The maximum number of breakpoints to estimate for model
 selection.  Default: 1}
+
+\item{visualize}{(boolean) Whether the plot should be displayed when the
+function is called. Default: FALSE}
 }
 \value{
 A list of 3 including: the summary output, the segmented regression
@@ -35,6 +38,8 @@ dat <- read.csv(system.file("extdata",
 land <- find_land(occurrences = dat)
 areas <- find_areas(occs = land)
 
-seg <- create_SAR(areas)
+seg <- create_SAR(occurrences = areas,
+                  npsi = 1,
+                  visualize = TRUE)
 summary <- seg[1]
 }

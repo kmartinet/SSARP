@@ -72,11 +72,15 @@ test_that("When occurrence record dataframe input has no rows,
   expect_message(find_land(occs), "Occurrence record dataframe has no entries")
 })
 
-test_that("Fillgaps attempts to get information for a datapoint 
-          unsupported by map.where", {
-  expect_message(find_land(occs_mystery, fillgaps = TRUE),
-                 "Filling gaps using Photon...")
-})
+if (!curl::has_internet()) {
+  cli::cli_alert_info("No internet connection. Cannot run Photon tests.")
+} else {
+  test_that("Fillgaps attempts to get information for a datapoint 
+            unsupported by map.where", {
+    expect_message(find_land(occs_mystery, fillgaps = TRUE),
+                   "Filling gaps using Photon...")
+  })
+}
 
 test_that("Inputting a dataframe without the correct column names will cause
           an error", {
