@@ -93,8 +93,10 @@ find_areas <- function(occs, area_custom = NULL,
     minus <- rep(NA, nrow(occs))
     # Loop through dataframe
     for (i in seq_len(nrow(occs))) {
-      if (nrow(occs) == 0) {
-        cli::cli_alert_warning("No data in occurrence record dataframe")
+      if (nrow(occs) == 0) { 
+        if(!getOption("ssarp.silent", FALSE)){
+          cli::cli_alert_warning("No data in occurrence record dataframe")
+        }
         break
       }
       if (
@@ -128,10 +130,14 @@ find_areas <- function(occs, area_custom = NULL,
     # Next, go through the occs dataframe and see if the Third column has a name.
     # If yes, add to the island list. If NA, go to the Second column.
     # If Second column is NA, go to the First column.
-    cli::cli_alert_info("Recording island names...")
+    if(!getOption("ssarp.silent", FALSE)){
+      cli::cli_alert_info("Recording island names...")
+    }
     for (i in seq_len(nrow(occs))) {
       if (nrow(occs) == 0) {
-        cli::cli_alert_warning("No data in occurrence record dataframe")
+        if(!getOption("ssarp.silent", FALSE)){
+          cli::cli_alert_warning("No data in occurrence record dataframe")
+        }
         break
       }
       if (!is.na(occs[i, "Third"])) {
@@ -156,7 +162,9 @@ find_areas <- function(occs, area_custom = NULL,
     }
   
     # Look through the island area file and find the names in uniq_islands list
-    cli::cli_alert_info("Assembling island dictionary...")
+    if(!getOption("ssarp.silent", FALSE)){
+      cli::cli_alert_info("Assembling island dictionary...")
+    }
     # Initialize vector of island names from island area dataset with
     #  "Island" appended
     area_file_append <- paste0(area_file$Name, " Island")
@@ -197,7 +205,9 @@ find_areas <- function(occs, area_custom = NULL,
     }
   
     # Use the dictionary to add the areas to the final dataframe
-    cli::cli_alert_info("Adding areas to final dataframe...")
+    if(!getOption("ssarp.silent", FALSE)){
+      cli::cli_alert_info("Adding areas to final dataframe...")
+    }
     areas <- rep(0, times = nrow(occs))
   
     for (i in seq_len(nrow(occs))) {
@@ -227,8 +237,10 @@ find_areas <- function(occs, area_custom = NULL,
       if(!is.null(names)){
         polygons <- terra::subset(shapefile, shapefile$name %in% names)
       } else {
-        cli::cli_alert_info(
+        if(!getOption("ssarp.silent", FALSE)){
+          cli::cli_alert_info(
           "Using all names in the shapefile, this might extend processing time")
+        }
         # If the user did not input a "names" vector, use 
         #   the full list of polygon names
         # If there are any NAs in shapefile$name, remove them

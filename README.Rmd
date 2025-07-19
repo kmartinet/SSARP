@@ -39,6 +39,16 @@ library(devtools)
 install_github("kmartinet/ssarp")
 ```
 
+## Suppressing Messages
+
+To suppress all messages output by *ssarp*, run
+
+``` r
+options(ssarp.silent = TRUE)
+```
+
+before using any of *ssarp*'s functions.
+
 ## Example: Creating a Species-Area Relationship
 
 A species-area relationship (SAR) visualizes the relationship between species richness (the number of species) and the area of the land mass on which the species live. This brief example covers the *ssarp* workflow for creating a SAR, and more detailed explanations of the code and methods can be found [in the Articles on the ssarp pkgdown website](https://kmartinet.github.io/ssarp/index.html).

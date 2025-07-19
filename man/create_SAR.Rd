@@ -18,13 +18,20 @@ selection.  Default: 1}
 function is called. Default: FALSE}
 }
 \value{
-A list of 3 including: the summary output, the segmented regression
-object, and the aggregated dataframe used to create the plot
+A list of 4 including: the summary output, the regression
+object, the aggregated dataframe used to create the plot, and the AIC scores
+used in model selection
 }
 \description{
 Use segmented regression to create a species-area relationship (SAR) plot.
 The X axis represents log(island area) and the Y axis represents log(number
 of species)
+}
+\details{
+If the user would prefer to create their own plot of the
+\code{ssarp::create_SAR()} output, the \code{aggDF} element of the returned list
+includes the raw points from the plot created here. They can be accessed
+as demonstrated in the Examples section.
 }
 \examples{
 # The GBIF key for the Anolis genus is 8782549
@@ -42,5 +49,7 @@ seg <- create_SAR(occurrences = areas,
                   npsi = 1,
                   visualize = FALSE)
 plot(seg)
-summary <- seg[1]
+summary <- seg$summary
+model_object <- seg$segObj
+points <- seg$aggDF
 }

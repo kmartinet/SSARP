@@ -3,6 +3,11 @@
 #' Use segmented regression to create a speciation-area relationship plot. The
 #' X axis represents log(island area) and the Y axis represents
 #' log(speciation rate)
+#' 
+#' If the user would prefer to create their own plot of the 
+#' `ssarp::create_SpAR()` output, the `aggDF` element of the returned list
+#' includes the raw points from the plot created here. They can be accessed
+#' as demonstrated in the Examples section.
 #' @param occurrences The dataframe output by one of ssarp's speciation
 #' methods (`ssarp::estimate_BAMM()`, `ssarp::estimate_DR()`,
 #' `ssarp::estimate_MS()`), or if using a custom dataframe, ensure that it
@@ -11,8 +16,9 @@
 #' selection.  Default: 1
 #' @param visualize (boolean) Whether the plot should be displayed when the 
 #' function is called. Default: FALSE
-#' @return A list of 3 including: the summary output, the segmented regression
-#' object, and the aggregated dataframe used to create the plot
+#' @return A list of 4 including: the summary output, the regression
+#' object, the aggregated dataframe used to create the plot, and the AIC scores
+#' used in model selection
 #' @examples
 #' # The GBIF key for the Anolis genus is 8782549
 #' # Read in example dataset filtered from:
@@ -38,7 +44,9 @@
 #'                    npsi = 1,
 #'                    visualize = FALSE)
 #' plot(seg)
-#' summary <- seg[1]
+#' summary <- seg$summary
+#' model_object <- seg$segObj
+#' points <- seg$aggDF
 #' @export
 
 create_SpAR <- function(occurrences, npsi = 1, visualize = FALSE) {

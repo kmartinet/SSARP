@@ -43,7 +43,9 @@ get_sources <- function(occs) {
 
     return(count_df)
   } else {
-    cli::cli_alert_warning("datasetKey column not found.")
+    if(!getOption("ssarp.silent", FALSE)){
+      cli::cli_alert_warning("datasetKey column not found.")
+    }
     return(NULL)
   }
 }

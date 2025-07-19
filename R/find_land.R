@@ -64,7 +64,9 @@ find_land <- function(occurrences, fillgaps = FALSE) {
   # Check if there is anything in the given occurrences
   # If not, return NULL to stop the function call
   if (nrow(occurrences) == 0) {
-    cli::cli_alert_warning("Occurrence record dataframe has no entries")
+    if(!getOption("ssarp.silent", FALSE)){
+      cli::cli_alert_warning("Occurrence record dataframe has no entries")
+    }
     return(NULL)
   }
 
@@ -119,10 +121,14 @@ find_land <- function(occurrences, fillgaps = FALSE) {
   if (fillgaps == TRUE) {
     # There might still be a lot of NA entries, so use Photon to try to
     #  fill in gaps
-    cli::cli_alert_info("Filling gaps using Photon...")
+    if(!getOption("ssarp.silent", FALSE)){
+      cli::cli_alert_info("Filling gaps using Photon...")
+    }
     for (i in seq_len(nrow(occs))) {
       if (nrow(occs) == 0) {
-        cli::cli_alert_warning("Occurrence record dataframe has no entries")
+        if(!getOption("ssarp.silent", FALSE)){
+          cli::cli_alert_warning("Occurrence record dataframe has no entries")
+        }
         break
       }
       if (is.na(occs[i, "First"])) {
